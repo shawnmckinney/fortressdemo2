@@ -54,16 +54,6 @@ public abstract class MyBasePage extends WebPage
     protected String infoField;
     protected TextArea infoTA;
 
-    static
-    {
-        // Needed for MySQL SSL DB connection:
-        System.setProperty( "javax.net.ssl.keyStore", "/opt/jdk1.7.0_10/bin/keystore" );
-        System.setProperty( "javax.net.ssl.keyStorePassword", "changeit" );
-        System.setProperty( "javax.net.ssl.trustStore", "/opt/jdk1.7.0_10/bin/truststore" );
-        System.setProperty( "javax.net.ssl.trustStorePassword", "changeit" );
-        System.setProperty( "javax.net.debug", "all" );
-    }
-
     public enum ChildPage
     {
         PAGE1,
@@ -305,8 +295,6 @@ public abstract class MyBasePage extends WebPage
                     {
                         inactiveRoles.remove( activatedRole );
                     }
-                    //inactiveRoles.remove( new UserRole( "FORTRESS_DEMO2" ) );
-                    //inactiveRoles.remove( new UserRole( "ROLE_TEST_USER" ) );
                     LOG.info( "user: " + session.getUserId() + " inactiveRoles for activate list: " + inactiveRoles );
                     activeRoles = session.getRoles();
                     //activeRoles.remove( new UserRole ( "FORTRESS_DEMO2" ) );
@@ -350,7 +338,6 @@ public abstract class MyBasePage extends WebPage
             {
                 for ( Warning warning : warnings )
                 {
-                    //if(warning.getId() == GlobalErrIds.)
                     LOG.info( "Warning: " + warning.getMsg() + " errCode: " + warning.getId() + " name: " + warning
                         .getName() + " type: " + warning.getType().toString() );
                     if ( warning.getType() == Warning.Type.ROLE && warning.getName().equalsIgnoreCase( roleName ) )

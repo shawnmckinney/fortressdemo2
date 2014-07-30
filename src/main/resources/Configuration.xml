@@ -5,15 +5,16 @@
 
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <properties resource="database.properties"/>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="driver" value="${database.driver}"/>
                 <property name="url"
-                          value="jdbc:mysql://192.168.1.101:3306/demoDB?useSSL=true&amp;requireSSL=true"/>
-                <property name="username" value="admin"/>
-                <property name="password" value="secret"/>
+                          value="${database.url}"/>
+                <property name="username" value="${database.username}"/>
+                <property name="password" value="${database.password}"/>
             </dataSource>
         </environment>
     </environments>
