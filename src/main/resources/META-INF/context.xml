@@ -1,0 +1,11 @@
+<Context path="/fortressdemo2" reloadable="true">
+
+    <Realm className="org.openldap.sentry.tomcat.Tc7AccessMgrProxy"
+           debug="0"
+           resourceName="UserDatabase"
+           defaultRoles="ROLE_TEST_SUPER, ROLE_TEST_POWER, ROLE_TEST1, ROLE_TEST2, ROLE_TEST3"
+           containerType="TomcatContext"
+           realmClasspath=""
+            />
+
+</Context>

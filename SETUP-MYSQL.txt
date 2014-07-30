@@ -1,0 +1,409 @@
+Instructions to install MySql Ubuntu 12.04 64-bit machine
+
+Note, the below is for support of this mybatis helloworld demo:
+http://howtodoinjava.com/2013/01/03/ibatis-hello-world-example-with-source-code/
+
+0. instructions:
+https://help.ubuntu.com/12.04/serverguide/mysql.html
+
+1. install MySQL on Ubuntu 12.04 64-bit:
+
+> sudo apt-get update --fix-missing
+>sudo apt-get install mysql-server
+
+2. root user password: secret
+
+3. verify:
+smckinn@ubuntu:~$ sudo netstat -tap | grep mysql
+tcp        0      0 localhost:mysql         *:*                     LISTEN      3385/mysqld     
+
+4. configure
+
+a. change the bind listen address:
+
+sudo vi /etc/mysql/my.cnf
+
+bind-address            = 192.168.1.112
+
+b. restart
+
+>sudo service mysql restart
+
+5. install workbench:
+
+sudo apt-get install mysql-workbench
+
+6. start workbench via ssh terminal:
+ ssh -C -X 192.168.1.101 mysql-workbench
+
+7. create a new user for workbench to connect with (security precaution?)
+
+Possibly a security precaution. You could try adding a new administrator account:
+
+>mysql -h localhost -P 3306 -u admin -p
+mysql> CREATE USER 'admin'@'localhost' IDENTIFIED BY 'secret';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost'
+    ->     WITH GRANT OPTION;
+mysql> CREATE USER 'admin'@'%' IDENTIFIED BY 'secret';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'secret'@'%'
+    ->     WITH GRANT OPTION;
+
+8. create a new server instance in workbench
+
+9. create a new database:
+
+mysql>CREATE DATABASE demoDB;
+
+10. create new table:
+
+>mysql -h localhost -P 3306 -u admin -p
+mysql> use demoDB;
+Database changed
+mysql> CREATE TABLE USERINFO
+    -> (
+    -> ID INT,
+    -> NAME VARCHAR(100),
+    -> EMAIL VARCHAR(50),
+    -> PASSWORD VARCHAR(16),
+    -> STATUS INT
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+11. 
+
+GRANT ALL ON demoDB.* TO admin@'%' IDENTIFIED BY 'secret';
+
+12. Upgrade OpenSSL on Ubuntu 12.04 (heartbleed)
+
+http://www.hak9.com/fix-heart-bleed-bug-centos-ubuntu/
+
+a. sudo apt-get upgrade openssl
+b. smckinn@ubuntu:~$ openssl version -b
+built on: Fri Jun 20 18:54:15 UTC 2014
+
+note:
+Doing an update through the repositories of your Linux distro will probably patch the bug, but it may not increment your version number. You need to check the installed package and patch number for your distro using your package tool of choice on the command line (dpkg for Debian & Ubuntu, yum for RH, CentOS, Fedora). Google the package and patch number to confirm that this is a patch for the Heartbleed bug.
+For example, on Ubuntu 12.04 LTS, the patched version of OpenSSL that you want is actually called “1.0.1-4ubuntu5.12″, however, that specific patch information won’t come up from `openssl version -b`
+
+13. Create public/private keys
+
+http://dev.mysql.com/doc/refman/5.1/en/creating-ssl-certs.html
+
+# Create clean environment
+from home:
+a. smckinn@ubuntu:~$ mkdir newcerts
+b. smckinn@ubuntu:~$ cd newcerts
+
+# Create CA certificate
+c. openssl genrsa 2048 > ca-key.pem
+smckinn@ubuntu:~/newcerts$ openssl req -new -x509 -nodes -days 3600 -key ca-key.pem -out ca-cert.pem
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:US
+State or Province Name (full name) [Some-State]:AR
+Locality Name (eg, city) []:Little Rock
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Symas
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:mysqlhost
+Email Address []:
+
+# Create server certificate, remove passphrase, and sign it
+# server-cert.pem = public key, server-key.pem = private key
+d. smckinn@ubuntu:~/newcerts$ openssl req -newkey rsa:2048 -days 3600 -nodes -keyout server-key.pem -out server-req.pem
+Generating a 2048 bit RSA private key
+.....................................................................+++
+.................+++
+writing new private key to 'server-key.pem'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:US
+State or Province Name (full name) [Some-State]:AR
+Locality Name (eg, city) []:Little Rock
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:fortressdemo
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:Shawn McKinney
+Email Address []:
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:secret
+An optional company name []:
+
+
+e. openssl rsa -in server-key.pem -out server-key.pem
+f. openssl x509 -req -in server-req.pem -days 3600 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out server-cert.pem
+
+# Create client certificate, remove passphrase, and sign it
+# client-cert.pem = public key, client-key.pem = private key
+
+g. openssl req -newkey rsa:2048 -days 3600 -nodes -keyout client-key.pem -out client-req.pem
+smckinn@ubuntu:~/newcerts$ openssl req -newkey rsa:2048 -days 3600 -nodes -keyout client-key.pem -out client-req.pem
+Generating a 2048 bit RSA private key
+...............................................+++
+...........................................+++
+writing new private key to 'client-key.pem'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:US
+State or Province Name (full name) [Some-State]:AR
+Locality Name (eg, city) []:Little Rock
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Symas
+Organizational Unit Name (eg, section) []:   
+Common Name (e.g. server FQDN or YOUR name) []:^C
+smckinn@ubuntu:~/newcerts$ openssl req -newkey rsa:2048 -days 3600 -nodes -keyout client-key.pem -out client-req.pem
+Generating a 2048 bit RSA private key
+........................................................+++
+....................+++
+writing new private key to 'client-key.pem'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:US
+State or Province Name (full name) [Some-State]:AR
+Locality Name (eg, city) []:Little Rock
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:fortressdemo
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:Shawn McKinney
+Email Address []:
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:secret
+An optional company name []:
+
+
+h. openssl rsa -in client-key.pem -out client-key.pem
+i. openssl x509 -req -in client-req.pem -days 3600 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out client-cert.pem
+
+After generating the certificates, verify them:
+j. openssl verify -CAfile ca-cert.pem server-cert.pem client-cert.pem
+
+Now you have a set of files that can be used as follows:
+
+ca-cert.pem: Use this as the argument to --ssl-ca on the server and client sides. (The CA certificate, if used, must be the same on both sides.)
+
+server-cert.pem, server-key.pem: Use these as the arguments to --ssl-cert and --ssl-key on the server side.
+
+client-cert.pem, client-key.pem: Use these as the arguments to --ssl-cert and --ssl-key on the client side.
+
+
+14. MySQL Using SSL Connections
+
+To start the MySQL server so that it permits clients to connect using SSL, use the options that identify the certificate and key files the server uses when establishing a secure connection:
+
+--ssl-ca identifies the Certificate Authority (CA) certificate.
+
+--ssl-cert identifies the server public key certificate. This can be sent to the client and authenticated against the CA certificate that it has.
+
+--ssl-key identifies the server private key.
+
+For example, start the server like this:
+
+shell> mysqld --ssl-ca=ca-cert.pem \
+         --ssl-cert=server-cert.pem \
+         --ssl-key=server-key.pem
+
+
+a. copy certs/keys to mysql:
+
+sudo cp ca-cert.pem /etc/mysql
+sudo cp server-cert.pem /etc/mysql
+sudo cp server-key.pem /etc/mysql
+
+b. add to /etc/mysql/my.cnf:
+
+sudo vi /etc/mysql/my.cnf
+
+ssl-ca=/etc/mysql/ca-cert.pem
+ssl-cert=/etc/mysql/server-cert.pem
+ssl-key=/etc/mysql/server-key.pem
+
+c. restart
+
+>sudo service mysql restart
+
+d. verify:
+
+mysql> SHOW VARIABLES LIKE 'have_ssl';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| have_ssl      | YES   |
++---------------+-------+
+1 row in set (0.00 sec)
+
+
+15. Connecting Securely Using SSL from MySQL JDBC Driver using JSSE (Java Secure Sockets Extension)
+
+a. Use Java's keytool to create a truststore in the current directory , and import the server's CA certificate 
+
+>keytool -import -alias mysqlServerCACert -file ca-cert.pem -keystore truststore
+
+b. Importing an existing certificate requires the certificate to be in DER format. You can use openssl to convert an existing certificate into the new format.
+
+> openssl x509 -outform DER -in client-cert.pem -out client.cert
+
+c. Now import the converted certificate into your keystore using keytool:
+
+> keytool -import -file ~/Development/mybatis/ibatisHelloWorld/src/test/resources/newcerts/client.cert -keystore keystore -alias mysqlClientCertificate
+
+d. set system properties on client-side:
+
+        System.setProperty("javax.net.ssl.keyStore","/opt/jdk1.7.0_10/bin/keystore");
+        System.setProperty("javax.net.ssl.keyStorePassword","changeit");
+        System.setProperty("javax.net.ssl.trustStore","/opt/jdk1.7.0_10/bin/truststore");
+        System.setProperty("javax.net.ssl.trustStorePassword","changeit");
+
+e. Test client, turn on JSSE (Java Secure Sockets Extension) debug by adding to startup:
+
+-Djavax.net.debug=all
+
+
+16. Create Fortress Demo tables:
+
+>mysql -h localhost -P 3306 -u admin -p
+mysql> use demoDB;
+DROP TABLE page1;
+CREATE TABLE page1 (ID INT, customer VARCHAR(20), attr_a VARCHAR(20), attr_b VARCHAR(20), attr_c VARCHAR(20), unique key(id) );
+ALTER TABLE page1 ADD INDEX customer (customer);
+DROP TABLE page2;
+CREATE TABLE page2 (ID INT, customer VARCHAR(20), attr_d VARCHAR(20), attr_e VARCHAR(20), attr_f VARCHAR(20), unique key(id) );
+ALTER TABLE page2 ADD INDEX customer (customer);
+DROP TABLE page3;
+CREATE TABLE page3 (ID INT, customer VARCHAR(20), attr_g VARCHAR(20), attr_h VARCHAR(20), attr_i VARCHAR(20), unique key(id) );
+ALTER TABLE page3 ADD INDEX customer (customer);
+
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10001,'123','123,1,a', '123,1,b', '123,1,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10002,'123','123,2,a', '123,2,b', '123,2,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10003,'123','123,3,a', '123,3,b', '123,3,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10004,'123','123,4,a', '123,4,b', '123,4,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10005,'123','123,5,a', '123,5,b', '123,5,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10006,'123','123,6,a', '123,6,b', '123,6,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10007,'123','123,7,a', '123,7,b', '123,7,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10008,'123','123,8,a', '123,8,b', '123,8,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10009,'123','123,9,a', '123,9,b', '123,9,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (100010,'123','123,10,a', '123,10,b', '123,10,c');
+
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10011,'456','456,1,a', '456,1,b', '456,1,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10012,'456','456,2,a', '456,2,b', '456,2,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10013,'456','456,3,a', '456,3,b', '456,3,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10014,'456','456,4,a', '456,4,b', '456,4,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10015,'456','456,5,a', '456,5,b', '456,5,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10016,'456','456,6,a', '456,6,b', '456,6,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10017,'456','456,7,a', '456,7,b', '456,7,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10018,'456','456,8,a', '456,8,b', '456,8,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10019,'456','456,9,a', '456,9,b', '456,9,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (100020,'456','456,10,a', '456,10,b', '456,10,c');
+
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10021,'789','789,1,a', '789,1,b', '789,1,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10022,'789','789,2,a', '789,2,b', '789,2,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10023,'789','789,3,a', '789,3,b', '789,3,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10024,'789','789,4,a', '789,4,b', '789,4,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10025,'789','789,5,a', '789,5,b', '789,5,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10026,'789','789,6,a', '789,6,b', '789,6,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10027,'789','789,7,a', '789,7,b', '789,7,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10028,'789','789,8,a', '789,8,b', '789,8,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (10029,'789','789,9,a', '789,9,b', '789,9,c');
+INSERT INTO page1 (id, customer, attr_a, attr_b, attr_c) VALUES (100030,'789','789,10,a', '789,10,b', '789,10,c');
+
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10001,'123','123,1,a', '123,1,b', '123,1,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10002,'123','123,2,a', '123,2,b', '123,2,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10003,'123','123,3,a', '123,3,b', '123,3,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10004,'123','123,4,a', '123,4,b', '123,4,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10005,'123','123,5,a', '123,5,b', '123,5,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10006,'123','123,6,a', '123,6,b', '123,6,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10007,'123','123,7,a', '123,7,b', '123,7,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10008,'123','123,8,a', '123,8,b', '123,8,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10009,'123','123,9,a', '123,9,b', '123,9,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (100010,'123','123,10,a', '123,10,b', '123,10,c');
+
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10011,'456','456,1,a', '456,1,b', '456,1,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10012,'456','456,2,a', '456,2,b', '456,2,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10013,'456','456,3,a', '456,3,b', '456,3,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10014,'456','456,4,a', '456,4,b', '456,4,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10015,'456','456,5,a', '456,5,b', '456,5,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10016,'456','456,6,a', '456,6,b', '456,6,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10017,'456','456,7,a', '456,7,b', '456,7,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10018,'456','456,8,a', '456,8,b', '456,8,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10019,'456','456,9,a', '456,9,b', '456,9,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (100020,'456','456,10,a', '456,10,b', '456,10,c');
+
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10021,'789','789,1,a', '789,1,b', '789,1,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10022,'789','789,2,a', '789,2,b', '789,2,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10023,'789','789,3,a', '789,3,b', '789,3,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10024,'789','789,4,a', '789,4,b', '789,4,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10025,'789','789,5,a', '789,5,b', '789,5,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10026,'789','789,6,a', '789,6,b', '789,6,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10027,'789','789,7,a', '789,7,b', '789,7,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10028,'789','789,8,a', '789,8,b', '789,8,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (10029,'789','789,9,a', '789,9,b', '789,9,c');
+INSERT INTO page2 (id, customer, attr_d, attr_e, attr_f) VALUES (100030,'789','789,10,a', '789,10,b', '789,10,c');
+
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10001,'123','123,1,a', '123,1,b', '123,1,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10002,'123','123,2,a', '123,2,b', '123,2,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10003,'123','123,3,a', '123,3,b', '123,3,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10004,'123','123,4,a', '123,4,b', '123,4,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10005,'123','123,5,a', '123,5,b', '123,5,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10006,'123','123,6,a', '123,6,b', '123,6,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10007,'123','123,7,a', '123,7,b', '123,7,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10008,'123','123,8,a', '123,8,b', '123,8,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10009,'123','123,9,a', '123,9,b', '123,9,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (100010,'123','123,10,a', '123,10,b', '123,10,c');
+
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10011,'456','456,1,a', '456,1,b', '456,1,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10012,'456','456,2,a', '456,2,b', '456,2,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10013,'456','456,3,a', '456,3,b', '456,3,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10014,'456','456,4,a', '456,4,b', '456,4,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10015,'456','456,5,a', '456,5,b', '456,5,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10016,'456','456,6,a', '456,6,b', '456,6,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10017,'456','456,7,a', '456,7,b', '456,7,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10018,'456','456,8,a', '456,8,b', '456,8,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10019,'456','456,9,a', '456,9,b', '456,9,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (100020,'456','456,10,a', '456,10,b', '456,10,c');
+
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10021,'789','789,1,a', '789,1,b', '789,1,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10022,'789','789,2,a', '789,2,b', '789,2,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10023,'789','789,3,a', '789,3,b', '789,3,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10024,'789','789,4,a', '789,4,b', '789,4,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10025,'789','789,5,a', '789,5,b', '789,5,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10026,'789','789,6,a', '789,6,b', '789,6,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10027,'789','789,7,a', '789,7,b', '789,7,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10028,'789','789,8,a', '789,8,b', '789,8,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10029,'789','789,9,a', '789,9,b', '789,9,c');
+INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (100030,'789','789,10,a', '789,10,b', '789,10,c');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
