@@ -99,12 +99,12 @@ public abstract class MyBasePage extends WebPage
         HttpServletRequest servletReq = ( HttpServletRequest ) getRequest().getContainerRequest();
         // RBAC Security Processing:
         Principal principal = servletReq.getUserPrincipal();
-        linksLabel += " for " + principal.getName();
 
         // Is this a Java EE secured page && has the User successfully authenticated already?
         boolean isSecured = principal != null;
         if( isSecured && !isLoggedIn( ) )
         {
+            linksLabel += " for " + principal.getName();
             String szPrincipal = principal.toString();
             // Pull the RBAC session from the realm and assert into the Web app's session:
             initializeRbacSession(szPrincipal);
