@@ -7,26 +7,29 @@
     <meta name="keywords" content="wicket jquery, wicket jquery ui, autocomplete, dialog, draggable, droppable, progress bar, wizard, kendo ui, border layout, calendar" />
     <link rel="stylesheet" type="text/css" href="css/my-style.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.10.2.custom.min.css" media="all" />
-    <title>Wicket Project Sample for RBAC</title>
+    <link rel="stylesheet" type="text/css" href="css/kendo/kendo.common.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/kendo/kendo.default.min.css" media="all" />
     <link rel="shortcut icon" href="images/favicon.ico" />
+    <title>RBAC Project Sample for Wicket Web and Mybatis Data Persistence Frameworks</title>
 </head>
 <body>
 <div id="header">
     <h3>
-        <span wicket:id="linksLabel" id="linksLabel"/>
-        <br>
-        <a href="#" wicket:id="page1">PAGE1</a>
-        &nbsp
-        <a href="#" wicket:id="page2">PAGE2</a>
-        &nbsp
-        <a href="#" wicket:id="page3">PAGE3</a>
-        &nbsp
-        <a href="#" wicket:id="logout">LOGOUT</a>
+        <fieldset>
+            <legend><span wicket:id="linksLabel" id="linksLabel"/></legend>
+            <a href="#" wicket:id="page1">PAGE1</a>
+            &nbsp
+            <a href="#" wicket:id="page2">PAGE2</a>
+            &nbsp
+            <a href="#" wicket:id="page3">PAGE3</a>
+            &nbsp
+            <a href="#" wicket:id="logout">LOGOUT</a>
+        </fieldset>
     </h3>
 
     <form wicket:id="commonForm">
         <fieldset>
-            <legend>Activate and Deactivate Roles in Session</legend>
+            <legend><b>Activate and Deactivate Roles in Session</b></legend>
             <table id="inputFormTableActivate">
                 <tr>
                     <td>
@@ -61,7 +64,7 @@
 </div>
 <div id="footer">
     <h2><textarea wicket:id="infoField" id="infoField" rows="1" cols="80"></textarea></h2>
-    <br><br>
+    <hr>
     <span wicket:id="footer"></span>
 </div>
 </body>

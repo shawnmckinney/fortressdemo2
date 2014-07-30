@@ -102,12 +102,15 @@ public abstract class MyBasePage extends WebPage
 
         // Is this a Java EE secured page && has the User successfully authenticated already?
         boolean isSecured = principal != null;
-        if( isSecured && !isLoggedIn( ) )
+        if(isSecured)
         {
             linksLabel += " for " + principal.getName();
-            String szPrincipal = principal.toString();
-            // Pull the RBAC session from the realm and assert into the Web app's session:
-            initializeRbacSession(szPrincipal);
+            if( !isLoggedIn( ) )
+            {
+                String szPrincipal = principal.toString();
+                // Pull the RBAC session from the realm and assert into the Web app's session:
+                initializeRbacSession(szPrincipal);
+            }
         }
         myForm = new MyBasePageForm( "commonForm" );
         myForm.setOutputMarkupId( true );
