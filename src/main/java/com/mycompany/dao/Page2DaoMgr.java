@@ -47,6 +47,7 @@ public class Page2DaoMgr implements Serializable
                 id = id == null ? 1 : id + 1;
                 page2EO.setId( id );
                 int rc = page2DaoMapper.addPage2( page2EO );
+                sqlSession.commit();
                 page2EO = page2DaoMapper.getPage2ById( id );
             }
             else throw new RuntimeException( "User not Authorized: " + GlobalUtils.PAGE2_OBJNAME + "." + GlobalUtils.ADD + "." + page2EO.getCustomer() );
@@ -78,6 +79,7 @@ public class Page2DaoMgr implements Serializable
             {
                 Page2Dao page2DaoMapper = sqlSession.getMapper( Page2Dao.class );
                 int rc = page2DaoMapper.updatePage2( page2EO );
+                sqlSession.commit();
                 page2EO = page2DaoMapper.getPage2ById( page2EO.getId() );
             }
             else throw new RuntimeException( "User not Authorized:" + GlobalUtils.PAGE2_OBJNAME + "." + GlobalUtils.UPDATE + "." + page2EO.getCustomer() );
@@ -205,6 +207,7 @@ public class Page2DaoMgr implements Serializable
             {
                 Page2Dao page2DaoMapper = sqlSession.getMapper( Page2Dao.class );
                 page2DaoMapper.deletePage2ById( page2EO.getId() );
+                sqlSession.commit();
             }
             else throw new RuntimeException( "User not Authorized: " + GlobalUtils.PAGE2_OBJNAME + "." + GlobalUtils.DELETE + "." + page2EO.getCustomer());
         }
