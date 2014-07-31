@@ -311,7 +311,7 @@ public class Page2 extends MyBasePage
 
         PropertyColumn id = new PropertyColumn<DefaultTreeModel, DefaultMutableTreeNode, String, String>(
             Model.of( "ID" ), "userObject.Id");
-        id.setInitialSize( 50 );
+        id.setInitialSize( 100 );
         columns.add(id);
 
         PropertyColumn customer = new PropertyColumn<DefaultTreeModel, DefaultMutableTreeNode, String, String>(
