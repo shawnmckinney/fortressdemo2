@@ -7,7 +7,7 @@
     <artifactId>fortressdemo2</artifactId>
     <version>1.0-RC38</version>
     <packaging>war</packaging>
-    <description>This sample Web application demonstrates how to integrate with Fortress RBAC policy enforcement APIs.</description>
+    <description>Fortress RBAC Security Project Sample using Wicket Web and Mybatis Data Persistence Frameworks.</description>
     <properties>
         <wicket.version>6.16.0</wicket.version>
         <wicket.jquery.version>6.16.0</wicket.jquery.version>

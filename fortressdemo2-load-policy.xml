@@ -29,20 +29,20 @@
             </deluser>
 
             <adduser>
-                <user userId="superuser" password="password" description="Wicket Fortress Demo2 SuperUser" ou="WicketUsers" cn="test2" sn="superuser"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="poweruser" password="password" description="Wicket Fortress Demo2 PowerUser" ou="WicketUsers" cn="test2" sn="poweruser"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user1" password="password" description="Wicket Fortress Demo2 User1" ou="WicketUsers" cn="test2" sn="user1"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user1_123" password="password" description="Wicket Fortress Demo2 User1 Customer 123" ou="WicketUsers" cn="test2" sn="user1"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user1_456" password="password" description="Wicket Fortress Demo2 User1 Customer 456" ou="WicketUsers" cn="test2" sn="user1"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user1_789" password="password" description="Wicket Fortress Demo2 User1 Customer 123" ou="WicketUsers" cn="test2" sn="user1"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user2" password="password" description="Wicket Fortress Demo2 User2" ou="WicketUsers" cn="test2" sn="user2"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user2_123" password="password" description="Wicket Fortress Demo2 User2 Customer 123" ou="WicketUsers" cn="test2" sn="user2"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user2_456" password="password" description="Wicket Fortress Demo2 User2 Customer 456" ou="WicketUsers" cn="test2" sn="user2"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user2_789" password="password" description="Wicket Fortress Demo2 User2 Customer 789" ou="WicketUsers" cn="test2" sn="user2"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user3" password="password" description="Wicket Fortress Demo2 User3" ou="WicketUsers" cn="test2" sn="user3"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user3_123" password="password" description="Wicket Fortress Demo2 User3 Customer 123" ou="WicketUsers" cn="test2" sn="user3"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user3_456" password="password" description="Wicket Fortress Demo2 User3 Customer 456" ou="WicketUsers" cn="test2" sn="user3"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
-                <user userId="user3_789" password="password" description="Wicket Fortress Demo2 User3 Customer 789" ou="WicketUsers" cn="test2" sn="user3"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="superuser" password="password" description="Fortress Demo2 SuperUser" ou="Demo2Users" cn="test2" sn="superuser"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="poweruser" password="password" description="Fortress Demo2 PowerUser" ou="Demo2Users" cn="test2" sn="poweruser"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user1" password="password" description="Fortress Demo2 User1" ou="Demo2Users" cn="test2" sn="user1"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user1_123" password="password" description="Fortress Demo2 User1 Customer 123" ou="Demo2Users" cn="test2" sn="user1"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user1_456" password="password" description="Fortress Demo2 User1 Customer 456" ou="Demo2Users" cn="test2" sn="user1"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user1_789" password="password" description="Fortress Demo2 User1 Customer 123" ou="Demo2Users" cn="test2" sn="user1"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user2" password="password" description="Fortress Demo2 User2" ou="Demo2Users" cn="test2" sn="user2"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user2_123" password="password" description="Fortress Demo2 User2 Customer 123" ou="Demo2Users" cn="test2" sn="user2"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user2_456" password="password" description="Fortress Demo2 User2 Customer 456" ou="Demo2Users" cn="test2" sn="user2"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user2_789" password="password" description="Fortress Demo2 User2 Customer 789" ou="Demo2Users" cn="test2" sn="user2"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user3" password="password" description="Fortress Demo2 User3" ou="Demo2Users" cn="test2" sn="user3"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user3_123" password="password" description="Fortress Demo2 User3 Customer 123" ou="Demo2Users" cn="test2" sn="user3"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user3_456" password="password" description="Fortress Demo2 User3 Customer 456" ou="Demo2Users" cn="test2" sn="user3"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
+                <user userId="user3_789" password="password" description="Fortress Demo2 User3 Customer 789" ou="Demo2Users" cn="test2" sn="user3"  pwPolicy="Test1" beginTime="0000" endTime="0000" beginDate="20090101" endDate="20990101" beginLockDate="none" endLockDate="none" dayMask="1234567" timeout="0" photo="p27.jpeg" />
             </adduser>
 
             <adduserrole>
@@ -266,23 +266,23 @@
             </delpermobj>
 
             <addpermobj>
-                <permobj objName="com.mycompany.MyBasePage" description="Wicket Test BasePage" ou="WicketPerms" type="Page"/>
-                <permobj objName="com.mycompany.Page1" description="Wicket Test Page 1" ou="WicketPerms" type="Page"/>
-                <permobj objName="com.mycompany.Page2" description="Wicket Test Page 2" ou="WicketPerms" type="Page"/>
-                <permobj objName="com.mycompany.Page3" description="Wicket Test Page 3" ou="WicketPerms" type="Page"/>
-                <permobj objName="org.openldap.fortress.rbac.AccessMgrImpl" description="Used to perform role activation functions" ou="WicketPerms" type="Page"/>
-                <permobj objName="ROLE_PAGE1" description="Used to perform ROLE_PAGE1 role activation functions" ou="WicketPerms" type="Button"/>
-                <permobj objName="PAGE1_123" description="Used to perform PAGE1_123 role activation functions" ou="WicketPerms" type="Button"/>
-                <permobj objName="PAGE1_456" description="Used to perform PAGE1_456 role activation functions" ou="WicketPerms" type="Button"/>
-                <permobj objName="PAGE1_789" description="Used to perform PAGE1_789 role activation functions" ou="WicketPerms" type="Button"/>
-                <permobj objName="ROLE_PAGE2" description="Used to perform ROLE_PAGE12 role activation functions" ou="WicketPerms" type="Button"/>
-                <permobj objName="PAGE2_123" description="Used to perform PAGE2_123 role activation functions" ou="WicketPerms" type="Button"/>
-                <permobj objName="PAGE2_456" description="Used to perform PAGE2_456 role activation functions" ou="WicketPerms" type="Button"/>
-                <permobj objName="PAGE2_789" description="Used to perform PAGE2_789 role activation functions" ou="WicketPerms" type="Button"/>
-                <permobj objName="ROLE_PAGE3" description="Used to perform ROLE_PAGE3 role activation functions" ou="WicketPerms" type="Button"/>
-                <permobj objName="PAGE3_123" description="Used to perform PAGE3_123 role activation functions" ou="WicketPerms" type="Button"/>
-                <permobj objName="PAGE3_456" description="Used to perform PAGE3_456 role activation functions" ou="WicketPerms" type="Button"/>
-                <permobj objName="PAGE3_789" description="Used to perform PAGE3_789 role activation functions" ou="WicketPerms" type="Button"/>
+                <permobj objName="com.mycompany.MyBasePage" description="Fortress Demo2 BasePage" ou="Demo2Perms" type="Page"/>
+                <permobj objName="com.mycompany.Page1" description="Fortress Demo2 Page 1" ou="Demo2Perms" type="Page"/>
+                <permobj objName="com.mycompany.Page2" description="Fortress Demo2 Page 2" ou="Demo2Perms" type="Page"/>
+                <permobj objName="com.mycompany.Page3" description="Fortress Demo2 Page 3" ou="Demo2Perms" type="Page"/>
+                <permobj objName="org.openldap.fortress.rbac.AccessMgrImpl" description="Used to perform role activation functions" ou="Demo2Perms" type="Page"/>
+                <permobj objName="ROLE_PAGE1" description="Used to perform ROLE_PAGE1 role activation functions" ou="Demo2Perms" type="Button"/>
+                <permobj objName="PAGE1_123" description="Used to perform PAGE1_123 role activation functions" ou="Demo2Perms" type="Button"/>
+                <permobj objName="PAGE1_456" description="Used to perform PAGE1_456 role activation functions" ou="Demo2Perms" type="Button"/>
+                <permobj objName="PAGE1_789" description="Used to perform PAGE1_789 role activation functions" ou="Demo2Perms" type="Button"/>
+                <permobj objName="ROLE_PAGE2" description="Used to perform ROLE_PAGE12 role activation functions" ou="Demo2Perms" type="Button"/>
+                <permobj objName="PAGE2_123" description="Used to perform PAGE2_123 role activation functions" ou="Demo2Perms" type="Button"/>
+                <permobj objName="PAGE2_456" description="Used to perform PAGE2_456 role activation functions" ou="Demo2Perms" type="Button"/>
+                <permobj objName="PAGE2_789" description="Used to perform PAGE2_789 role activation functions" ou="Demo2Perms" type="Button"/>
+                <permobj objName="ROLE_PAGE3" description="Used to perform ROLE_PAGE3 role activation functions" ou="Demo2Perms" type="Button"/>
+                <permobj objName="PAGE3_123" description="Used to perform PAGE3_123 role activation functions" ou="Demo2Perms" type="Button"/>
+                <permobj objName="PAGE3_456" description="Used to perform PAGE3_456 role activation functions" ou="Demo2Perms" type="Button"/>
+                <permobj objName="PAGE3_789" description="Used to perform PAGE3_789 role activation functions" ou="Demo2Perms" type="Button"/>
             </addpermobj>
 
             <addpermop>
@@ -366,21 +366,21 @@
             </addpermop>
 
             <delsdset>
-                <sdset name="Demo2" setType="DYNAMIC"/>
+                <sdset name="Demo2DSD" setType="DYNAMIC"/>
             </delsdset>
 
             <addsdset>
-                <sdset name="Demo2" description="ROLE_TEST DATA roles are mutually exclusive" cardinality="2" setType="DYNAMIC" setmembers="PAGE1_123,PAGE1_456,PAGE1_789,PAGE2_123,PAGE2_456,PAGE2_789,PAGE3_123,PAGE3_456,PAGE3_789"/>
+                <sdset name="Demo2DSD" description="ROLE_TEST DATA roles are mutually exclusive" cardinality="2" setType="DYNAMIC" setmembers="PAGE1_123,PAGE1_456,PAGE1_789,PAGE2_123,PAGE2_456,PAGE2_789,PAGE3_123,PAGE3_456,PAGE3_789"/>
             </addsdset>
 
             <delorgunit>
-                <orgunit name="WicketPerms" typeName="PERM"/>
-                <orgunit name="WicketUsers" typeName="USER"/>
+                <orgunit name="Demo2Perms" typeName="PERM"/>
+                <orgunit name="Demo2Users" typeName="USER"/>
             </delorgunit>
 
             <addorgunit>
-                <orgunit name="WicketPerms" typeName="PERM" description="Used for Wicket Test Permissions"/>
-                <orgunit name="WicketUsers" typeName="USER" description="Used for Wicket Test Users"/>
+                <orgunit name="Demo2Perms" typeName="PERM" description="Fortress Demo2 Test Permissions"/>
+                <orgunit name="Demo2Users" typeName="USER" description="Fortress Demo2 Test Users"/>
             </addorgunit>
 
         </FortressAdmin>
