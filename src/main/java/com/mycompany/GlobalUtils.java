@@ -57,10 +57,10 @@ public class GlobalUtils
     public static final String USER_3 = "user3";
     public static final String BTN_PAGE_3 = "page3";
 
-    public static final String ROLE_SUPER = "ROLE_TEST_SUPER";
-    public static final String ROLE_TEST1 = "ROLE_TEST1";
-    public static final String ROLE_TEST2 = "ROLE_TEST2";
-    public static final String ROLE_TEST3 = "ROLE_TEST3";
+    public static final String ROLE_SUPER = "ROLE_DEMO2_SUPER_USER";
+    public static final String ROLE_PAGE1 = "ROLE_PAGE1";
+    public static final String ROLE_PAGE2 = "ROLE_PAGE2";
+    public static final String ROLE_PAGE3 = "ROLE_PAGE3";
     public static final String ROLE_TEST4 = "ROLE_TEST4";
     public static final String LOGOUT = "logout";
     public static final String INACTIVE_ROLES = "inactiveRoles";

@@ -67,11 +67,10 @@
         </web-resource-collection>
         <auth-constraint>
             <!-- Anyone with listed role may access this area -->
-            <role-name>ROLE_TEST_SUPER</role-name>
-            <role-name>ROLE_TEST_POWER</role-name>
-            <role-name>ROLE_TEST1</role-name>
-            <role-name>ROLE_TEST2</role-name>
-            <role-name>ROLE_TEST3</role-name>
+            <role-name>ROLE_DEMO2_SUPER_USER</role-name>
+            <role-name>ROLE_PAGE1</role-name>
+            <role-name>ROLE_PAGE2</role-name>
+            <role-name>ROLE_PAGE3</role-name>
         </auth-constraint>
     </security-constraint>
     <login-config>
@@ -84,19 +83,16 @@
     </login-config>
     <!-- Security roles referenced by this web application -->
     <security-role>
-        <role-name>ROLE_TEST_SUPER</role-name>
+        <role-name>ROLE_DEMO2_SUPER_USER</role-name>
     </security-role>
     <security-role>
-        <role-name>ROLE_TEST_POWER</role-name>
+        <role-name>ROLE_PAGE1</role-name>
     </security-role>
     <security-role>
-        <role-name>ROLE_TEST1</role-name>
+        <role-name>ROLE_PAGE2</role-name>
     </security-role>
     <security-role>
-        <role-name>ROLE_TEST2</role-name>
-    </security-role>
-    <security-role>
-        <role-name>ROLE_TEST3</role-name>
+        <role-name>ROLE_PAGE3</role-name>
     </security-role>
 
 </web-app>

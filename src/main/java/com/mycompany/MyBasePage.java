@@ -129,15 +129,15 @@ public abstract class MyBasePage extends WebPage
         add( new Label( LINKS_LABEL, new PropertyModel<String>( this, LINKS_LABEL ) ) );
         SecureBookmarkablePageLink page1Link = new SecureBookmarkablePageLink( GlobalUtils.BTN_PAGE_1, Page1.class,
             GlobalUtils.ROLE_SUPER +
-            "," + GlobalUtils.ROLE_TEST1 );
+            "," + GlobalUtils.ROLE_PAGE1 );
         add( page1Link );
         SecureBookmarkablePageLink page2Link = new SecureBookmarkablePageLink( GlobalUtils.BTN_PAGE_2, Page2.class,
             GlobalUtils.ROLE_SUPER +
-            "," + GlobalUtils.ROLE_TEST2 );
+            "," + GlobalUtils.ROLE_PAGE2 );
         add( page2Link );
         SecureBookmarkablePageLink page3Link = new SecureBookmarkablePageLink( GlobalUtils.BTN_PAGE_3, Page3.class,
             GlobalUtils.ROLE_SUPER +
-            "," + GlobalUtils.ROLE_TEST3 );
+            "," + GlobalUtils.ROLE_PAGE3 );
         add( page3Link );
     }
 
@@ -159,11 +159,10 @@ public abstract class MyBasePage extends WebPage
 
         private void addRoleActivationComboBoxesAndButtons()
         {
-            rolesCB = new ComboBox<UserRole>( GlobalUtils.INACTIVE_ROLES, new PropertyModel<String>( this,
-                "roleSelection" ), inactiveRoles, new ChoiceRenderer<UserRole>( "name" ) );
+            rolesCB = new ComboBox<UserRole>( GlobalUtils.INACTIVE_ROLES, new PropertyModel<String>( this, "roleSelection" ), inactiveRoles, new ChoiceRenderer<UserRole>( "name" ) );
             rolesCB.setOutputMarkupId( true );
             add( rolesCB );
-            add( new SecureIndicatingAjaxButton( this,GlobalUtils.ROLES_ACTIVATE, "com.mycompany.MyBasePage", "addActiveRole" )
+            add( new SecureIndicatingAjaxButton( this, GlobalUtils.ROLES_ACTIVATE, "com.mycompany.MyBasePage", "addActiveRole" )
             {
                 private static final long serialVersionUID = 1L;
 
@@ -204,12 +203,11 @@ public abstract class MyBasePage extends WebPage
                 }
             } );
 
-            activeRolesCB = new ComboBox<UserRole>( GlobalUtils.ACTIVE_ROLES, new PropertyModel<String>( this,
-                "activeRoleSelection" ), activeRoles, new ChoiceRenderer<UserRole>( "name" ) );
+            activeRolesCB = new ComboBox<UserRole>( GlobalUtils.ACTIVE_ROLES, new PropertyModel<String>( this, "activeRoleSelection" ), activeRoles, new ChoiceRenderer<UserRole>( "name" ) );
             activeRolesCB.setOutputMarkupId( true );
             add( activeRolesCB );
-            //add( new SecureIndicatingAjaxButton( GlobalUtils.ROLES_DEACTIVATE, "ROLE_TEST1,ROLE_TEST2,ROLE_TEST3" )
-            add( new SecureIndicatingAjaxButton( this,GlobalUtils.ROLES_DEACTIVATE, "com.mycompany.MyBasePage", "dropActiveRole" )
+            //add( new SecureIndicatingAjaxButton( GlobalUtils.ROLES_DEACTIVATE, "ROLE_PAGE1,ROLE_PAGE2,ROLE_PAGE3" )
+            add( new SecureIndicatingAjaxButton( this, GlobalUtils.ROLES_DEACTIVATE, "com.mycompany.MyBasePage", "dropActiveRole" )
             {
                 private static final long serialVersionUID = 1L;
 
@@ -249,6 +247,48 @@ public abstract class MyBasePage extends WebPage
                     attributes.getAjaxCallListeners().add( ajaxCallListener );
                 }
             } );
+
+            Label activatedRoleString = new Label( "activatedRoleString", new PropertyModel<String>( this, "activatedRoleString" ) );
+            add( activatedRoleString );
+            Label inactivatedRoleString = new Label( "inactivatedRoleString", new PropertyModel<String>( this, "inactivatedRoleString" ) );
+            add( inactivatedRoleString );
+        }
+
+        public String getActivatedRoleString()
+        {
+            String szRoleStr = "";
+            if(VUtil.isNotNullOrEmpty( activeRoles ))
+            {
+                int ctr = 0;
+                for(UserRole role : activeRoles )
+                {
+                    if(ctr++ > 0)
+                    {
+                        szRoleStr += ", ";
+                    }
+                    szRoleStr += role.getName();
+                }
+            }
+            return szRoleStr;
+        }
+
+
+        public String getInactivatedRoleString()
+        {
+            String szRoleStr = "";
+            if(VUtil.isNotNullOrEmpty( inactiveRoles ))
+            {
+                int ctr = 0;
+                for(UserRole role : inactiveRoles )
+                {
+                    if(ctr++ > 0)
+                    {
+                        szRoleStr += ", ";
+                    }
+                    szRoleStr += role.getName();
+                }
+            }
+            return szRoleStr;
         }
 
         /**

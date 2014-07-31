@@ -67,7 +67,7 @@ public class Page2 extends MyBasePage
             super( id, model );
             addDetailFields();
             addGrid();
-            add( new Label( "label1", "If you see this page, ROLE_TEST_SUPER or ROLE_TEST2 is activated within your session" ) );
+            add( new Label( "label1", "If you see this page, ROLE_DEMO2_SUPER_USER or ROLE_PAGE2 is activated within your session" ) );
             addButtons();
         }
 

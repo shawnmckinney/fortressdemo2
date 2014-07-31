@@ -89,19 +89,19 @@ public class FortressDemo2SeleniumITCase
         driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
         doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2, GlobalUtils.BUTTON1 );
 
-        // Now activate ROLE_TEST2:
-        activateRole(GlobalUtils.ROLE_TEST2);
+        // Now activate ROLE_PAGE2:
+        activateRole(GlobalUtils.ROLE_PAGE2);
         //TUtils.sleep( 1 );
         // Make sure the pop-up is correct:
-        if(!processPopup("Role selection ROLE_TEST2 activation failed because of Dynamic SoD rule violation"))
+        if(!processPopup("Role selection ROLE_PAGE2 activation failed because of Dynamic SoD rule violation"))
             fail("doActivate Button Test 2 Failed: " + GlobalUtils.BTN_PAGE_2 + "." + GlobalUtils.BUTTON1);
         doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2, GlobalUtils.BUTTON1 );
 
         // Go back to Page 1
         driver.findElement( By.linkText( GlobalUtils.PAGE_1 ) ).click();
 
-        // Now deactivate ROLE_TEST1:
-        ( ( JavascriptExecutor ) driver ).executeScript( "$(document.getElementById('" + GlobalUtils.ACTIVE_ROLES + "')).val('" + GlobalUtils.ROLE_TEST1 + "');" );
+        // Now deactivate ROLE_PAGE1:
+        ( ( JavascriptExecutor ) driver ).executeScript( "$(document.getElementById('" + GlobalUtils.ACTIVE_ROLES + "')).val('" + GlobalUtils.ROLE_PAGE1 + "');" );
         driver.findElement( By.name( GlobalUtils.ROLES_DEACTIVATE ) ).click();
         TUtils.sleep( 1 );
         doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.BUTTON1 );
@@ -110,8 +110,8 @@ public class FortressDemo2SeleniumITCase
         driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
         doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2, GlobalUtils.BUTTON1 );
 
-        // Now active ROLE_TEST2:
-        activateRole(GlobalUtils.ROLE_TEST2);
+        // Now active ROLE_PAGE2:
+        activateRole(GlobalUtils.ROLE_PAGE2);
 
         // Click the buttons on page 2
         doPositiveButtonTests( null, GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2 );
@@ -119,19 +119,19 @@ public class FortressDemo2SeleniumITCase
         // Now go to Page 3 and do negative tests on buttons:
         doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_3 );
 
-        // Now activate ROLE_TEST3:
-        activateRole(GlobalUtils.ROLE_TEST3);
+        // Now activate ROLE_PAGE3:
+        activateRole(GlobalUtils.ROLE_PAGE3);
         TUtils.sleep( 3 );
         // Make sure the pop-up is correct:
-        if(!processPopup("Role selection ROLE_TEST3 activation failed because of Dynamic SoD rule violation"))
+        if(!processPopup("Role selection ROLE_PAGE3 activation failed because of Dynamic SoD rule violation"))
             fail("doActivate Button Test 3 Failed: " + GlobalUtils.BTN_PAGE_2 + "." + GlobalUtils.BUTTON1);
         doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_3, GlobalUtils.BUTTON1 );
 
         // Go back to Page 2
         driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
 
-        // Now deactivate ROLE_TEST2:
-        ( ( JavascriptExecutor ) driver ).executeScript( "$(document.getElementById('" + GlobalUtils.ACTIVE_ROLES + "')).val('" + GlobalUtils.ROLE_TEST2 + "');" );
+        // Now deactivate ROLE_PAGE2:
+        ( ( JavascriptExecutor ) driver ).executeScript( "$(document.getElementById('" + GlobalUtils.ACTIVE_ROLES + "')).val('" + GlobalUtils.ROLE_PAGE2 + "');" );
         driver.findElement( By.name( GlobalUtils.ROLES_DEACTIVATE ) ).click();
         TUtils.sleep( 1 );
         doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2, GlobalUtils.BUTTON1 );
@@ -140,8 +140,8 @@ public class FortressDemo2SeleniumITCase
         driver.findElement( By.linkText( GlobalUtils.PAGE_3 ) ).click();
         doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2, GlobalUtils.BUTTON1 );
 
-        // Now active ROLE_TEST3:
-        activateRole(GlobalUtils.ROLE_TEST3);
+        // Now active ROLE_PAGE3:
+        activateRole(GlobalUtils.ROLE_PAGE3);
         //TUtils.sleep( 3 );
 
         // Now click the buttons on page 3:
