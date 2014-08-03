@@ -22,7 +22,7 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
  * @version $Rev$
  */
 public class WicketApplication extends WebApplication
-{    	
+{
     @Override
     public Session newSession(Request request, Response response)
     {

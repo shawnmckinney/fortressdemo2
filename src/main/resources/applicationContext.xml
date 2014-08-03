@@ -28,8 +28,9 @@
         <constructor-arg value="HOME"/>
     </bean>
 
-    <!-- JDBC Connection properties follow.  Their associated values contained inside database.properties file -->
-    <context:property-placeholder location="classpath:database.properties" />
+    <!-- JDBC Connection properties follow for SSL.  Their associated values contained inside fortress.properties file -->
+    <!-- Note, iff Fortress is using SSL, AND, its 'trust.store.set.prop' is set to TRUE, it will set these as System.properties during connection pool initialization -->
+    <context:property-placeholder location="classpath:fortress.properties" />
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject">
             <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
@@ -40,12 +41,9 @@
         <property name="targetMethod" value="putAll"/>
         <property name="arguments">
             <util:properties>
-                <prop key="javax.net.ssl.keyStore">${keyStore.path}/${keyStore.value}</prop>
-                <prop key="javax.net.ssl.keyStorePassword">${keyStorePassword.value}</prop>
-                <prop key="javax.net.ssl.trustStore">${keyStore.path}/${trustStore.value}</prop>
-                <prop key="javax.net.ssl.trustStorePassword">${trustStorePassword.value}</prop>
-                <prop key="javax.net.debug">${javax.net.debug}</prop>
-                <prop key="javax.net.debug">all</prop>
+                <prop key="javax.net.ssl.trustStore">${trust.store}</prop>
+                <prop key="javax.net.ssl.trustStorePassword">${trust.store.password}</prop>
+                <prop key="javax.net.debug">${enable.ldap.ssl.debug}</prop>
             </util:properties>
         </property>
     </bean>
