@@ -76,14 +76,14 @@ public class Page2 extends MyBasePage
          */
         private void addButtons()
         {
-            final String szBtn1 = GlobalUtils.BTN_PAGE_2 + "." + GlobalUtils.ADD;
-            add( new SecureIndicatingAjaxButton( this, szBtn1, GlobalUtils.PAGE2_OBJNAME, GlobalUtils.ADD )
+            //final String szBtn1 = GlobalUtils.BTN_PAGE_2 + "." + GlobalUtils.ADD;
+            add( new SecureIndicatingAjaxButton( this, GlobalUtils.BTN_PAGE_2_ADD, GlobalUtils.PAGE2_OBJNAME, GlobalUtils.ADD )
             {
                 @Override
                 protected void onSubmit( AjaxRequestTarget target, Form form )
                 {
                     Page2EO page2EO = ( Page2EO ) editForm.getModel().getObject();
-                    info( szBtn1 );
+                    info( GlobalUtils.BTN_PAGE_2_ADD );
                     if( page2EO != null && checkAccess( page2EO.getCustomer() ) )
                     {
                         p2manager.addPage2( page2EO, this );
@@ -99,7 +99,7 @@ public class Page2 extends MyBasePage
                 @Override
                 public void onError( AjaxRequestTarget target, Form form )
                 {
-                    LOG.error( "submit failed: " + szBtn1 );
+                    LOG.error( "submit failed: " + GlobalUtils.BTN_PAGE_2_ADD );
                 }
 
                 @Override
@@ -117,14 +117,13 @@ public class Page2 extends MyBasePage
                     attributes.getAjaxCallListeners().add( ajaxCallListener );
                 }
             } );
-            final String szBtn2 = GlobalUtils.BTN_PAGE_2 + "." + GlobalUtils.UPDATE;
-            add( new SecureIndicatingAjaxButton( this, szBtn2, GlobalUtils.PAGE2_OBJNAME, GlobalUtils.UPDATE )
+            add( new SecureIndicatingAjaxButton( this, GlobalUtils.BTN_PAGE_2_UPDATE, GlobalUtils.PAGE2_OBJNAME, GlobalUtils.UPDATE )
             {
                 @Override
                 protected void onSubmit( AjaxRequestTarget target, Form form )
                 {
                     Page2EO page2EO = ( Page2EO ) editForm.getModel().getObject();
-                    info( szBtn2 );
+                    info( GlobalUtils.BTN_PAGE_2_UPDATE );
                     if( page2EO != null && checkAccess( page2EO.getCustomer() ) )
                     {
                         p2manager.updatePage2( page2EO, this );
@@ -140,7 +139,7 @@ public class Page2 extends MyBasePage
                 @Override
                 public void onError( AjaxRequestTarget target, Form form )
                 {
-                    LOG.error( "submit failed: " + szBtn2 );
+                    LOG.error( "submit failed: " + GlobalUtils.BTN_PAGE_2_UPDATE );
                 }
 
                 @Override
@@ -158,19 +157,18 @@ public class Page2 extends MyBasePage
                     attributes.getAjaxCallListeners().add( ajaxCallListener );
                 }
             } );
-            final String szBtn3 = GlobalUtils.BTN_PAGE_2 + "." + GlobalUtils.DELETE;
-            add( new SecureIndicatingAjaxButton( this, szBtn3, GlobalUtils.PAGE2_OBJNAME, GlobalUtils.DELETE )
+            add( new SecureIndicatingAjaxButton( this, GlobalUtils.BTN_PAGE_2_DELETE, GlobalUtils.PAGE2_OBJNAME, GlobalUtils.DELETE )
             {
                 @Override
                 protected void onSubmit( AjaxRequestTarget target, Form form )
                 {
                     Page2EO page2EO = ( Page2EO ) editForm.getModel().getObject();
-                    info( szBtn3 );
+                    info( GlobalUtils.BTN_PAGE_2_DELETE );
                     if( page2EO != null && checkAccess( page2EO.getCustomer() ) )
                     {
                         p2manager.deletePage2ById( page2EO, this );
                         SaveModelEvent.send( getPage(), this, clearDetailFields( ), target, SaveModelEvent.Operations.DELETE );
-                        target.appendJavaScript(";alert('" + szBtn3 + "');");
+                        target.appendJavaScript(";alert('" + GlobalUtils.BTN_PAGE_2_DELETE + "');");
                     }
                     else
                     {
@@ -181,7 +179,7 @@ public class Page2 extends MyBasePage
                 @Override
                 public void onError( AjaxRequestTarget target, Form form )
                 {
-                    LOG.error( "submit failed: " + szBtn3 );
+                    LOG.error( "submit failed: " + GlobalUtils.BTN_PAGE_2_DELETE );
                 }
 
                 @Override
@@ -199,9 +197,7 @@ public class Page2 extends MyBasePage
                     attributes.getAjaxCallListeners().add( ajaxCallListener );
                 }
             } );
-
-            final String szBtn4 = GlobalUtils.BTN_PAGE_2 + "." + GlobalUtils.SEARCH;
-            add( new SecureIndicatingAjaxButton( this, szBtn4, GlobalUtils.PAGE2_OBJNAME, GlobalUtils.SEARCH )
+            add( new SecureIndicatingAjaxButton( this, GlobalUtils.BTN_PAGE_2_SEARCH, GlobalUtils.PAGE2_OBJNAME, GlobalUtils.SEARCH )
             {
                 @Override
                 protected void onSubmit( AjaxRequestTarget target, Form form )
@@ -221,7 +217,7 @@ public class Page2 extends MyBasePage
                         }
                         else
                         {
-                            info( "No matching objects found" );
+                            target.appendJavaScript( ";alert('No matching objects found');" );
                         }
                     }
                     else
@@ -233,7 +229,7 @@ public class Page2 extends MyBasePage
                 @Override
                 public void onError( AjaxRequestTarget target, Form form )
                 {
-                    LOG.error( "submit failed: " + szBtn4 );
+                    LOG.error( "submit failed: " + GlobalUtils.BTN_PAGE_2_SEARCH );
                 }
 
                 @Override

@@ -38,11 +38,28 @@ public class GlobalUtils
     public static final String BUTTON2 = "button2";
     public static final String BUTTON3 = "button3";
 
+    public static final String SUPER_USER = "superuser";
+    public static final String POWER_USER = "poweruser";
+
+    public static final String USER_1 = "user1";
+    public static final String USER_1_123 = "user1_123";
+    public static final String USER_1_456 = "user1_456";
+    public static final String USER_1_789 = "user1_789";
+
+    public static final String USER_2 = "user2";
+    public static final String USER_2_123 = "user2_123";
+    public static final String USER_2_456 = "user2_456";
+    public static final String USER_2_789 = "user2_789";
+
+    public static final String USER_3 = "user3";
+    public static final String USER_3_123 = "user3_123";
+    public static final String USER_3_456 = "user3_456";
+    public static final String USER_3_789 = "user3_789";
+
     public static final String USER_ID = "userId";
     public static final String PSWD_FIELD = "pswdField";
     public static final String LOGIN = "login";
     public static final String PAGE_1 = "PAGE1";
-    public static final String USER_1 = "user1";
     public static final String BTN_PAGE_1 = "page1";
 
     public static final String PAGE1_OBJNAME = "com.mycompany.Page1";
@@ -50,12 +67,27 @@ public class GlobalUtils
     public static final String PAGE3_OBJNAME = "com.mycompany.Page3";
 
     public static final String PAGE_2 = "PAGE2";
-    public static final String USER_2 = "user2";
     public static final String BTN_PAGE_2 = "page2";
 
     public static final String PAGE_3 = "PAGE3";
-    public static final String USER_3 = "user3";
     public static final String BTN_PAGE_3 = "page3";
+
+    public static final String BTN_PAGE_1_ADD = "page1.add";
+    public static final String BTN_PAGE_1_UPDATE = "page1.update";
+    public static final String BTN_PAGE_1_DELETE = "page1.delete";
+    public static final String BTN_PAGE_1_SEARCH = "page1.search";
+
+    public static final String BTN_PAGE_2_ADD = "page2.add";
+    public static final String BTN_PAGE_2_UPDATE = "page2.update";
+    public static final String BTN_PAGE_2_DELETE = "page2.delete";
+    public static final String BTN_PAGE_2_SEARCH = "page2.search";
+
+    public static final String BTN_PAGE_3_ADD = "page3.add";
+    public static final String BTN_PAGE_3_UPDATE = "page3.update";
+    public static final String BTN_PAGE_3_DELETE = "page3.delete";
+    public static final String BTN_PAGE_3_SEARCH = "page3.search";
+
+
 
     public static final String ROLE_SUPER = "ROLE_DEMO2_SUPER_USER";
     public static final String ROLE_PAGE1 = "ROLE_PAGE1";

@@ -128,16 +128,13 @@ public abstract class MyBasePage extends WebPage
     {
         add( new Label( LINKS_LABEL, new PropertyModel<String>( this, LINKS_LABEL ) ) );
         SecureBookmarkablePageLink page1Link = new SecureBookmarkablePageLink( GlobalUtils.BTN_PAGE_1, Page1.class,
-            GlobalUtils.ROLE_SUPER +
-            "," + GlobalUtils.ROLE_PAGE1 );
+            GlobalUtils.ROLE_SUPER + "," + GlobalUtils.ROLE_PAGE1 );
         add( page1Link );
         SecureBookmarkablePageLink page2Link = new SecureBookmarkablePageLink( GlobalUtils.BTN_PAGE_2, Page2.class,
-            GlobalUtils.ROLE_SUPER +
-            "," + GlobalUtils.ROLE_PAGE2 );
+            GlobalUtils.ROLE_SUPER + "," + GlobalUtils.ROLE_PAGE2 );
         add( page2Link );
         SecureBookmarkablePageLink page3Link = new SecureBookmarkablePageLink( GlobalUtils.BTN_PAGE_3, Page3.class,
-            GlobalUtils.ROLE_SUPER +
-            "," + GlobalUtils.ROLE_PAGE3 );
+            GlobalUtils.ROLE_SUPER + "," + GlobalUtils.ROLE_PAGE3 );
         add( page3Link );
     }
 
