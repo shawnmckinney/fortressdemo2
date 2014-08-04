@@ -28,9 +28,6 @@ import org.openldap.fortress.rbac.Warning;
 import org.openldap.fortress.util.attr.VUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.security.Principal;
 import java.util.List;
 
@@ -54,6 +51,9 @@ public abstract class MyBasePage extends WebPage
     protected String infoField;
     protected TextArea infoTA;
 
+    /**
+     * These are the child pages of this web application.
+     */
     public enum ChildPage
     {
         PAGE1,
@@ -64,6 +64,7 @@ public abstract class MyBasePage extends WebPage
     private ChildPage childPage;
 
     /**
+     * All pages in this Wicket application extend this page.
      *
      */
     public MyBasePage()
@@ -138,6 +139,9 @@ public abstract class MyBasePage extends WebPage
         add( page3Link );
     }
 
+    /**
+     *
+     */
     public class MyBasePageForm extends Form
     {
         private ComboBox<UserRole> rolesCB;
@@ -178,7 +182,8 @@ public abstract class MyBasePage extends WebPage
                         }
                         else
                         {
-                            target.appendJavaScript( ";alert('Unauthorized');" );
+                            String msg = "Unauthorized addActiveRole: " + roleSelection;
+                            target.appendJavaScript( ";alert('" + msg + "');" );
                             roleSelection = "";
                         }
                     }
@@ -251,6 +256,11 @@ public abstract class MyBasePage extends WebPage
             add( inactivatedRoleString );
         }
 
+        /**
+         * Build a comma delimited String containing activated roles to be displayed in page label.
+         *
+         * @return String containing comma delimited activated roles
+         */
         public String getActivatedRoleString()
         {
             String szRoleStr = "";
@@ -270,6 +280,11 @@ public abstract class MyBasePage extends WebPage
         }
 
 
+        /**
+         * Build a comma delimited String containing inactivated roles to be displayed in page label.
+         *
+         * @return String containing comma delimited inactivated roles
+         */
         public String getInactivatedRoleString()
         {
             String szRoleStr = "";
@@ -449,47 +464,13 @@ public abstract class MyBasePage extends WebPage
     }
 
     /**
-     * This utility method can deserialize any object but is used to convert java.security.Principal to Fortress RBAC session object.
-     *
-     * @param str contains String to deserialize
-     * @param cls contains class to use for destination object
-     * @return deserialization target object
-     */
-    private static <T> T deserialize(String str, Class<T> cls)
-    {
-        // deserialize the object
-        try
-        {
-            // This encoding induces a bijection between byte[] and String (unlike UTF-8)
-            byte b[] = str.getBytes("ISO-8859-1");
-            ByteArrayInputStream bi = new ByteArrayInputStream(b);
-            ObjectInputStream si = new ObjectInputStream(bi);
-            return cls.cast(si.readObject());
-        }
-        catch (java.io.UnsupportedEncodingException e)
-        {
-            LOG.warn( "deserialize caught UnsupportedEncodingException:" + e);
-        }
-        catch (IOException e)
-        {
-            LOG.warn( "deserialize caught IOException:" + e);
-        }
-        catch (ClassNotFoundException e)
-        {
-            LOG.warn( "deserialize caught ClassNotFoundException:" + e);
-        }
-        // this method failed so return null
-        return null;
-    }
-
-    /**
      * Call Fortress createSession and load into the Wicket session object
      *
      * @return
      */
     private void initializeRbacSession(String szPrincipal)
     {
-        Session realmSession = deserialize(szPrincipal, Session.class);
+        Session realmSession = GlobalUtils.deserialize(szPrincipal, Session.class, LOG);
         if(realmSession != null)
         {
             synchronized ( ( RbacSession ) RbacSession.get() )

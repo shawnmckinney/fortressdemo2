@@ -3,6 +3,7 @@
  */
 package com.mycompany;
 
+import org.apache.log4j.Logger;
 import org.apache.wicket.Component;
 import org.openldap.fortress.AccessMgr;
 import org.openldap.fortress.cfg.Config;
@@ -11,6 +12,9 @@ import org.openldap.fortress.rbac.Session;
 import org.openldap.fortress.util.attr.VUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -33,10 +37,6 @@ public class GlobalUtils
     public static final String SEARCH = "search";
     public static final String SEARCH_A = "searchA";
     public static final String READ = "read";
-
-    public static final String BUTTON1 = "button1";
-    public static final String BUTTON2 = "button2";
-    public static final String BUTTON3 = "button3";
 
     public static final String SUPER_USER = "superuser";
     public static final String POWER_USER = "poweruser";
@@ -87,13 +87,22 @@ public class GlobalUtils
     public static final String BTN_PAGE_3_DELETE = "page3.delete";
     public static final String BTN_PAGE_3_SEARCH = "page3.search";
 
+    public static final String ROLE_PAGE1_123 = "PAGE1_123";
+    public static final String ROLE_PAGE1_456 = "PAGE1_456";
+    public static final String ROLE_PAGE1_789 = "PAGE1_789";
+    public static final String ROLE_PAGE2_123 = "PAGE2_123";
+    public static final String ROLE_PAGE2_456 = "PAGE2_456";
+    public static final String ROLE_PAGE2_789 = "PAGE2_789";
+    public static final String ROLE_PAGE3_123 = "PAGE3_123";
+    public static final String ROLE_PAGE3_456 = "PAGE3_456";
+    public static final String ROLE_PAGE3_789 = "PAGE3_789";
 
+    public static final String CUSTOMER_EF_ID = "customer";
 
     public static final String ROLE_SUPER = "ROLE_DEMO2_SUPER_USER";
     public static final String ROLE_PAGE1 = "ROLE_PAGE1";
     public static final String ROLE_PAGE2 = "ROLE_PAGE2";
     public static final String ROLE_PAGE3 = "ROLE_PAGE3";
-    public static final String ROLE_TEST4 = "ROLE_TEST4";
     public static final String LOGOUT = "logout";
     public static final String INACTIVE_ROLES = "inactiveRoles";
     public static final String ACTIVE_ROLES = "activeRoles";
@@ -152,5 +161,39 @@ public class GlobalUtils
         RbacSession session = ( RbacSession )component.getSession();
         Permission permission = new Permission( objName, opName, objId );
         return accessMgr.checkAccess( session.getRbacSession(), permission );
+    }
+
+    /**
+     * This utility method can deserialize any object but is used to convert java.security.Principal to Fortress RBAC session object.
+     *
+     * @param str contains String to deserialize
+     * @param cls contains class to use for destination object
+     * @return deserialization target object
+     */
+    public static <T> T deserialize(String str, Class<T> cls, Logger LOG)
+    {
+        // deserialize the object
+        try
+        {
+            // This encoding induces a bijection between byte[] and String (unlike UTF-8)
+            byte b[] = str.getBytes("ISO-8859-1");
+            ByteArrayInputStream bi = new ByteArrayInputStream(b);
+            ObjectInputStream si = new ObjectInputStream(bi);
+            return cls.cast(si.readObject());
+        }
+        catch (java.io.UnsupportedEncodingException e)
+        {
+            LOG.warn( "deserialize caught UnsupportedEncodingException:" + e);
+        }
+        catch (IOException e)
+        {
+            LOG.warn( "deserialize caught IOException:" + e);
+        }
+        catch (ClassNotFoundException e)
+        {
+            LOG.warn( "deserialize caught ClassNotFoundException:" + e);
+        }
+        // this method failed so return null
+        return null;
     }
 }

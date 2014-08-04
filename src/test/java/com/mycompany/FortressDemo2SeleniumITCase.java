@@ -49,28 +49,57 @@ public class FortressDemo2SeleniumITCase
     {
         LOG.info( "Begin FortressDemo2SeleniumITCase" );
         driver.get( baseUrl + "/fortressdemo2" );
+
+        // SuperUser:
         login( GlobalUtils.SUPER_USER, "password");
-
         TUtils.sleep( 1 );
-
-        // User 1:
         doPositiveButtonTests( GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1 );
+        TUtils.sleep( 1 );
+        doPositiveDataTest(GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_SUPER, "123");
+        TUtils.sleep( 1 );
+        doPositiveDataTest(GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_SUPER, "456");
+        TUtils.sleep( 1 );
+        doPositiveDataTest(GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_SUPER, "789");
+        TUtils.sleep( 1 );
         doPositiveButtonTests( GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2 );
+        TUtils.sleep( 1 );
+        doPositiveDataTest(GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_SUPER, "123");
+        TUtils.sleep( 1 );
+        doPositiveDataTest(GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_SUPER, "456");
+        TUtils.sleep( 1 );
+        doPositiveDataTest(GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_SUPER, "789");
+        TUtils.sleep( 1 );
         doPositiveButtonTests( GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3 );
-
-        //doNegativeButtonTests( GlobalUtils.PAGE_2, GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2 );
-        //doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_3 );
+        doPositiveDataTest(GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_SUPER, "123");
+        TUtils.sleep( 1 );
+        doPositiveDataTest(GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_SUPER, "456");
+        TUtils.sleep( 1 );
+        doPositiveDataTest(GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_SUPER, "789");
+        TUtils.sleep( 1 );
         logout( GlobalUtils.SUPER_USER );
 
-        login( GlobalUtils.POWER_USER, "password");
-
-        TUtils.sleep( 1 );
-
         // power User:
-        doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.POWER_USER, GlobalUtils.BTN_PAGE_1 );
-        doNegativeButtonTests( GlobalUtils.PAGE_2, GlobalUtils.POWER_USER, GlobalUtils.BTN_PAGE_2 );
-        doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.POWER_USER, GlobalUtils.BTN_PAGE_3 );
-
+        login( GlobalUtils.POWER_USER, "password");
+        TUtils.sleep( 1 );
+        driver.findElement( By.linkText( GlobalUtils.PAGE_1 ) ).click();
+        activateRole( GlobalUtils.ROLE_PAGE3_789 );
+        doActivateTest( GlobalUtils.POWER_USER, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_123, GlobalUtils.ROLE_PAGE3_789, "123", "456", true );
+        driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
+        doActivateTest( GlobalUtils.POWER_USER, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_123, GlobalUtils.ROLE_PAGE1_123, "123", "456", true );
+        driver.findElement( By.linkText( GlobalUtils.PAGE_3 ) ).click();
+        doActivateTest( GlobalUtils.POWER_USER, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_123, GlobalUtils.ROLE_PAGE2_123, "123", "456", true );
+        driver.findElement( By.linkText( GlobalUtils.PAGE_1 ) ).click();
+        doActivateTest( GlobalUtils.POWER_USER, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_456, GlobalUtils.ROLE_PAGE3_123, "456", "789", true );
+        driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
+        doActivateTest( GlobalUtils.POWER_USER, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_456, GlobalUtils.ROLE_PAGE1_456, "456", "789", true );
+        driver.findElement( By.linkText( GlobalUtils.PAGE_3 ) ).click();
+        doActivateTest( GlobalUtils.POWER_USER, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_456, GlobalUtils.ROLE_PAGE2_456, "456", "789", true );
+        driver.findElement( By.linkText( GlobalUtils.PAGE_1 ) ).click();
+        doActivateTest( GlobalUtils.POWER_USER, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_789, GlobalUtils.ROLE_PAGE3_456, "789", "123", true );
+        driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
+        doActivateTest( GlobalUtils.POWER_USER, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_789, GlobalUtils.ROLE_PAGE1_789, "789", "123", true );
+        driver.findElement( By.linkText( GlobalUtils.PAGE_3 ) ).click();
+        doActivateTest( GlobalUtils.POWER_USER, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_789, GlobalUtils.ROLE_PAGE2_789, "789", "123", true );
         logout( GlobalUtils.POWER_USER );
 
         // User 1:
@@ -79,6 +108,10 @@ public class FortressDemo2SeleniumITCase
         doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_1 );
         doNegativeLinkTest( GlobalUtils.PAGE_2, GlobalUtils.USER_1 );
         doNegativeLinkTest( GlobalUtils.PAGE_3, GlobalUtils.USER_1 );
+        activateRole( GlobalUtils.ROLE_PAGE1_789 );
+        doActivateTest( GlobalUtils.USER_1, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_123, GlobalUtils.ROLE_PAGE1_789, "123", "789", true );
+        doActivateTest( GlobalUtils.USER_1, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_456, GlobalUtils.ROLE_PAGE1_123, "456", "123", true );
+        doActivateTest( GlobalUtils.USER_1, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_789, GlobalUtils.ROLE_PAGE1_456, "789", "456", true );
         logout( GlobalUtils.USER_1 );
 
         // User 1 123:
@@ -87,6 +120,7 @@ public class FortressDemo2SeleniumITCase
         doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.USER_1_123, GlobalUtils.BTN_PAGE_1 );
         doNegativeLinkTest( GlobalUtils.PAGE_2, GlobalUtils.USER_1_123 );
         doNegativeLinkTest( GlobalUtils.PAGE_3, GlobalUtils.USER_1_123 );
+        doActivateTest( GlobalUtils.USER_1_123, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_123, null, "123", "789", false );
         logout( GlobalUtils.USER_1_123 );
 
         // User 1 456:
@@ -95,6 +129,7 @@ public class FortressDemo2SeleniumITCase
         doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.USER_1_456, GlobalUtils.BTN_PAGE_1 );
         doNegativeLinkTest( GlobalUtils.PAGE_2, GlobalUtils.USER_1_456 );
         doNegativeLinkTest( GlobalUtils.PAGE_3, GlobalUtils.USER_1_456 );
+        doActivateTest( GlobalUtils.USER_1_456, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_456, null, "456", "123", false );
         logout( GlobalUtils.USER_1_456 );
 
         // User 1 789:
@@ -103,6 +138,7 @@ public class FortressDemo2SeleniumITCase
         doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.USER_1_789, GlobalUtils.BTN_PAGE_1 );
         doNegativeLinkTest( GlobalUtils.PAGE_2, GlobalUtils.USER_1_789 );
         doNegativeLinkTest( GlobalUtils.PAGE_3, GlobalUtils.USER_1_789 );
+        doActivateTest( GlobalUtils.USER_1_789, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_789, null, "789", "123", false );
         logout( GlobalUtils.USER_1_789 );
 
         // User 2:
@@ -111,7 +147,38 @@ public class FortressDemo2SeleniumITCase
         doNegativeButtonTests( GlobalUtils.PAGE_2, GlobalUtils.USER_2, GlobalUtils.BTN_PAGE_2 );
         doNegativeLinkTest( GlobalUtils.PAGE_1, GlobalUtils.USER_2 );
         doNegativeLinkTest( GlobalUtils.PAGE_3, GlobalUtils.USER_2 );
+        activateRole( GlobalUtils.ROLE_PAGE2_789 );
+        doActivateTest( GlobalUtils.USER_2, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_123, GlobalUtils.ROLE_PAGE2_789, "123", "789", true );
+        doActivateTest( GlobalUtils.USER_2, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_456, GlobalUtils.ROLE_PAGE2_123, "456", "123", true );
+        doActivateTest( GlobalUtils.USER_2, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_789, GlobalUtils.ROLE_PAGE2_456, "789", "456", true );
         logout( GlobalUtils.USER_2 );
+
+        // User 2 123:
+        login( GlobalUtils.USER_2_123, "password" );
+        TUtils.sleep( 1 );
+        doNegativeButtonTests( GlobalUtils.PAGE_2, GlobalUtils.USER_2_123, GlobalUtils.BTN_PAGE_2 );
+        doNegativeLinkTest( GlobalUtils.PAGE_1, GlobalUtils.USER_2_123 );
+        doNegativeLinkTest( GlobalUtils.PAGE_3, GlobalUtils.USER_2_123 );
+        doActivateTest( GlobalUtils.USER_2_123, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_123, null, "123", "789", false );
+        logout( GlobalUtils.USER_2_123 );
+
+        // User 2 456:
+        login( GlobalUtils.USER_2_456, "password" );
+        TUtils.sleep( 1 );
+        doNegativeButtonTests( GlobalUtils.PAGE_2, GlobalUtils.USER_2_456, GlobalUtils.BTN_PAGE_2 );
+        doNegativeLinkTest( GlobalUtils.PAGE_1, GlobalUtils.USER_2_456 );
+        doNegativeLinkTest( GlobalUtils.PAGE_3, GlobalUtils.USER_2_456 );
+        doActivateTest( GlobalUtils.USER_2_456, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_456, null, "456", "123", false );
+        logout( GlobalUtils.USER_2_456 );
+
+        // User 2 789:
+        login( GlobalUtils.USER_2_789, "password" );
+        TUtils.sleep( 1 );
+        doNegativeButtonTests( GlobalUtils.PAGE_2, GlobalUtils.USER_2_789, GlobalUtils.BTN_PAGE_2 );
+        doNegativeLinkTest( GlobalUtils.PAGE_1, GlobalUtils.USER_2_789 );
+        doNegativeLinkTest( GlobalUtils.PAGE_3, GlobalUtils.USER_2_789 );
+        doActivateTest( GlobalUtils.USER_2_789, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_789, null, "789", "123", false );
+        logout( GlobalUtils.USER_1_789 );
 
         // User 3:
         login( GlobalUtils.USER_3, "password" );
@@ -119,83 +186,89 @@ public class FortressDemo2SeleniumITCase
         doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.USER_3, GlobalUtils.BTN_PAGE_3 );
         doNegativeLinkTest( GlobalUtils.PAGE_1, GlobalUtils.USER_3 );
         doNegativeLinkTest( GlobalUtils.PAGE_2, GlobalUtils.USER_3 );
+        activateRole( GlobalUtils.ROLE_PAGE3_789 );
+        doActivateTest( GlobalUtils.USER_3, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_123, GlobalUtils.ROLE_PAGE3_789, "123", "789", true );
+        doActivateTest( GlobalUtils.USER_3, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_456, GlobalUtils.ROLE_PAGE3_123, "456", "123", true );
+        doActivateTest( GlobalUtils.USER_3, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_789, GlobalUtils.ROLE_PAGE3_456, "789", "456", true );
         logout( GlobalUtils.USER_3 );
 
-        // Back to User1 for Activation tests:
-        //login( GlobalUtils.USER_1, "password");
-        //TUtils.sleep( 1 );
-        //doActivateTest( );
-        //logout( GlobalUtils.USER_1 );
+        // User 3 123:
+        login( GlobalUtils.USER_3_123, "password" );
+        TUtils.sleep( 1 );
+        doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.USER_3_123, GlobalUtils.BTN_PAGE_3 );
+        doNegativeLinkTest( GlobalUtils.PAGE_1, GlobalUtils.USER_3_123 );
+        doNegativeLinkTest( GlobalUtils.PAGE_2, GlobalUtils.USER_3_123 );
+        doActivateTest( GlobalUtils.USER_3_123, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_123, null, "123", "789", false );
+        logout( GlobalUtils.USER_3_123 );
+
+        // User 3 456:
+        login( GlobalUtils.USER_3_456, "password" );
+        TUtils.sleep( 1 );
+        doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.USER_3_456, GlobalUtils.BTN_PAGE_3 );
+        doNegativeLinkTest( GlobalUtils.PAGE_1, GlobalUtils.USER_3_456 );
+        doNegativeLinkTest( GlobalUtils.PAGE_2, GlobalUtils.USER_3_456 );
+        doActivateTest( GlobalUtils.USER_3_456, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_456, null, "456", "123", false );
+        logout( GlobalUtils.USER_3_456 );
+
+        // User 3 789:
+        login( GlobalUtils.USER_3_789, "password" );
+        TUtils.sleep( 1 );
+        doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.USER_3_789, GlobalUtils.BTN_PAGE_3 );
+        doNegativeLinkTest( GlobalUtils.PAGE_1, GlobalUtils.USER_3_789 );
+        doNegativeLinkTest( GlobalUtils.PAGE_2, GlobalUtils.USER_3_789 );
+        doActivateTest( GlobalUtils.USER_3_789, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_789, null, "789", "123", false );
+        logout( GlobalUtils.USER_1_789 );
     }
 
-    private void doActivateTest( )
+    private void doActivateTest( String userId, String page, String buttonPage, String activateRole, String deactivateRole, String authorizedData, String unauthorizedData, boolean isDeactivateTest )
     {
-        info("Do Role Activation Test");
-        // Go to Page 2
-        driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
-        doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2, GlobalUtils.BUTTON1 );
+        info( "Do Role Activation Test role: " + activateRole );
+        doNegativeButtonTest( userId, page, GlobalUtils.ADD );
 
-        // Now activate ROLE_PAGE2:
-        activateRole(GlobalUtils.ROLE_PAGE2);
-        //TUtils.sleep( 1 );
-        // Make sure the pop-up is correct:
-        if(!processPopup("Role selection ROLE_PAGE2 activation failed because of Dynamic SoD rule violation"))
-            fail("doActivate Button Test 2 Failed: " + GlobalUtils.BTN_PAGE_2 + "." + GlobalUtils.BUTTON1);
-        doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2, GlobalUtils.BUTTON1 );
+        if(isDeactivateTest)
+        {
+            // Now activate ROLE:
+            activateRole(activateRole);
+            // Make sure the pop-up is correct:
+            if(!processPopup("Role selection " + activateRole + " activation failed because of Dynamic SoD rule violation"))
+                fail("doActivate Button Test 2 Failed: " + buttonPage);
+            doNegativeButtonTest( userId, page, buttonPage );
 
-        // Go back to Page 1
-        driver.findElement( By.linkText( GlobalUtils.PAGE_1 ) ).click();
-
-        // Now deactivate ROLE_PAGE1:
-        ( ( JavascriptExecutor ) driver ).executeScript( "$(document.getElementById('" + GlobalUtils.ACTIVE_ROLES + "')).val('" + GlobalUtils.ROLE_PAGE1 + "');" );
-        driver.findElement( By.name( GlobalUtils.ROLES_DEACTIVATE ) ).click();
-        TUtils.sleep( 1 );
-        doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.BUTTON1 );
-
-        // Now go back to Page 2 again
-        driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
-        doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2, GlobalUtils.BUTTON1 );
-
-        // Now active ROLE_PAGE2:
-        activateRole(GlobalUtils.ROLE_PAGE2);
+            // Now deactivate ROLE_PAGE1:
+            ( ( JavascriptExecutor ) driver ).executeScript( "$(document.getElementById('" + GlobalUtils.ACTIVE_ROLES + "')).val('" + deactivateRole + "');" );
+            driver.findElement( By.name( GlobalUtils.ROLES_DEACTIVATE ) ).click();
+            TUtils.sleep( 1 );
+        }
+        // Now active ROLE:
+        activateRole(activateRole);
 
         // Click the buttons on page 2
-        doPositiveButtonTests( null, GlobalUtils.BTN_PAGE_2 );
+        doPositiveButtonTests( null, buttonPage );
+        doNegativeDataTest(buttonPage, activateRole, unauthorizedData);
+        doPositiveDataTest(buttonPage, activateRole, authorizedData);
+    }
 
-        // Now go to Page 3 and do negative tests on buttons:
-        doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_3 );
+    private void doPositiveDataTest(String buttonPage, String activateRole, String data)
+    {
+        info( "Postive Data test for role: " + activateRole + ", customer: " + data );
+        driver.findElement( By.id( GlobalUtils.CUSTOMER_EF_ID ) ).clear();
+        driver.findElement( By.id( GlobalUtils.CUSTOMER_EF_ID ) ).sendKeys( data );
+        driver.findElement( By.name( buttonPage + "." + GlobalUtils.SEARCH ) ).click();
+    }
 
-        // Now activate ROLE_PAGE3:
-        activateRole(GlobalUtils.ROLE_PAGE3);
-        TUtils.sleep( 3 );
-        // Make sure the pop-up is correct:
-        if(!processPopup("Role selection ROLE_PAGE3 activation failed because of Dynamic SoD rule violation"))
-            fail("doActivate Button Test 3 Failed: " + GlobalUtils.BTN_PAGE_2 + "." + GlobalUtils.BUTTON1);
-        doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_3, GlobalUtils.BUTTON1 );
-
-        // Go back to Page 2
-        driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
-
-        // Now deactivate ROLE_PAGE2:
-        ( ( JavascriptExecutor ) driver ).executeScript( "$(document.getElementById('" + GlobalUtils.ACTIVE_ROLES + "')).val('" + GlobalUtils.ROLE_PAGE2 + "');" );
-        driver.findElement( By.name( GlobalUtils.ROLES_DEACTIVATE ) ).click();
-        TUtils.sleep( 1 );
-        doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2, GlobalUtils.BUTTON1 );
-
-        // Now go back to Page 3 again
-        driver.findElement( By.linkText( GlobalUtils.PAGE_3 ) ).click();
-        doNegativeButtonTest( GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_2, GlobalUtils.BUTTON1 );
-
-        // Now active ROLE_PAGE3:
-        activateRole(GlobalUtils.ROLE_PAGE3);
-        //TUtils.sleep( 3 );
-
-        // Now click the buttons on page 3:
-        doPositiveButtonTests( null, GlobalUtils.BTN_PAGE_3 );
+    private void doNegativeDataTest(String buttonPage, String activateRole, String data)
+    {
+        info( "Negative Data test for role: " + activateRole + ", customer: " + data );
+        driver.findElement( By.id( GlobalUtils.CUSTOMER_EF_ID ) ).clear();
+        driver.findElement( By.id( GlobalUtils.CUSTOMER_EF_ID ) ).sendKeys( data );
+        driver.findElement( By.name( buttonPage + "." + GlobalUtils.SEARCH ) ).click();
+        if(!processPopup("Unauthorized"))
+            fail("doActivateTest Unauthorized data Test Failed: " + buttonPage + "." + GlobalUtils.SEARCH);
     }
 
     private void doPositiveButtonTests( String linkName, String pageId )
     {
+        info( "Postive Button test for " + linkName );
         if(linkName != null)
             driver.findElement( By.linkText( linkName ) ).click();
         // Click the buttons on the page
@@ -207,6 +280,7 @@ public class FortressDemo2SeleniumITCase
 
     private void doNegativeButtonTests( String linkName, String userId, String pageId )
     {
+        info( "Negative Button test for user: " + userId + ", linkName: " + linkName );
         if(linkName != null)
             driver.findElement( By.linkText( linkName ) ).click();
         doNegativeButtonTest( userId, pageId, GlobalUtils.ADD );
@@ -237,7 +311,7 @@ public class FortressDemo2SeleniumITCase
 
     private void activateRole(String roleName)
     {
-        info("Active test for " + roleName);
+        info("Activate test for " + roleName);
         ( ( JavascriptExecutor ) driver ).executeScript( "$(document.getElementById('" + GlobalUtils.INACTIVE_ROLES + "')).val('" + roleName + "');" );
         driver.findElement( By.name( GlobalUtils.ROLES_ACTIVATE ) ).click();
     }
@@ -253,11 +327,11 @@ public class FortressDemo2SeleniumITCase
 
     private void doNegativeButtonTest( String userId, String pageId, String buttonId )
     {
-        info("Negative button test for " + pageId + ", " + buttonId + ", and " + userId);
+        info("Negative button test for " + buttonId + ", and " + userId);
         try
         {
             driver.findElement( By.name( pageId + "." + buttonId ) ).click();
-            fail("Negative Button Test Failed: " + pageId + "." + GlobalUtils.BUTTON1);
+            fail("Negative Button Test Failed: " + pageId + "." + GlobalUtils.ADD);
         }
         catch (org.openqa.selenium.NoSuchElementException e)
         {
