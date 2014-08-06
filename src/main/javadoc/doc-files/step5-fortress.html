@@ -1,0 +1,180 @@
+<!--
+  ~ This is free and unencumbered software released into the public domain.
+  -->
+<html>
+   <head>
+      <title>Package Documentation for com.mycompany web app demo</title>
+       <a href="../overview-summary.html">Back to top</a>
+   </head>
+   <body>
+      <p>
+          <hr>
+          <h3>Step 1 - Download & Install Fortress</h3>
+          Instructions to install OpenLDAP directory server, Tomcat servlet container, Fortress SDK, and Commander RBAC Web admin UI.
+
+          <br>
+
+      <ol>
+          <li>
+              Create Java keystore for JSSE
+              <ol type="a">
+
+                  <li>
+
+                      Set JAVA_HOME:
+                      <pre>
+                        ~/certs$ export JAVA_HOME=/opt/jdk1.7.0_10/
+                      </pre>
+                  </li>
+
+                  <li>
+                      Import public key generated in Step 3 into truststore
+
+                      <pre>
+
+                          smckinn@ubuntu:~/certs$ $JAVA_HOME/bin/keytool -import -alias fortressDemo2ServerCACert -file ca-cert.pem -keystore mytruststore
+                          Enter keystore password:
+                          Re-enter new password:
+                          Owner: CN=fortressdemo2.com, OU=mygroupname, O=mycompanyname, L=Joshua Tree, ST=California, C=US
+                          Issuer: CN=fortressdemo2.com, OU=mygroupname, O=mycompanyname, L=Joshua Tree, ST=California, C=US
+                          Serial number: fae6c81e389bbeef
+                          Valid from: Tue Aug 05 08:47:43 PDT 2014 until: Thu Jun 13 08:47:43 PDT 2024
+                          Certificate fingerprints:
+                          MD5:  8E:DF:5F:4E:CB:ED:33:E7:72:1E:76:D8:15:60:48:A5
+                          SHA1: 18:35:4E:32:10:4D:D2:D4:52:A0:70:31:CE:1D:99:AB:14:23:EC:8C
+                          SHA256: C6:37:4F:E5:59:C7:4B:DF:E2:FE:BA:7D:93:7C:03:FA:29:12:8F:F1:53:EF:E6:B5:5F:09:A4:53:6A:5F:C4:04
+                          Signature algorithm name: SHA1withRSA
+                          Version: 3
+
+                          Extensions:
+
+                          #1: ObjectId: 2.5.29.35 Criticality=false
+                          AuthorityKeyIdentifier [
+                          KeyIdentifier [
+                          0000: AE C6 DD DE 82 84 4D 0E   48 FB CF 79 40 16 D1 3A  ......M.H..y@..:
+                          0010: 00 D3 16 4B                                        ...K
+                          ]
+                          ]
+
+                          #2: ObjectId: 2.5.29.19 Criticality=false
+                          BasicConstraints:[
+                          CA:true
+                          PathLen:2147483647
+                          ]
+
+                          #3: ObjectId: 2.5.29.14 Criticality=false
+                          SubjectKeyIdentifier [
+                          KeyIdentifier [
+                          0000: AE C6 DD DE 82 84 4D 0E   48 FB CF 79 40 16 D1 3A  ......M.H..y@..:
+                          0010: 00 D3 16 4B                                        ...K
+                          ]
+                          ]
+
+                          Trust this certificate? [no]:  yes
+                          Certificate was added to keystore
+                      </pre>
+                  </li>
+
+                  <li>
+                      Verify truststore present:
+                      <pre>
+                        ~/certs$ ls
+                        ca-cert.pem  ca-key.pem  mytruststore  server-cert.pem  server-key.pem  server-req.pem
+                      </pre>
+
+                  </li>
+
+              </ol>
+
+          </li>
+
+      </ol>
+      <li>
+          Download Fortress Quickstart package for Ubuntu 64:
+          <a href="http://iamfortress.org/download">iamfortress.org/download</a>
+      </li>
+
+          <br>
+
+          <li>
+              Install Fortress infrastructure to target machine
+              <ol type="a">
+                  <li>
+                      Perform Steps I, II, III in <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">README-QUICKSTART.html</a>
+                      After completion of Step III in README-QUICKSTART, OpenLDAP will be installed to target machine.
+                  </li>
+
+                  <br>
+
+                  <li>
+                      Update/add build.properties with the following:
+
+                      <pre>
+                        ldap.host=fortressdemo2.com
+                        ldap.port=636
+                        enable.ldap.ssl=true
+                        enable.ldap.ssl.debug=true
+                        trust.store=/home/smckinn/certs/mytruststore
+                        trust.store.password=changeit
+                        trust.store.set.prop=true
+                      </pre>
+
+                      note: the ldap.host contains setting from Step 1 - setting host entry
+                  </li>
+
+                  <li>
+                      Modify build.properties slapd startup:
+                      <pre>
+                        slapd.start=${openldap.root}/lib64/slapd -h ldaps://${ldap.host}:${ldap.port} -f ${openldap.root}/etc/openldap/slapd.conf -F ${openldap.root}/etc/openldap
+                      </pre>
+                  </li>
+
+                  <li>
+                      Update slapd.conf with the following:
+                      <pre>
+                        TLSCACertificateFile /home/smckinn/certs/ca-cert.pem
+                        TLSCertificateFile /home/smckinn/certs/server-cert.pem
+                        TLSCertificateKeyFile home/smckinn/certs/server-key.pem
+                      </pre>
+                  </li>
+
+                  <li>
+                      Restart slapd:
+                      <pre>
+
+                      </pre>
+                  </li>
+
+                  <br>
+
+                  <li>
+                      After completion of Step V in README-QUICKSTART, Commander RBAC admin will be deployed to Tomcat.
+                  </li>
+
+                  <br>
+
+                  <li>
+                      To administer RBAC policies:  <a href="http://localhost:8080/commander">Commander Web Admin</a>
+                      <br>
+                      at the login prompt enter: test/test
+                  </li>
+
+              </ol>
+          </li>
+
+              <br>
+
+              <li>
+                  Next step
+
+              </li>
+
+              <br>
+
+              <li>
+
+              </li>
+
+          </ol>
+   </body>
+</html>

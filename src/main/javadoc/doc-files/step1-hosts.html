@@ -1,0 +1,62 @@
+<!--
+  ~ This is free and unencumbered software released into the public domain.
+  -->
+<html>
+<head>
+    <title>Package Documentation for com.mycompany web app demo</title>
+     <a href="../overview-summary.html">Back to top</a>
+</head>
+<body>
+<p>
+<hr>
+<h3>Step 1 - Set hosts entry</h3>
+Instructions to set /etc/hosts hostname on target machine.
+<ol>
+    <li>
+        Determine IP address
+        <br>
+        $/sbin/ifconfig
+    </li>
+
+    <br>
+
+    <li>
+        Set hosts entry:
+        <br>
+        <ol type="a">
+            <li>
+                Edit the hosts file
+                <br>
+                $sudo vi /etc/hosts
+            </li>
+            <br>
+            <li>
+                Add entry to file:
+                <br>
+                192.168.1.83 fortressdemo2
+            </li>
+
+            <br>
+
+            <li>
+                Save and exit
+            </li>
+        </ol>
+    </li>
+
+    <br>
+
+    <li>
+        Verify
+        <pre>
+        $ ping fortressdemo2
+        PING fortressdemo2 (192.168.1.83) 56(84) bytes of data.
+        64 bytes from fortressdemo2 (192.168.1.83): icmp_req=1 ttl=64 time=0.106 ms
+        64 bytes from fortressdemo2 (192.168.1.83): icmp_req=2 ttl=64 time=0.052 ms
+        64 bytes from fortressdemo2 (192.168.1.83): icmp_req=3 ttl=64 time=0.055 ms
+        64 bytes from fortressdemo2 (192.168.1.83): icmp_req=4 ttl=64 time=0.068 ms
+        </pre>
+    </li>
+</ol>
+</body>
+</html>
