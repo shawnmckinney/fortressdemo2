@@ -12,23 +12,32 @@
          This application uses Apache Wicket Web app and Mybatis database access frameworks to demonstrate application security techniques.
       <ol>
           <li>
-                  Download package: https://github.com/shawnmckinney/fortressdemo2/archive/master.zip
+                  Download: <a href="https://github.com/shawnmckinney/fortressdemo2/archive/master.zip">Fortress Demo #2 Package</a>
           </li>
 
           <li>
-              Extract
+              Set JAVA_HOME:
+              export JAVA_HOME=/opt/jdk1.7.0_10/
           </li>
 
           <li>
-              Set JAVA_HOME
+              Extract:
+              $JAVA_HOME/bin/jar -xf fortressdemo2-master.zip
           </li>
 
           <li>
-              Set M2_HOME
+              change directory:
+              cd fortressdemo2-master/
           </li>
 
           <li>
-              Set ANT_HOME
+              Set M2_HOME:
+              export M2_HOME=../builder/apache-maven/
+          </li>
+
+          <li>
+              Set ANT_HOME:
+              export ANT_HOME=../builder/apache-ant/
           </li>
 
           <li>

@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fortressdemo2</groupId>
     <artifactId>fortressdemo2</artifactId>
-    <version>1.0-RC38</version>
+    <version>1.0-RC38a</version>
     <packaging>war</packaging>
     <name>Fortress Demo #2</name>
     <description>Fortress RBAC Security Project Sample using Wicket Web and Mybatis Data Persistence Frameworks.</description>

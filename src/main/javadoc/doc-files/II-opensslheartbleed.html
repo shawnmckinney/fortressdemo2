@@ -9,16 +9,40 @@
 <body>
 <p>
 <hr>
-<h3>Section I - Patch Heartbleed</h3>
-Instructions to upgrade OpenSSL to correct heartbleed vulnerability.
+<h3>Section II - Heartbleed Bug</h3>
+<img src="heartbleed.png" width="120" height="120">
+<br><br>
+This section provides instructions to fix the OpenSSL Heartbleed bug.  Follow these steps if OpenSSL installed to
+target machine is version <b>1.0.1</b> through <b>1.0.1f</b>.
+<hr>
+<br>To determine if upgrade is needed, enter the following at the command prompt:
+<pre>
+    <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
+openssl version -b
+    </p>
+</pre>
+
+If the date is less than <b>Mon Apr 7 2014</b>, and the version equals  <b>1.0.1</b>, then the machine is running an OpenSSL version that is <em>vulnerable to the Heart Bleed bug</em>
+and must be upgraded.
+<hr>
+<h4>Steps to upgrade OpenSSL</h4>
 <ol>
     <li>
-        From the system command prompt:
+        Update your repo (Debian):
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
+sudo apt-get update
+            </p>
+        </pre>
+    </li>
+
+    <li>
+        From the system command prompt (Debian):
 
         <pre>
-            <p style="color: white; background-color: black">
+            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
 sudo apt-get upgrade openssl
-[sudo] password for smckinn:
+[sudo] password for myuser:
 Reading package lists... Done
 Building dependency tree
 Reading state information... Done
@@ -29,23 +53,10 @@ linux-generic linux-image-generic
         </pre>
     </li>
 
-    <br>
-
-    <li>
-        May have to run the following command before repeating previous command.
-        <pre>
-            <p style="color: white; background-color: black">
-sudo apt-get update --fix-missing
-            </p>
-        </pre>
-    </li>
-
-    <br>
-
     <li>
         Verify:
         <pre>
-            <p style="color: white; background-color: black">
+            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
 openssl version -b
 built on: Fri Jun 20 18:54:15 UTC 2014
             </p>
@@ -53,4 +64,5 @@ built on: Fri Jun 20 18:54:15 UTC 2014
     </li>
 </ol>
 </body>
+<p style="color: black; font-size: 6pt">This is free and unencumbered software released into the public domain.</p>
 </html>

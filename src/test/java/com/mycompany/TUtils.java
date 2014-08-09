@@ -17,8 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.openldap.fortress.GlobalIds;
-import org.openldap.fortress.util.LogUtil;
-import org.openldap.fortress.util.attr.VUtil;
 
 
 /**
@@ -44,7 +42,7 @@ public class TUtils extends TestCase
     {
         // This property can be overriden with system property:
         String tenant = System.getProperty( GlobalIds.TENANT );
-        if ( VUtil.isNotNullOrEmpty( tenant ) && !tenant.equals( "${tenant}" ) )
+        if ( tenant != null && tenant.length() > 0 && !tenant.equals( "${tenant}" ) )
         {
             contextId = tenant;
         }
@@ -87,7 +85,7 @@ public class TUtils extends TestCase
         {
             Integer iSleep = ( Integer.parseInt( len ) * 1000 );
             //LOG.debug(TUtils.class.getName() + ".sleep for len=" + iSleep);
-            LogUtil.logIt( TUtils.class.getName() + ".sleep for len=" + iSleep );
+            LOG.info( TUtils.class.getName() + ".sleep for len=" + iSleep );
             Thread.currentThread().sleep( iSleep );
         }
         catch ( InterruptedException ie )
@@ -106,7 +104,7 @@ public class TUtils extends TestCase
         try
         {
             int iSleep = len * 1000;
-            org.openldap.fortress.util.LogUtil.logIt( TUtils.class.getName() + ".sleep for len=" + iSleep );
+            LOG.info( TUtils.class.getName() + ".sleep for len=" + iSleep );
             Thread.currentThread().sleep( iSleep );
         }
         catch ( InterruptedException ie )

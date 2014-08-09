@@ -35,8 +35,9 @@ public class FortressDemo2SeleniumITCase
         driver.manage().window().maximize();
 
         // Use test local default:
+        //baseUrl = "http://localhost:8080";
         //baseUrl = "http://fortressdemo2.com:8080";
-        baseUrl = "http://localhost:8080";
+        baseUrl = "https://fortressdemo2.com:8443";
         driver.manage().timeouts().implicitlyWait( 1, TimeUnit.SECONDS );
     }
 
