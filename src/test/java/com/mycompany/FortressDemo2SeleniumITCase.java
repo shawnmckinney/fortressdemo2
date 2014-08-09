@@ -35,8 +35,9 @@ public class FortressDemo2SeleniumITCase
         driver.manage().window().maximize();
 
         // Use test local default:
+        //baseUrl = "http://fortressdemo2.com:8080";
         baseUrl = "http://localhost:8080";
-        driver.manage().timeouts().implicitlyWait( 5, TimeUnit.SECONDS );
+        driver.manage().timeouts().implicitlyWait( 1, TimeUnit.SECONDS );
     }
 
     private void info(String msg)
@@ -271,6 +272,7 @@ public class FortressDemo2SeleniumITCase
         info( "Postive Button test for " + linkName );
         if(linkName != null)
             driver.findElement( By.linkText( linkName ) ).click();
+        TUtils.sleep( 1 );
         // Click the buttons on the page
         doPositiveButtonTest(pageId, GlobalUtils.ADD, pageId + "." + GlobalUtils.ADD);
         doPositiveButtonTest(pageId, GlobalUtils.UPDATE, pageId + "." + GlobalUtils.UPDATE);

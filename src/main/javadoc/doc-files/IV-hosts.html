@@ -1,0 +1,89 @@
+<!--
+  ~ This is free and unencumbered software released into the public domain.
+  -->
+<html>
+<head>
+    <title>Package Documentation for com.mycompany web app demo</title>
+     <a href="../overview-summary.html">Back to top</a>
+</head>
+<body>
+<p>
+<hr>
+<h3>Section III - Set host entry</h3>
+Instructions to add hostname to /etc/hosts on target machine.
+<br>If SSL connectivity is to occur between a client and server residing on separate machines, the public key's common name must match the hostname set here.
+
+<ol>
+    <li>
+        Determine IP address
+        <br>
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt">
+/sbin/ifconfig
+eth0      Link encap:Ethernet  HWaddr 00:0c:29:43:94:0c
+inet addr:192.168.1.101  Bcast:192.168.1.255  Mask:255.255.255.0
+inet6 addr: fe80::20c:29ff:fe43:940c/64 Scope:Link
+UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+RX packets:408641 errors:0 dropped:0 overruns:0 frame:0
+TX packets:134769 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:1000
+RX bytes:458268505 (458.2 MB)  TX bytes:28361917 (28.3 MB)
+            </p>
+        </pre>
+
+    </li>
+
+    <br>
+
+    <li>
+        Add new hosts entry for IP address:
+        <br>
+        <ol type="a">
+            <br>
+            <li>
+                Edit the hosts file
+                <br>
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt">
+sudo vi /etc/hosts
+            </p>
+        </pre>
+            </li>
+            <br>
+            <li>
+                Use your IP address for new host entry:
+                <br>
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt">
+192.168.1.101     fortressdemo2.com
+            </p>
+        </pre>
+            </li>
+
+            <br>
+
+            <li>
+                Save and exit
+            </li>
+        </ol>
+    </li>
+
+    <br>
+
+    <li>
+        Verify
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt">
+ping fortressdemo2.com
+PING fortressdemo2.com (192.168.1.101) 56(84) bytes of data.
+64 bytes from fortressdemo2.com (192.168.1.101): icmp_req=1 ttl=64 time=0.106 ms
+64 bytes from fortressdemo2.com (192.168.1.101): icmp_req=2 ttl=64 time=0.052 ms
+64 bytes from fortressdemo2.com (192.168.1.101): icmp_req=3 ttl=64 time=0.055 ms
+64 bytes from fortressdemo2.com (192.168.1.101): icmp_req=4 ttl=64 time=0.068 ms
+            </p>
+        </pre>
+    </li>
+</ol>
+</body>
+<p style="color: black; font-size: 6pt">This is free and unencumbered software released into the public domain.</p>
+</html>

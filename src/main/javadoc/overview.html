@@ -4,27 +4,56 @@
 -->
 <HTML>
 <HEAD>
-    <TITLE>Installation instructions Fortress Demo # 2 end-to-end Web Application Security</TITLE>
+    <TITLE>Overview of Fortress Demo # 2 end-to-end Web Application Security</TITLE>
 </HEAD>
 <BODY>
 <p>
-    This file contains instructions to install fortress 2 demo web application.
-<h3>Steps</h3>
-<ol>
-    <li><a href="./doc-files/step1-hosts.html">Set hostname on target machine</a></li>
-    <li><a href="./doc-files/step2-opensslheartbleed.html">Patch Heartbleed</a></li>
-    <li><a href="./doc-files/step3-keys.html">Create SSL Keys</a></li>
-    <li><a href="./doc-files/step4-mysql.html">Install MySQL</a></li>
-    <li><a href="./doc-files/step5-fortress.html">Install Fortress</a></li>
-    <li><a href="./doc-files/step6-commander.html">Install Commander</a></li>
-    <li><a href="./doc-files/step7-tomcatssl.html">Enable Tomcat SSL</a></li>
-    <li><a href="./doc-files/step8-demo.html">Install Fortress RBAC Demo #2</a></li>
+    <h3>Overview of Fortress Demo # 2 end-to-end Web Application Security</h3>
+    The purpose of this application is to demonstrate principles of Java Web security enforcement.
+    The installation of this application requires completion of the sections listed below.
+<h4>Sections required for installation:</h4>
+<ol type="I">
+    <li>Install Java 7 (or beyond) SDK</li>
+    <li><a href="./doc-files/II-opensslheartbleed.html">Heartbleed Bug</a></li>
+    <li><a href="./doc-files/III-keys.html">Managing PKI Keys</a></li>
+    <li><a href="./doc-files/IV-hosts.html">Set hostname on target machine</a></li>
+    <li><a href="./doc-files/V-fortress.html">Install Fortress</a></li>
+    <li><a href="./doc-files/VI-mysql.html">Install MySQL</a></li>
+    <li><a href="./doc-files/VII-tomcatssl.html">Enable Tomcat SSL</a></li>
+    <li><a href="./doc-files/VIII-demo.html">Install Fortress RBAC Demo #2</a></li>
 </ol>
 </p>
+<h4>Demonstrate end-to-end security enforcement</h4>
 <p>
-    Place more instructions here:
+This sample Web application demonstrates usage of the following security mechanisms:
+
+<ol type="1">
+    <li>Java 2 Authentication</li>
+    <li>Java 2 Coarse-grained Role Authorization</li>
+    <li>Spring Coarse-grained Page Role Authorization</li>
+    <li>Medium-grained RBAC Authorization inside Wicket Web Framework</li>
+    <li>Fine-grained RBAC Authorization within Data Persistence Classes</li>
+    <li>Java 2 Confidentiality</li>
+    <li>LDAP v3 Confidentiality</li>
+    <li>JDBC Confidentiality</li>
+    <li>Audit Trail of Authentication & Authorization Events</li>
+</ol>
+
+<h4>Infrastructure Requirements</h4>
+<p>
+    Demo Web application prerequisites include:
+<ol type="1">
+    <li>Java Programming SDK</li>
+    <li>Fortress RBAC SDK</li>
+    <li>OpenLDAP Directory Server</li>
+    <li>MySQL Database Manager</li>
+    <li>Tomcat Servlet Container</li>
+    <li>Commander RBAC Web Admin</li>
+    <li>OpenSSL</li>
+    <li>JSSE</li>
+</ol>
+
 </p>
-<p>
 
 </BODY>
 </HTML>
