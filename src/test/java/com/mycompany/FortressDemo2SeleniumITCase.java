@@ -38,7 +38,7 @@ public class FortressDemo2SeleniumITCase
         //baseUrl = "http://localhost:8080";
         //baseUrl = "http://fortressdemo2.com:8080";
         baseUrl = "https://fortressdemo2.com:8443";
-        driver.manage().timeouts().implicitlyWait( 1, TimeUnit.SECONDS );
+        driver.manage().timeouts().implicitlyWait( 2500, TimeUnit.MILLISECONDS );
     }
 
     private void info(String msg)
@@ -244,6 +244,8 @@ public class FortressDemo2SeleniumITCase
         // Now active ROLE:
         activateRole(activateRole);
 
+        //TUtils.sleep( 1 );
+
         // Click the buttons on page 2
         doPositiveButtonTests( null, buttonPage );
         doNegativeDataTest(buttonPage, activateRole, unauthorizedData);
@@ -322,7 +324,15 @@ public class FortressDemo2SeleniumITCase
     private void doPositiveButtonTest(String pageId, String buttonId, String alertText)
     {
         info("Positive button test for " + pageId + ", " + buttonId);
-        driver.findElement( By.name( pageId + "." + buttonId ) ).click();
+        try
+        {
+            driver.findElement( By.name( pageId + "." + buttonId ) ).click();
+        }
+        catch(Exception e)
+        {
+            LOG.error( "activateRole Exception: " + e);
+        }
+
         //TUtils.sleep( 1 );
         //if(!processPopup(alertText))
         //    fail("Button Test Failed: " + pageId + "." + buttonId);

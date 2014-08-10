@@ -114,3 +114,4 @@ INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10028,'789','78
 INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10029,'789','789,9,g', '789,9,h', '789,9,i');
 INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (100030,'789','789,10,g', '789,10,h', '789,10,i');
 
+commit;

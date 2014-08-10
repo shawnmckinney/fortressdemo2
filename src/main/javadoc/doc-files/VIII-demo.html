@@ -7,44 +7,70 @@
        <a href="../overview-summary.html">Back to top</a>
    </head>
    <body>
-      <p>
+      <hr>
+      <h3>Section VIII - Fortress Demo #2</h3>
+<!--      <img src="fortress100.gif">-->
 
-         This application uses Apache Wicket Web app and Mybatis database access frameworks to demonstrate application security techniques.
+      <h4>This section describes how to install and use the Fortress Demo #2 Web application</h4>
+
       <ol>
           <li>
                   Download: <a href="https://github.com/shawnmckinney/fortressdemo2/archive/master.zip">Fortress Demo #2 Package</a>
           </li>
 
+          <br>
+
           <li>
-              Set JAVA_HOME:
-              export JAVA_HOME=/opt/jdk1.7.0_10/
+            Set JAVA_HOME:
+            <pre>
+                <p style="color: white; background-color: black; font-size: 14pt">
+export JAVA_HOME=/opt/jdk1.7.0_10/
+                </p>
+            </pre>
+
           </li>
 
           <li>
-              Extract:
-              $JAVA_HOME/bin/jar -xf fortressdemo2-master.zip
+            Extract:
+            <pre>
+                <p style="color: white; background-color: black; font-size: 14pt">
+$JAVA_HOME/bin/jar -xf fortressdemo2-master.zip
+                </p>
+            </pre>
           </li>
 
           <li>
               change directory:
-              cd fortressdemo2-master/
+            <pre>
+                <p style="color: white; background-color: black; font-size: 14pt">
+cd fortressdemo2-master/
+                </p>
+            </pre>
           </li>
 
           <li>
               Set M2_HOME:
-              export M2_HOME=../builder/apache-maven/
+            <pre>
+                <p style="color: white; background-color: black; font-size: 14pt">
+export M2_HOME=../builder/apache-maven/
+                </p>
+            </pre>
           </li>
 
           <li>
               Set ANT_HOME:
-              export ANT_HOME=../builder/apache-ant/
+            <pre>
+                <p style="color: white; background-color: black; font-size: 14pt">
+export ANT_HOME=../builder/apache-ant/
+                </p>
+            </pre>
           </li>
 
           <li>
               Run this command from the root package:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-$ mvn install
+$M2_HOME/bin/mvn install
                     </p>
                 </pre>
           </li>
@@ -53,16 +79,109 @@ $ mvn install
               Run this command from the root package:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-$mvn tomcat:deploy
+$M2_HOME/bin/mvn tomcat:deploy
                     </p>
                 </pre>
           </li>
+
           <li>
+              You may use:
+              <br><br>
+              <ol type="a">
+                  <li>
+                      non-SSL:
+                      <a href="http://localhost:8080/fortressdemo2">http://localhost:8080/fortressdemo2</a>,
+                      <a href="http://fortressdemo2.com:8080/fortressdemo2">http://fortressdemo2.com:8080/fortressdemo2</a>
+                      <br>
+                  </li>
+                  <br>
+                  <li>
+                      SSL:
+                      <a href="https://localhost:8443/fortressdemo2">https://localhost:8443/fortressdemo2</a>,
+                      <a href="https://fortressdemo2.com:8443/fortressdemo2">https://fortressdemo2.com:8443/fortressdemo2</a>
+                  </li>
+              </ol>
 
           </li>
-                Go to this URL: http://localhost:8080/fortressdemo2
+
+          <br>
 
           <li>
+              Use Apache Solenium to drive Firefox through a range of security unit tests.  Firefox must be installed before running this step.
+            <pre>
+                <p style="color: white; background-color: black; font-size: 14pt">
+$M2_HOME/bin/mvn mvn verify -DskipTests=false
+                </p>
+            </pre>
+          </li>
+
+          <li>
+              Try the various user accounts:
+              <ol type="a">
+
+                  <br>
+
+                  <li>
+                        superuser/password
+                  </li>
+                  <br>
+                  <li>
+                      poweruser/password
+                  </li>
+                  <br>
+                  <li>
+                      user1/password
+                  </li>
+                  <br>
+                  <li>
+                      user1_123/password
+                  </li>
+                  <br>
+                  <li>
+                      user1_456/password
+                  </li>
+                  <br>
+                  <li>
+                      user1_789/password
+                  </li>
+                  <br>
+                  <li>
+                      user2/password
+                  </li>
+                  <br>
+                  <li>
+                      user2_123/password
+                  </li>
+                  <br>
+                  <li>
+                      user2_456/password
+                  </li>
+                  <br>
+                  <li>
+                      user2_789/password
+                  </li>
+                  <br>
+                  <li>
+                      user3/password
+                  </li>
+                  <br>
+                  <li>
+                      user3_123/password
+                  </li>
+                  <br>
+                  <li>
+                      user3_456/password
+                  </li>
+                  <br>
+                  <li>
+                      user3_789/password
+                  </li>
+                  <br>
+              </ol>
+          </li>
+
+          <br>
+
       </ol>
 
    </body>

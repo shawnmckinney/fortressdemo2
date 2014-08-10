@@ -58,7 +58,7 @@ mysql -h localhost -P 3306 -u root -p
         </pre>
     </li>
     <li>
-        Run the config script:
+        Run the <a href="demo-db-create-and-load.sql">demo-db-create-and-load.sql</a> script:
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt">
 mysql> source demo-db-create-and-load.sql;
@@ -114,6 +114,17 @@ drwxr-xr-x 2 root root 4096 Aug  5 10:11 conf.d
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
 sudo vi /etc/mysql/my.cnf
+                    </p>
+                </pre>
+            </li>
+
+            <li>
+                Instruct daemon to listen to hostname set on this step: <a href="IV-hosts.html">Set hostname on target machine</a>
+                <pre>
+                    <p style="color: white; background-color: black; font-size: 14pt">
+# Instead of skip-networking the default is now to listen only on
+# localhost which is more compatible and is not less secure.
+bind-address            = fortressdemo2.com
                     </p>
                 </pre>
             </li>
@@ -179,7 +190,7 @@ tcp        0      0 *:mysql                 *:*                     LISTEN      
 
 </ol>
 
-<h3>Demo DB Setup Script</h3>
+<h3>Listing for <a href="demo-db-create-and-load.sql">demo-db-create-and-load.sql</a> Script</h3>
     <pre>
         <p style="color: white; background-color: black; font-size: 14pt">
 
@@ -299,6 +310,7 @@ INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10028,'789','78
 INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (10029,'789','789,9,g', '789,9,h', '789,9,i');
 INSERT INTO page3 (id, customer, attr_g, attr_h, attr_i) VALUES (100030,'789','789,10,g', '789,10,h', '789,10,i');
 
+commit;
         </p>
     </pre>
 
