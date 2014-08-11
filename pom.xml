@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fortressdemo2</groupId>
     <artifactId>fortressdemo2</artifactId>
-    <version>1.0-RC38a</version>
+    <version>1.0-RC39</version>
     <packaging>war</packaging>
     <name>Fortress Demo #2</name>
     <description>Fortress RBAC Security Project Sample using Wicket Web and Mybatis Data Persistence Frameworks.</description>
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>org.openldap</groupId>
             <artifactId>sentry</artifactId>
-            <version>${version}</version>
+            <version>1.0-RC39a</version>
         </dependency>
 
         <!--  WICKET DEPENDENCIES -->
@@ -432,14 +432,9 @@
 
     <repositories>
         <repository>
-            <id>Apache Nexus</id>
-            <url>https://repository.apache.org/content/repositories/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <id>maven2</id>
+            <url>http://repo1.maven.org/maven2</url>
         </repository>
     </repositories>
+
 </project>
