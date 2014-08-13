@@ -1,0 +1,144 @@
+<!--
+  ~ This is free and unencumbered software released into the public domain.
+  -->
+<html>
+   <head>
+      <title>Package Documentation for com.mycompany web app demo</title>
+       <a href="../overview-summary.html">Back to top</a>
+   </head>
+   <body>
+   <hr>
+   <h3>Section VII - Tomcat Installation</h3>
+   <img src="tomcat.png">
+   <hr>
+   <h4>This section describes how to install Apache Tomcat to Debian and Redhat distros and enable HTTPS communication</h4>
+
+   <ol>
+       <li>
+           For Debian from system command prompt:
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt">
+# sudo apt-get install tomcat7 tomcat7-admin tomcat7-docs
+            </p>
+        </pre>
+           For Redhat (as root):
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt">
+# mkdir tmp
+# cd tmp
+# wget http://www.us.apache.org/dist/tomcat/tomcat-7/v7.0.55/bin/apache-tomcat-7.0.55.tar.gz
+# tar xzf apache-tomcat-7.0.55.tar.gz
+# mv apache-tomcat-7.0.55 /usr/share/tomcat7
+# cd /usr/share/tomcat7
+# ./bin/startup.sh
+            </p>
+        </pre>
+
+       </li>
+
+       <li>
+           Verify process is running:
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt">
+# ps -ef | grep tomcat
+            </p>
+        </pre>
+       </li>
+
+       <li>
+        Place the <a href="http://search.maven.org/remotecontent?filepath=org/openldap/sentry/1.0-RC39/sentry-1.0-RC39-proxy.jar">Sentry Realm proxy jar</a> into Tomcat's /lib folder.
+        <pre>
+          <p style="color: white; background-color: black; font-size: 14pt">
+# cp sentry-1.0-RC39-proxy.jar /usr/share/tomcat7/lib
+          </p>
+        </pre>
+       </li>
+
+       <li>
+        Edit tomcat-users.xml:
+        <pre>
+          <p style="color: white; background-color: black; font-size: 14pt">
+# vi /usr/share/tomcat7/conf/tomcat-users.xml
+          </p>
+        </pre>
+       </li>
+
+       <li>
+        Add privilege to automatically deploy from Maven (later):
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt">
+&lt;role rolename="manager-script"/&gt;
+&lt;user username="tcmanager" password="m@nager123" roles="manager-script"/&gt;
+            </p>
+        </pre>
+           Using config files to store security policy is itself an <b>antipattern</b>.  For production, a Java EE security plug-in like
+           <a href="http://www.jts.us/iamfortress/javadocs/api-sentry/index.html?overview-summary.html">Sentry</a> must be enabled.
+       </li>
+
+       <br>
+
+       <li>
+           Save and exit.
+       </li>
+
+       <br>
+
+       <li>
+           Enable Tomcat SSL
+           <ol type="a">
+               <br>
+               <li>
+                   Copy keys from Step III, <a href="III-keys.html">Managing PKI Keys</a> to <b>/usr/local/tomcat/conf</b>.
+                <pre>
+                    <p style="color: white; background-color: black; font-size: 14pt">
+# sudo cp src/test/resources/certs/mykeystore /usr/local/tomcat/conf
+                    </p>
+                </pre>
+               </li>
+
+               <li>
+                   Edit server.xml:
+                    <pre>
+                      <p style="color: white; background-color: black; font-size: 14pt">
+# vi /usr/share/tomcat7/conf/server.xml
+                      </p>
+                    </pre>
+               </li>
+
+               <li>
+                   Add the following:
+                <pre>
+                    <p style="color: white; background-color: black; font-size: 14pt">
+&lt;!-- Define a SSL Coyote HTTP/1.1 Connector on port 8443 --&gt;
+&lt;Connector
+        port="8443" maxThreads="200"
+        scheme="https" secure="true" SSLEnabled="true"
+        keystoreFile="conf/mykeystore" keystorePass="changeit"
+        clientAuth="false" sslProtocol="TLS"/&gt;
+                    </p>
+        </pre>
+               </li>
+
+               <li>
+                   Restart Tomcat (Debian):
+                <pre>
+                    <p style="color: white; background-color: black; font-size: 14pt">
+sudo /etc/init.d/tomcat7 restart
+                    </p>
+                </pre>
+
+                   Redhat users:
+                <pre>
+                    <p style="color: white; background-color: black; font-size: 14pt">
+# ./bin/shutdown.sh
+# ./bin/startup.sh
+                    </p>
+                </pre>
+
+               </li>
+           </ol>
+       </li>
+   </ol>
+   </body>
+   <p style="color: black; font-size: 6pt">This is free and unencumbered software released into the public domain.</p>
+</html>

@@ -12,27 +12,26 @@
 <h3>Section III - Managing PKI Keys</h3>
 <img src="keys.jpg">
 <br><br>
-This app uses SSL for confidential communication between the Java client and corresponding servers.
-For SSL communication to work, a private key must be generated and configured for use within the servers as described in sections:
-<a href="V-fortress.html">Fortress</a> and <a href="VI-mysql.html">MySQL</a>
-Likewise, a public key must be imported into a Java truststore utilized by the demo Web application client.
-If SSL connectivity is to occur between a client and server residing on separate machines, the public key's common name must match the hostname
-of the OpenLDAP and MySQL servers.
+This app uses <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">Transport Layer Security</a>, hereafter referred to as <b>SSL</b>, for
+maintaining confidential communication between the client and server processes.
+A prerequisite of SSL communication is that <a href="http://en.wikipedia.org/wiki/Public-key_cryptography">PKI keys</a> be generated and enabled for use
+in participating processes.  If SSL is between processes residing across separate machines, the server's public key common name must match its hostname.
+The keys generated here are needed in later sections of tutorial.
 <hr>
 <h4>Pick one of the following options for obtaining PKI keys:</h4>
 <ol type="A">
 
     <li>
         Use the test certificate & keys supplied by the <a href="V-fortress.html">Fortress Quickstart</a> package.
-        <br>For this option you may skip to the next section: <a href="IV-hosts.html">Set hostname on target machine</a>.
+        <br>For this option you may skip to the next section IV: <a href="IV-hosts.html">Set hostname on target machine</a>.
     </li>
     <br>
     <li>
-        Create a self-signed certificate using <a href="http://www.openssl.org">OpenSSL</a>.  For this option, follow the instructions that follow below.
+        Create a self-signed certificate created by <a href="http://www.openssl.org">OpenSSL</a> to sign the keys.  For this option, follow the instructions below.
     </li>
     <br>
     <li>
-        Use a valid CA to sign the keys.  The instructions for this are beyond the scope of this document.
+        Use certificate from well-known CA to sign the keys.  While important to many production environments is beyond the scope of this tutorial.
     </li>
 </ol>
 <hr>
@@ -55,43 +54,19 @@ cd certs
             <br>
             <li>
                 Generate new RSA private key:
-                <ol type="i">
-                    <br>
-                    <li>
-                        Create private key:
-                        <pre>
-                            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt; font-size: 14pt">
+                <pre>
+                    <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt; font-size: 14pt">
 ~/certs$ openssl genrsa 2048 > ca-key.pem
 Generating RSA private key, 2048 bit long modulus
 .....+++
 ...............................................................................................................................................................+++
 e is 65537 (0x10001)
-                            </p>
-                        </pre>
-                    </li>
-
-                    <li>
-                        verify:
-                        <pre>
-                            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
-~/certs$ ls
-ca-key.pem
-                            </p>
-                        </pre>
-                    </li>
-
-                    <li>
-                        ca-key.pem is private key
-                    </li>
-
-                </ol>
-
+                      </p>
+                </pre>
             </li>
 
-            <br>
-
             <li>
-                Generate Certificate Request.  The answers to the prompts may be chosen arbitrarily but again the common name must match the hostname on target server (as they will be installed on the same machine):
+                Generate self-signed certificate.  When testing, these prompts may be be answered arbitrarily except for <b>common name</b> which must match the hostname on machine hosting the OpenLDAP and MySQL daemons:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
 ~/certs$ openssl req -new -x509 -nodes -days 3600 -key ca-key.pem -out ca-cert.pem
@@ -173,23 +148,8 @@ Email Address []:
                         </pre>
                     </li>
                 </ol>
-
             </li>
-
-            <br>
-
-            <li>
-                verify certificate present (ca-cert.pem):
-                <pre>
-                    <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
-~/certs$ ls
-ca-cert.pem  ca-key.pem
-                    </p>
-                </pre>
-            </li>
-
         </ol>
-
     </li>
 
     <li>
@@ -291,8 +251,7 @@ keytool -importkeystore -destkeystore mykeystore -srckeystore mykeystore.p12 -sr
     </li>
 
     <li>
-        Create Java truststore for JSSE.  This will be used for client-side SSL connectivity.
-        as a Java truststore is provided in Quickstart package.
+        Create Java truststore for JSSE.  This will be used for client-side SSL connectivity securing LDAPv3 and JDBC protocols.
         <br>
         <ol type="a">
             <br>
@@ -354,38 +313,37 @@ Certificate was added to keystore
                       </pre>
             </li>
 
-            <li>
-                Verify artifacts generated:
+                </ol>
+            </li>
+    <li>
+        View listing of crypto artifacts:
                       <pre>
                         <p style="color: white; background-color: black; font-size: 14pt">
 ~/certs$ ls
 ca-cert.pem  ca-key.pem  mykeystore  mykeystore.p12  mytruststore  server-cert.pem  server-key.pem  server-req.pem
                         </p>
                       </pre>
-            </li>
+    </li>
 
+    <li>
+        Crypto artifacts used as follows:
+        <ol type="a">
+            <br>
             <li>
-                Artifacts will be used as follows:
-                <ol type="a">
-                    <br>
-                    <li>
-                        <b>ca-cert.pem</b>, <b>server-cert.pem</b>, <b>server-key.pem</b>
-                        <br>-Server-side, used by OpenLDAP and MySQL
-                    </li>
-                    <br>
-                    <li>
-                        <b>mytruststore</b>
-                        <br>-Client-side, used by demo web app to connect with OpenLDAP and MySQL:
-                    </li>
-                    <br>
-                    <li>
-                        <b>mykeystore</b>
-                        <br>-Server-side, used by Tomcat for HTTPS connections:
-                    </li>
-                </ol>
+                <b>ca-cert.pem</b>, <b>server-cert.pem</b>, <b>server-key.pem</b>
+                <br>-Server-side: used by OpenLDAP and MySQL to encrypt data over LDAPv3 and JDBC protocols with the Fortress demo #2 web app.
+            </li>
+            <br>
+            <li>
+                <b>mykeystore</b>
+                <br>-Server-side: used by Tomcat to encrypt data for HTTPS traffic between Fortress demo #2 and its end users.
+            </li>
+            <br>
+            <li>
+                <b>mytruststore</b>
+                <br>-Client-side: used to generate encrypted JDBC and LDAP connections between the Fortress Demo #2 web app and its servers.
             </li>
         </ol>
-
     </li>
 </ol>
 </body>

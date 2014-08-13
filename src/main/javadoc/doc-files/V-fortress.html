@@ -16,27 +16,23 @@
       <h4>Steps to install Fortress</h4>
       <ol>
 
-      <li>
-          Download Fortress Quickstart package:
-          <a href="http://iamfortress.org/download">iamfortress.org/download</a>
-      </li>
+          <li>
+              Download Fortress Quickstart package:
+              <a href="http://iamfortress.org/download">iamfortress.org/download</a>
+          </li>
 
           <br>
 
           <li>
-              Install Fortress to target machine
-              <br><br>
-              <ol type="a">
-                  <li>
-                      Perform [<b>Section I - download Fortress QUICKSTART and prepare the package</b>] in <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">FORTRESS README-QUICKSTART.html</a>
-                  </li>
+              Perform [<b>Section I - download Fortress QUICKSTART and prepare the package</b>] in <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">FORTRESS README-QUICKSTART.html</a>
+          </li>
 
-                  <br>
+          <br>
 
-                  <li>
-                      Edit the build.properties in root folder of fortress package.  Change/add these settings to the file:
-                      <pre>
-                        <p style="color: white; background-color: black; font-size: 14pt">
+          <li>
+              Edit the build.properties in root folder of fortress package.  Change/add these settings to the file:
+              <pre>
+                <p style="color: white; background-color: black; font-size: 14pt">
 # This points fortress to LDAP host.
 # Use same value as [Section IV - Set Hostname Entry]:
 ldap.host=fortressdemo2.com
@@ -76,48 +72,26 @@ tls.key.file=server-key.pem
 # Used by Tomcat server-side SSL configuration (used in fortress demo #2):
 key.store=/home/smckinn/fortress/builder/src/test/resources/certs/mykeystore
 key.store.password=changeit
-                        </p>
-                      </pre>
+                </p>
+              </pre>
+          </li>
 
-                  </li>
+          <li>
+              Perform [<b>Section II - compile Fortress source and build distribution packages</b>] in <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">FORTRESS README-QUICKSTART.html</a>.
+          </li>
 
-                  <li>
-                      Perform [<b>Section II - compile Fortress source and build distribution packages</b>] in <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">FORTRESS README-QUICKSTART.html</a>.
-                  </li>
+          <br>
 
-                  <br>
+          <li>
+              Perform [<b>Section III - install, configure and load OpenLDAP with seed data</b>] in <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">FORTRESS README-QUICKSTART.html</a>.
+              <br><br>
+              After completing this step, Fortress & OpenLDAP will be installed to target machine.
+          </li>
 
-                  <li>
-                      Perform [<b>Section III - install, configure and load OpenLDAP with seed data</b>] in <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">FORTRESS README-QUICKSTART.html</a>.
-                      <br><br>
-                      After completing this step, Fortress & OpenLDAP will be installed to target machine.
-                  </li>
+          <br>
 
-                  <br>
-
-                  <li>
-                      Optional - you may test installation by performing [<b>Section IV - integration test Fortress and OpenLDAP</b>] in the <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">README-QUICKSTART.html</a> guide.
-                  </li>
-
-                  <br>
-
-                  <li>
-                      Optional - you may install the RBAC Web admin UI by following [<b>Section V - Commander Web Administration demo</b>] in the <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">README-QUICKSTART.html</a> guide.
-                  </li>
-
-                  <br>
-
-                  <li>
-                      Optional - you may test the RBAC Web admin UI by following [<b>Section VI - integration test Commander with Solenium</b>] in the <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">README-QUICKSTART.html</a> guide.
-                  </li>
-
-                  <br>
-
-                  <li>
-                      Optional - you may connect to the RBAC Web admin UI by following [<b>Section VII - connecting to Commander via Web browser</b>] in the <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">README-QUICKSTART.html</a> guide.
-                  </li>
-
-              </ol>
+          <li>
+              Optional - you may test installation by performing [<b>Section IV - integration test Fortress and OpenLDAP</b>] in the <a href="http://www.jts.us/iamfortress/guides/README-QUICKSTART.html">README-QUICKSTART.html</a> guide.
           </li>
       </ol>
    </body>

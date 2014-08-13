@@ -9,32 +9,47 @@
 <body>
 <p>
 <hr>
-<h3>Section VI - Install MySQL</h3>
+<h3>Section VI - MySQL Installation</h3>
 <img src="logo-mysql-110x57.png">
 <hr>
-<h4>Instructions to install and configure MySQL for usage within demo app</h4>
+<h4>This section describes how to install MySQL to Debian and Redhat distros and enable SSL communication</h4>
+
 <ol>
     <li>
-        From the system command prompt (Debian):
+        For Debian from system command prompt:
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt">
 sudo apt-get install mysql-server
             </p>
         </pre>
+        For Redhat (as root):
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt">
+yum install mysql-server
+/sbin/service mysqld start
+/usr/bin/mysql_secure_installation
+            </p>
+        </pre>
 
     </li>
 
     <li>
-        If install fails, you may have to issue update before retrying install:
+        If Debian package install fails, you may need to issue update before retrying:
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt">
 sudo apt-get update --fix-missing
             </p>
         </pre>
+        Redhat users issue different commands to accomplish package refresh (as root):
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt">
+yum clean headers && yum clean metadata && yum makecache
+            </p>
+        </pre>
     </li>
 
     <li>
-        During install a root password my be chosen, since this is a demo env we're using 'secret'.  The password chosen will be used to connect later when connecting to SQL command line processor.
+        During install a root password my be chosen, since this is a demo env we're using 'secret'.  This password is needed a couple steps later to connect with MySQL's command line processor.
     </li>
 
     <br>
@@ -50,13 +65,14 @@ tcp        0      0 localhost:mysql         *:*                     LISTEN      
     </li>
 
     <li>
-        Connect to SQL command line processor, use the same password as during install:.
+        Connect to SQL command line processor (<i>Enter password chosen before during install</i>):
         <pre>
           <p style="color: white; background-color: black; font-size: 14pt">
 mysql -h localhost -P 3306 -u root -p
           </p>
         </pre>
     </li>
+
     <li>
         Run the <a href="demo-db-create-and-load.sql">demo-db-create-and-load.sql</a> script:
         <pre>
@@ -64,16 +80,7 @@ mysql -h localhost -P 3306 -u root -p
 mysql> source demo-db-create-and-load.sql;
             </p>
         </pre>
-        Note the contents of the sql script are at the end of this document.
     </li>
-
-    <br>
-
-    <li>
-        Verify the script ran and there were no SQL errors.
-    </li>
-
-    <br>
 
     <li>
         Configure MySQL to use SSL:
@@ -82,29 +89,12 @@ mysql> source demo-db-create-and-load.sql;
         <ol type="a">
 
             <li>
-                Copy keys created in Step3 to mysql conf folder:
+                Copy keys from Step III, <a href="III-keys.html">Managing PKI Keys</a> to <b>/etc/mysql</b>.  Redhat users must create the folder:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
 sudo cp src/test/resources/certs/ca-cert.pem /etc/mysql
 sudo cp src/test/resources/certs/server-cert.pem /etc/mysql
 sudo cp src/test/resources/certs/server-key.pem /etc/mysql
-                    </p>
-                </pre>
-            </li>
-
-            <li>
-                Verify:
-                <pre>
-                    <p style="color: white; background-color: black; font-size: 14pt">
-ls -l /etc/mysql
-total 28
--rw-r--r-- 1 root root 1395 Aug  5 10:48 ca-cert.pem
-drwxr-xr-x 2 root root 4096 Aug  5 10:11 conf.d
--rw------- 1 root root  333 Aug  5 10:11 debian.cnf
--rwxr-xr-x 1 root root 1220 Jul 16 14:30 debian-start
--rw-r--r-- 1 root root 3547 Aug  5 10:29 my.cnf
--rw-r--r-- 1 root root 1261 Aug  5 10:49 server-cert.pem
--rw-r--r-- 1 root root 1675 Aug  5 10:49 server-key.pem
                     </p>
                 </pre>
             </li>
@@ -116,10 +106,16 @@ drwxr-xr-x 2 root root 4096 Aug  5 10:11 conf.d
 sudo vi /etc/mysql/my.cnf
                     </p>
                 </pre>
+                Redhat users must edit file in different location:
+                <pre>
+                    <p style="color: white; background-color: black; font-size: 14pt">
+sudo vi /etc/my.cnf
+                    </p>
+                </pre>
             </li>
 
             <li>
-                Instruct daemon to listen to hostname set on this step: <a href="IV-hosts.html">Set hostname on target machine</a>
+                Instruct MySQL to accept connections using hostname defined in Step IV: <a href="IV-hosts.html">Set hostname on target machine</a>
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
 # Instead of skip-networking the default is now to listen only on
@@ -130,7 +126,7 @@ bind-address            = fortressdemo2.com
             </li>
 
             <li>
-                Add to the file after the <b>Security Features</b> section:
+                Add key locations after the <b>[mysqld]</b> section:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
 # * Security Features
@@ -151,12 +147,20 @@ ssl-key=/etc/mysql/server-key.pem
             <br>
 
             <li>
-                Restart MySQL daemon:
+                Restart MySQL daemon (Debian):
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
 sudo service mysql restart
 mysql stop/waiting
 mysql start/running, process 3800
+                    </p>
+                </pre>
+                Redhat users have slightly different command:
+                <pre>
+                    <p style="color: white; background-color: black; font-size: 14pt">
+sudo /sbin/service mysqld restart
+Stopping mysqld:                                           [  OK  ]
+Starting mysqld:                                           [  OK  ]
                     </p>
                 </pre>
             </li>
@@ -175,13 +179,13 @@ tcp        0      0 *:mysql                 *:*                     LISTEN      
                 Verify SSL is enabled.  From the command line SQL prompt:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-                    mysql> SHOW VARIABLES LIKE 'have_ssl';
-                    +---------------+-------+
-                    | Variable_name | Value |
-                    +---------------+-------+
-                    | have_ssl      | YES   |
-                    +---------------+-------+
-                    1 row in set (0.00 sec)
+mysql> SHOW VARIABLES LIKE 'have_ssl';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| have_ssl      | YES   |
++---------------+-------+
+1 row in set (0.00 sec)
                     </p>
                 </pre>
             </li>

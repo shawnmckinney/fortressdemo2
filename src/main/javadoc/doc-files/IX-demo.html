@@ -8,7 +8,7 @@
    </head>
    <body>
       <hr>
-      <h3>Section VIII - Fortress Demo #2</h3>
+      <h3>Section IX - Fortress Demo #2</h3>
 <!--      <img src="fortress100.gif">-->
 
       <h4>This section describes how to install and use the Fortress Demo #2 Web application</h4>
@@ -67,19 +67,19 @@ export ANT_HOME=../builder/apache-ant/
           </li>
 
           <li>
-              Run this command from the root package:
+              To deploy, run this command:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-$M2_HOME/bin/mvn install
+# $M2_HOME/bin/mvn tomcat:deploy
                     </p>
                 </pre>
           </li>
 
           <li>
-              Run this command from the root package:
+              To redeploy:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-$M2_HOME/bin/mvn tomcat:deploy
+# $M2_HOME/bin/mvn tomcat:redeploy
                     </p>
                 </pre>
           </li>
@@ -110,7 +110,7 @@ $M2_HOME/bin/mvn tomcat:deploy
               Use Apache Solenium to drive Firefox through a range of security unit tests.  Firefox must be installed before running this step.
             <pre>
                 <p style="color: white; background-color: black; font-size: 14pt">
-$M2_HOME/bin/mvn mvn verify -DskipTests=false
+$M2_HOME/bin/mvn verify -DskipTests=false
                 </p>
             </pre>
           </li>

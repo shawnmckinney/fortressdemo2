@@ -28,39 +28,50 @@ and must be upgraded.
 <h4>Steps to upgrade OpenSSL</h4>
 <ol>
     <li>
-        Update your repo (Debian):
+        If Debian, you may need to update package lists in repo to latest:
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
 sudo apt-get update
             </p>
         </pre>
+
+        If Redhat, to do similar:
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
+yum clean headers && yum clean metadata && yum makecache
+            </p>
+        </pre>
+
     </li>
 
     <li>
-        From the system command prompt (Debian):
+        To update openssl package to latest:
 
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
 sudo apt-get upgrade openssl
-[sudo] password for myuser:
-Reading package lists... Done
-Building dependency tree
-Reading state information... Done
-The following packages have been kept back:
-linux-generic linux-image-generic
-0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
             </p>
         </pre>
+
+        If Redhat:
+
+        <pre>
+            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
+yum upgrade openssl
+            </p>
+        </pre>
+
     </li>
 
     <li>
-        Verify:
+        Verify that it worked (date will vary by linux distro):
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
 openssl version -b
 built on: Fri Jun 20 18:54:15 UTC 2014
             </p>
         </pre>
+
     </li>
 </ol>
 </body>
