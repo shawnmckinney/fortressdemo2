@@ -4,12 +4,26 @@
 <html>
 <head>
     <title>Package Documentation for com.mycompany web app demo</title>
-    <a href="../overview-summary.html">Back to top</a>
+    <hr>
+    <fieldset>
+        <legend><b>Navigation Links</b></legend>
+        <ul>
+            <li><a href="./I-opensslheartbleed.html">Section I - Heartbleed Bug</a></li>
+            <li><a href="./II-keys.html">Section II - Managing PKI Keys</a></li>
+            <li><a href="./III-hosts.html">Section III - Set Hostname Entry</a></li>
+            <li><a href="./IV-fortress.html">Section IV - Install Fortress</a></li>
+            <li><a href="./V-mysql.html">Section V - Install MySQL</a></li>
+            <li><a href="./VI-tomcat.html">Section VI - Install Tomcat</a></li>
+            <li><a href="./VII-commander.html">Section VII - Install Commander</a></li>
+            <li><a href="./VIII-demo.html">Section VIII - Install Fortress Demo #2</a></li>
+        </ul>
+        <a href="../overview-summary.html">Back to top</a>
+    </fieldset>
+    <hr>
 </head>
 <body>
 <p>
-<hr>
-<h3>Section VI - MySQL Installation</h3>
+<h3>Section V - Install MySQL</h3>
 <img src="logo-mysql-110x57.png">
 <hr>
 <h4>This section describes how to install MySQL to Debian and Redhat distros and enable SSL communication</h4>
@@ -19,15 +33,15 @@
         For Debian from system command prompt:
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt">
-sudo apt-get install mysql-server
+# sudo apt-get install mysql-server
             </p>
         </pre>
         For Redhat (as root):
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt">
-yum install mysql-server
-/sbin/service mysqld start
-/usr/bin/mysql_secure_installation
+# yum install mysql-server
+# /sbin/service mysqld start
+# /usr/bin/mysql_secure_installation
             </p>
         </pre>
 
@@ -37,13 +51,13 @@ yum install mysql-server
         If Debian package install fails, you may need to issue update before retrying:
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt">
-sudo apt-get update --fix-missing
+# sudo apt-get update --fix-missing
             </p>
         </pre>
         Redhat users issue different commands to accomplish package refresh (as root):
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt">
-yum clean headers && yum clean metadata && yum makecache
+# yum clean headers && yum clean metadata && yum makecache
             </p>
         </pre>
     </li>
@@ -58,7 +72,7 @@ yum clean headers && yum clean metadata && yum makecache
         Verify daemon is running and listening to network:
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt">
-sudo netstat -tap | grep mysql
+# sudo netstat -tap | grep mysql
 tcp        0      0 localhost:mysql         *:*                     LISTEN      2969/mysqld
             </p>
         </pre>
@@ -68,7 +82,7 @@ tcp        0      0 localhost:mysql         *:*                     LISTEN      
         Connect to SQL command line processor (<i>Enter password chosen before during install</i>):
         <pre>
           <p style="color: white; background-color: black; font-size: 14pt">
-mysql -h localhost -P 3306 -u root -p
+# mysql -h localhost -P 3306 -u root -p
           </p>
         </pre>
     </li>
@@ -89,33 +103,35 @@ mysql> source demo-db-create-and-load.sql;
         <ol type="a">
 
             <li>
-                Copy keys from Step III, <a href="III-keys.html">Managing PKI Keys</a> to <b>/etc/mysql</b>.  Redhat users must create the folder:
+                Copy keys generated during <a href="III-keys.html">Section III - Managing PKI Keys</a> to <b>/etc/mysql</b> folder.  Redhat users must create the folder:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-sudo cp src/test/resources/certs/ca-cert.pem /etc/mysql
-sudo cp src/test/resources/certs/server-cert.pem /etc/mysql
-sudo cp src/test/resources/certs/server-key.pem /etc/mysql
+# sudo cp src/test/resources/certs/ca-cert.pem /etc/mysql
+# sudo cp src/test/resources/certs/server-cert.pem /etc/mysql
+# sudo cp src/test/resources/certs/server-key.pem /etc/mysql
                     </p>
                 </pre>
             </li>
 
             <li>
-                Configure MySQL to use newly generated keys:
+                Edit the <b>my.cnf</b> file.
+                <br><br>
+                For Debian:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-sudo vi /etc/mysql/my.cnf
+# sudo vi /etc/mysql/my.cnf
                     </p>
                 </pre>
-                Redhat users must edit file in different location:
+                Redhat file in different location:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-sudo vi /etc/my.cnf
+# sudo vi /etc/my.cnf
                     </p>
                 </pre>
             </li>
 
             <li>
-                Instruct MySQL to accept connections using hostname defined in Step IV: <a href="IV-hosts.html">Set hostname on target machine</a>
+                Add bind address to  to the <b>[mysqld]</b> section of <b>my.cnf</b> file.  Use hostname from <a href="III-hosts.html">Section III - Set Hostname Entry</a>.
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
 # Instead of skip-networking the default is now to listen only on
@@ -126,16 +142,15 @@ bind-address            = fortressdemo2.com
             </li>
 
             <li>
-                Add key locations after the <b>[mysqld]</b> section:
+                Add key locations to the <b>[mysqld]</b> section of <b>my.cnf</b> file:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-# * Security Features
+# Use keys genned [<a href="II-keys.html">Section II - Managing PKI Keys</a>]:
 ssl-ca=/etc/mysql/ca-cert.pem
 ssl-cert=/etc/mysql/server-cert.pem
 ssl-key=/etc/mysql/server-key.pem
                     </p>
                 </pre>
-                note: In order for the ssl directives to be picked up, they must be added after the <b>Security Features</b> label.
             </li>
 
             <br>
@@ -150,7 +165,7 @@ ssl-key=/etc/mysql/server-key.pem
                 Restart MySQL daemon (Debian):
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-sudo service mysql restart
+# sudo service mysql restart
 mysql stop/waiting
 mysql start/running, process 3800
                     </p>
@@ -158,7 +173,7 @@ mysql start/running, process 3800
                 Redhat users have slightly different command:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-sudo /sbin/service mysqld restart
+# sudo /sbin/service mysqld restart
 Stopping mysqld:                                           [  OK  ]
 Starting mysqld:                                           [  OK  ]
                     </p>
@@ -169,7 +184,7 @@ Starting mysqld:                                           [  OK  ]
                 Verify the MySQL daemon is up:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
-sudo netstat -tap | grep mysql
+# sudo netstat -tap | grep mysql
 tcp        0      0 *:mysql                 *:*                     LISTEN      3800/mysqld
                     </p>
                 </pre>
