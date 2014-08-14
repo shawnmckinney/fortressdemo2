@@ -238,8 +238,7 @@
                 <configuration>
                     <warFile>target/${project.artifactId}.war</warFile>
                     <server>local-tomcat</server>
-                    <url>http://localhost:8080/manager/html</url>
-                    <!-- TODO: CHANGE ME ON NEXT RELEASE TO USE 'TEXT' on URL: <url>http://localhost:8080/manager/text</url>-->
+                    <url>http://localhost:8080/manager/text</url>
                     <path>/${project.artifactId}</path>
                     <!-- Warning the tomcat manager creds here are for deploying into a demo environment only. -->
                     <username>tcmanager</username>

@@ -23,9 +23,9 @@
    </head>
    <body>
       <h3>Section VIII - Install Fortress Demo #2</h3>
-<!--      <img src="fortress100.gif">-->
+      <img src="RbacDSD.png">
 
-      <h4>This section describes how to install and use the Fortress Demo #2 Web application</h4>
+      <h4>This section describes the installation and usage of the Fortress Demo #2 Web application</h4>
 
       <ol>
           <li>
@@ -108,6 +108,9 @@ enable.ldap.ssl.debug=true
 # Use truststore genned [<a href="II-keys.html">Section II - Managing PKI Keys</a>] or found under /src/test/resources/certs in fortress source package.
 trust.store=/home/smckinn/fortress/builder/src/test/resources/certs/mytruststore
 trust.store.password=changeit
+
+# Sets trust.store params as System.property to be used by JDBC driver:
+trust.store.set.prop=true
                     </p>
                 </pre>
           </li>
@@ -119,7 +122,7 @@ trust.store.password=changeit
           <br>
 
           <li>
-              To deploy, run this command:
+              To build and deploy this web application, run this command:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
 # $M2_HOME/bin/mvn tomcat:deploy
@@ -128,7 +131,7 @@ trust.store.password=changeit
           </li>
 
           <li>
-              To redeploy:
+              To redeploy the web app:
                 <pre>
                     <p style="color: white; background-color: black; font-size: 14pt">
 # $M2_HOME/bin/mvn tomcat:redeploy
@@ -137,20 +140,20 @@ trust.store.password=changeit
           </li>
 
           <li>
-              You may use:
+              Connect to web app:
               <br><br>
               <ol type="a">
                   <li>
-                      non-SSL:
-                      <a href="http://localhost:8080/fortressdemo2">http://localhost:8080/fortressdemo2</a>,
-                      <a href="http://fortressdemo2.com:8080/fortressdemo2">http://fortressdemo2.com:8080/fortressdemo2</a>
+                      non-SSL -
+                      local: <a href="http://localhost:8080/fortressdemo2">http://localhost:8080/fortressdemo2</a>,
+                      remote: <a href="http://fortressdemo2.com:8080/fortressdemo2">http://fortressdemo2.com:8080/fortressdemo2</a>
                       <br>
                   </li>
                   <br>
                   <li>
-                      SSL:
-                      <a href="https://localhost:8443/fortressdemo2">https://localhost:8443/fortressdemo2</a>,
-                      <a href="https://fortressdemo2.com:8443/fortressdemo2">https://fortressdemo2.com:8443/fortressdemo2</a>
+                      SSL -
+                      local: <a href="https://localhost:8443/fortressdemo2">https://localhost:8443/fortressdemo2</a>,
+                      remote: <a href="https://fortressdemo2.com:8443/fortressdemo2">https://fortressdemo2.com:8443/fortressdemo2</a>
                   </li>
                   <br>
                   Accept the self-signed certificate when the warning dialog appears.
@@ -170,7 +173,7 @@ trust.store.password=changeit
           </li>
 
           <li>
-              Try the various user accounts.  This security policy is automatically loaded into target LDAP with <b>fortressdemo2-load-policy.xml</b> script during web deployment step.
+              Try the various user accounts.  The RBAC policy is automatically loaded into LDAP using <b>fortressdemo2-load-policy.xml</b> during web deployment step.
               <ol type="a">
                   <br>
                   <li>
@@ -269,7 +272,7 @@ trust.store.password=changeit
                               <td><b>Page3</b></td>
                               <td align="center"><font color="red">F</font></td>
                               <td align="center"><font color="red">F</font></td>
-                              <td align="center"><font color="green">F</font></td>
+                              <td align="center"><font color="red">F</font></td>
                           </tr>
                       </table>
                   </li>

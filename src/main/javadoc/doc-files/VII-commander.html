@@ -108,6 +108,9 @@ enable.ldap.ssl.debug=true
 # Use truststore genned [<a href="II-keys.html">Section II - Managing PKI Keys</a>] or found under /src/test/resources/certs in fortress source package.
 trust.store=/home/smckinn/fortress/builder/src/test/resources/certs/mytruststore
 trust.store.password=changeit
+
+# Sets trust.store params as System.property:
+trust.store.set.prop=true
                     </p>
                 </pre>
           </li>
@@ -156,20 +159,20 @@ trust.store.password=changeit
           </li>
 
           <li>
-              You may use:
+              Connect to web app:
               <br><br>
               <ol type="a">
                   <li>
-                      non-SSL:
-                      <a href="http://localhost:8080/commander">http://localhost:8080/commander</a>,
-                      <a href="http://fortressdemo2.com:8080/commander">http://fortressdemo2.com:8080/commander</a>
+                      non-SSL -
+                      local: <a href="http://localhost:8080/commander">http://localhost:8080/commander</a>,
+                      remote: <a href="http://fortressdemo2.com:8080/commander">http://fortressdemo2.com:8080/commander</a>
                       <br>
                   </li>
                   <br>
                   <li>
-                      SSL:
-                      <a href="https://localhost:8443/commander">https://localhost:8443/commander</a>,
-                      <a href="https://fortressdemo2.com:8443/commander">https://fortressdemo2.com:8443/commander</a>
+                      SSL -
+                      local: <a href="https://localhost:8443/commander">https://localhost:8443/commander</a>,
+                      remote: <a href="https://fortressdemo2.com:8443/commander">https://fortressdemo2.com:8443/commander</a>
                   </li>
                   <br>
                   Accept the self-signed certificate when the warning dialog appears.
@@ -180,7 +183,8 @@ trust.store.password=changeit
           <br>
 
           <li>
-              Take Apache Solenium test drive of Commander web app.  Firefox browser is a prereq.
+              Take an Apache Solenium test drive of the Commander web pages.  Firefox installed to target machine is a requirement.  Another requirement is Step #6
+              from <a href="./IV-fortress.html">Section IV - Install Fortress</a> has loaded the necessary test data.
             <pre>
                 <p style="color: white; background-color: black; font-size: 14pt">
 $M2_HOME/bin/mvn verify -DskipTests=false

@@ -82,11 +82,12 @@
        </li>
 
        <li>
-        Add privilege to automatically deploy web apps to Tomcat from Maven:
+        Add privilege for <b>tcmanager</b> user to connect with Tomcat Manager.  This account can access GUI and deploy via maven.
         <pre>
             <p style="color: white; background-color: black; font-size: 14pt">
 &lt;role rolename="manager-script"/&gt;
-&lt;user username="tcmanager" password="m@nager123" roles="manager-script"/&gt;
+&lt;role rolename="manager-gui"/&gt;
+&lt;user username="tcmanager" password="m@nager123" roles="manager-script,manager-gui"/&gt;
             </p>
         </pre>
            Using the config file realm to store credentials for an important application like the Tomcat Manager is a security <b>antipattern</b>.  For production, a realm like
@@ -164,7 +165,7 @@ sudo /etc/init.d/tomcat7 restart
            </ol>
        </li>
        <li>
-           Verfiy setup by signing onto the Tomcat Manager app with credentials <b>userId</b>: <i>tcmanager</i>, <b>password</b>: <i>m@nager123</i>:
+           Verify setup by signing onto the Tomcat Manager app with credentials <b>userId</b>: <i>tcmanager</i>, <b>password</b>: <i>m@nager123</i>
            <br><br>
            <ol type="a">
                <li>
