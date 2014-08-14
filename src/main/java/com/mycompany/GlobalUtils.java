@@ -56,6 +56,10 @@ public class GlobalUtils
     public static final String USER_3_456 = "user3_456";
     public static final String USER_3_789 = "user3_789";
 
+    public static final String USER_123 = "user123";
+    public static final String USER_456 = "user456";
+    public static final String USER_789 = "user789";
+
     public static final String USER_ID = "userId";
     public static final String PSWD_FIELD = "pswdField";
     public static final String LOGIN = "login";

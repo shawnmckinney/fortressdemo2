@@ -52,7 +52,76 @@ public class FortressDemo2SeleniumITCase
         LOG.info( "Begin FortressDemo2SeleniumITCase" );
         driver.get( baseUrl + "/fortressdemo2" );
 
-        // SuperUser:
+        // User 123, has access to all pages, Customer 123 data only:
+        login( GlobalUtils.USER_123, "password" );
+        TUtils.sleep( 1 );
+        doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.USER_123, GlobalUtils.BTN_PAGE_1 );
+        doActivateTest( GlobalUtils.USER_123, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_123, null, "123", "789", false );
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_123, "456");
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_123, "789");
+        driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
+        doActivateTest( GlobalUtils.USER_123, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_123, GlobalUtils.ROLE_PAGE1_123, "123", "789", true );
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_123, "456");
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_123, "789");
+        driver.findElement( By.linkText( GlobalUtils.PAGE_3 ) ).click();
+        doActivateTest( GlobalUtils.USER_123, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_123, GlobalUtils.ROLE_PAGE2_123, "123", "789", true );
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_123, "456");
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_123, "789");
+        logout( GlobalUtils.USER_123 );
+
+        // User 456, has access to all pages, Customer 456 data only:
+        login( GlobalUtils.USER_456, "password" );
+        TUtils.sleep( 1 );
+        doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.USER_456, GlobalUtils.BTN_PAGE_1 );
+        doActivateTest( GlobalUtils.USER_456, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_456, null, "456", "123", false );
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_456, "123");
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_456, "789");
+        driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
+        doActivateTest( GlobalUtils.USER_456, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_456, GlobalUtils.ROLE_PAGE1_456, "456", "789", true );
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_456, "123");
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_456, "789");
+        driver.findElement( By.linkText( GlobalUtils.PAGE_3 ) ).click();
+        doActivateTest( GlobalUtils.USER_456, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_456, GlobalUtils.ROLE_PAGE2_456, "456", "789", true );
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_456, "123");
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_456, "789");
+        logout( GlobalUtils.USER_456 );
+
+        // User 789, has access to all pages, Customer 789 data only:
+        login( GlobalUtils.USER_789, "password" );
+        TUtils.sleep( 1 );
+        doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.USER_789, GlobalUtils.BTN_PAGE_1 );
+        doActivateTest( GlobalUtils.USER_789, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_789, null, "789", "123", false );
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_789, "123");
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_789, "456");
+        driver.findElement( By.linkText( GlobalUtils.PAGE_2 ) ).click();
+        doActivateTest( GlobalUtils.USER_789, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_789, GlobalUtils.ROLE_PAGE1_789, "789", "456", true );
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_789, "123");
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_789, "456");
+        driver.findElement( By.linkText( GlobalUtils.PAGE_3 ) ).click();
+        doActivateTest( GlobalUtils.USER_789, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_789, GlobalUtils.ROLE_PAGE2_789, "789", "123", true );
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_789, "123");
+        TUtils.sleep( 1 );
+        doNegativeDataTest(GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_789, "456");
+        logout( GlobalUtils.USER_789 );
+
+        // SuperUser has access to all pages and all customer data without restriction:
         login( GlobalUtils.SUPER_USER, "password");
         TUtils.sleep( 1 );
         doPositiveButtonTests( GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1 );
@@ -80,7 +149,7 @@ public class FortressDemo2SeleniumITCase
         TUtils.sleep( 1 );
         logout( GlobalUtils.SUPER_USER );
 
-        // power User:
+        // Poweruser has access to all pages, and all customer data with DSD constraints applied:
         login( GlobalUtils.POWER_USER, "password");
         TUtils.sleep( 1 );
         driver.findElement( By.linkText( GlobalUtils.PAGE_1 ) ).click();
@@ -104,7 +173,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.POWER_USER, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_789, GlobalUtils.ROLE_PAGE2_789, "789", "123", true );
         logout( GlobalUtils.POWER_USER );
 
-        // User 1:
+        // User 1 has access to Page 1, all customer data with DSD constraints applied::
         login( GlobalUtils.USER_1, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.USER_1, GlobalUtils.BTN_PAGE_1 );
@@ -116,7 +185,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.USER_1, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_789, GlobalUtils.ROLE_PAGE1_456, "789", "456", true );
         logout( GlobalUtils.USER_1 );
 
-        // User 1 123:
+        // User 1 123 has access to Page 1, Customer 123 only:
         login( GlobalUtils.USER_1_123, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.USER_1_123, GlobalUtils.BTN_PAGE_1 );
@@ -125,7 +194,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.USER_1_123, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_123, null, "123", "789", false );
         logout( GlobalUtils.USER_1_123 );
 
-        // User 1 456:
+        // User 1 456 has access to Page 1, Customer 456 only::
         login( GlobalUtils.USER_1_456, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.USER_1_456, GlobalUtils.BTN_PAGE_1 );
@@ -134,7 +203,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.USER_1_456, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_456, null, "456", "123", false );
         logout( GlobalUtils.USER_1_456 );
 
-        // User 1 789:
+        // User 1 789 has access to Page 1, Customer 789 only::
         login( GlobalUtils.USER_1_789, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_1, GlobalUtils.USER_1_789, GlobalUtils.BTN_PAGE_1 );
@@ -143,7 +212,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.USER_1_789, GlobalUtils.PAGE_1, GlobalUtils.BTN_PAGE_1, GlobalUtils.ROLE_PAGE1_789, null, "789", "123", false );
         logout( GlobalUtils.USER_1_789 );
 
-        // User 2:
+        // User 2 has access to Page 2, all customer data with DSD constraints applied::
         login( GlobalUtils.USER_2, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_2, GlobalUtils.USER_2, GlobalUtils.BTN_PAGE_2 );
@@ -155,7 +224,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.USER_2, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_789, GlobalUtils.ROLE_PAGE2_456, "789", "456", true );
         logout( GlobalUtils.USER_2 );
 
-        // User 2 123:
+        // User 2 123 has access to Page 2, Customer 123 only::
         login( GlobalUtils.USER_2_123, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_2, GlobalUtils.USER_2_123, GlobalUtils.BTN_PAGE_2 );
@@ -164,7 +233,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.USER_2_123, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_123, null, "123", "789", false );
         logout( GlobalUtils.USER_2_123 );
 
-        // User 2 456:
+        // User 2 456 has access to Page 2, Customer 456 only::
         login( GlobalUtils.USER_2_456, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_2, GlobalUtils.USER_2_456, GlobalUtils.BTN_PAGE_2 );
@@ -173,7 +242,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.USER_2_456, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_456, null, "456", "123", false );
         logout( GlobalUtils.USER_2_456 );
 
-        // User 2 789:
+        // User 2 789 has access to Page 2, Customer 789 only::
         login( GlobalUtils.USER_2_789, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_2, GlobalUtils.USER_2_789, GlobalUtils.BTN_PAGE_2 );
@@ -182,7 +251,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.USER_2_789, GlobalUtils.PAGE_2, GlobalUtils.BTN_PAGE_2, GlobalUtils.ROLE_PAGE2_789, null, "789", "123", false );
         logout( GlobalUtils.USER_1_789 );
 
-        // User 3:
+        // User 3 has access to Page 3, all customer data with DSD constraints applied::
         login( GlobalUtils.USER_3, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.USER_3, GlobalUtils.BTN_PAGE_3 );
@@ -194,7 +263,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.USER_3, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_789, GlobalUtils.ROLE_PAGE3_456, "789", "456", true );
         logout( GlobalUtils.USER_3 );
 
-        // User 3 123:
+        // User 3 123 has access to Page 3, Customer 123 only::
         login( GlobalUtils.USER_3_123, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.USER_3_123, GlobalUtils.BTN_PAGE_3 );
@@ -203,7 +272,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.USER_3_123, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_123, null, "123", "789", false );
         logout( GlobalUtils.USER_3_123 );
 
-        // User 3 456:
+        // User 3 456 has access to Page 3, Customer 456 only::
         login( GlobalUtils.USER_3_456, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.USER_3_456, GlobalUtils.BTN_PAGE_3 );
@@ -212,7 +281,7 @@ public class FortressDemo2SeleniumITCase
         doActivateTest( GlobalUtils.USER_3_456, GlobalUtils.PAGE_3, GlobalUtils.BTN_PAGE_3, GlobalUtils.ROLE_PAGE3_456, null, "456", "123", false );
         logout( GlobalUtils.USER_3_456 );
 
-        // User 3 789:
+        // User 3 789 has access to Page 3, Customer 789 only::
         login( GlobalUtils.USER_3_789, "password" );
         TUtils.sleep( 1 );
         doNegativeButtonTests( GlobalUtils.PAGE_3, GlobalUtils.USER_3_789, GlobalUtils.BTN_PAGE_3 );
