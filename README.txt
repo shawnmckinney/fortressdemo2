@@ -7,10 +7,11 @@ _____________________________________________________________________________
 #############################################################################
 # Prerequisites
 #############################################################################
-1. Internet access to retrieve dependencies from online Maven repo.
-2. Java SDK Version 7 (or greater), Apache Ant 1.8 (or greater) and Apache Maven.
-3. Firefox browser installed (for automated unit testing with Apache Solenium).
-4. All other packages will be covered inside the help document.
+1. Linux machine (tested on Ubuntu 12.04 & Centos 6.3)
+2. Internet access to retrieve dependencies from online Maven repo.
+3. Java SDK Version 7 (or greater), Apache Ant 1.8 (or greater) and Apache Maven.
+4. Firefox browser installed (for automated unit testing with Apache Solenium).
+5. All other packages will be covered inside the help document.
 #############################################################################
 # Instructions for downloading application and generating the installation document
 #############################################################################
