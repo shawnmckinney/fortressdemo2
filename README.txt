@@ -5,7 +5,7 @@ README for Fortress Demo #2 RBAC Security Sample
 Last updated: August 14, 2014
 _____________________________________________________________________________
 #############################################################################
-# Prerequisites
+# Prerequisites:
 #############################################################################
 1. Linux machine (tested on Ubuntu 12.04 & Centos 6.3)
 2. Internet access to retrieve dependencies from online Maven repo.
@@ -13,7 +13,7 @@ _____________________________________________________________________________
 4. Firefox browser installed (for automated unit testing with Apache Solenium).
 5. All other packages will be covered inside the help document.
 #############################################################################
-# Instructions for downloading application and generating the installation document
+# Instructions for downloading app and generating the install doc:
 #############################################################################
 1. Download package: https://github.com/shawnmckinney/fortressdemo2/archive/master.zip
 2. Extract
