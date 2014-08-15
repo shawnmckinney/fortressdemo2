@@ -29,23 +29,25 @@
 This app uses <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">Transport Layer Security</a>, hereafter referred to as <b>SSL</b>, for
 maintaining confidential communication between the client and server processes.
 A prerequisite of SSL communication is that <a href="http://en.wikipedia.org/wiki/Public-key_cryptography">PKI keys</a> be generated and enabled for use
-in participating processes.  If SSL is between processes residing across separate machines, the server's public key common name must match its hostname.
-The keys generated here are needed in later sections of tutorial.
+in participating processes.  The server's public key common name must match its hostname.  The keys generated here are needed in later sections of tutorial.
 <hr>
-<h4>Pick one of the following options for obtaining PKI keys:</h4>
+<h4>Pick one of the following options for obtaining PKI keys and certificate:</h4>
 <ol type="A">
 
     <li>
-        Use the test certificate & keys in the <a href="http://iamfortress.org/download">iamfortress.org/download</a>.
+        Use the <a href="http://en.wikipedia.org/wiki/Self-signed_certificate">self-signed certificate</a> and keys contained within the <a href="http://iamfortress.org/download">Fortress QUICKSTART</a> package.
+        This option requires the target host name for OpenLDAP & MySQL will be set to <b>fortressdemo2.com</b>.
         <br>For this option you may skip to <a href="III-hosts.html">Section III - Set Hostname Entry</a>.
     </li>
     <br>
     <li>
-        Create a self-signed certificate created by <a href="http://www.openssl.org">OpenSSL</a> to sign the keys.  For this option, follow the instructions below.
+        Use <a href="http://www.openssl.org">OpenSSL</a> to generate a new private key to (self) sign a new certificate.  It is assumed this option
+        will be followed to create a certificate bound for a hostname other than <b>fortressdemo2.com</b>.  For this option, follow the instructions below.
     </li>
     <br>
     <li>
-        Use certificate from well-known CA to sign the keys.  While important to many production environments is beyond the scope of this tutorial.
+        Use keys and certificate signed by a well-known <a href="http://en.wikipedia.org/wiki/Certificate_authority">Certificate authority</a>.  Often times the correct
+        choice for apps in production but beyond the scope of this introductory tutorial.
     </li>
 </ol>
 <hr>
