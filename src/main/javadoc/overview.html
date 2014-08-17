@@ -4,13 +4,14 @@
 -->
 <HTML>
 <HEAD>
-    <TITLE>Overview of Fortress Demo # 2 end-to-end Web Application Security</TITLE>
+    <TITLE>Overview of Fortress Demo # 2</TITLE>
 </HEAD>
 <BODY>
 <p>
-    <h3>Overview of Fortress Demo # 2 end-to-end Web Application Security</h3>
-    The purpose of this application is to demonstrate principles of Java Web security enforcement.
-    The installation of this application requires completion of the sections listed below.
+    <h3>Overview of Fortress Demo # 2 End-to-End Web Security</h3>
+    The purpose of this application is to demonstrate correct security techniques inside a Java Web environment.
+    Topics covered include Authentication, Authorization, Confidentiality and Audit.  Both declarative and programmatic controls will be covered.
+    The application installation requires completion of the sections listed below.
 <h4>Sections required for installation:</h4>
 <ol type="I">
     <li><a href="./doc-files/I-opensslheartbleed.html">Heartbleed Bug</a></li>
@@ -23,7 +24,7 @@
     <li><a href="./doc-files/VIII-demo.html">Install Fortress Demo #2</a></li>
 </ol>
 </p>
-<h4>Demonstrate end-to-end security enforcement</h4>
+<h4>Demonstrate End-to-End Security Enforcement</h4>
 <img src="./doc-files/Demo2-Block-Diagram-no-text.png">
 <img src="./doc-files/Demo2-Block-Diagram-text-only.png" height="200" width="250">
 <p>
@@ -42,19 +43,26 @@ This sample Web application demonstrates usage of the following security mechani
 
 <h4>Infrastructure Requirements</h4>
 <p>
-    Demo Web application prerequisites include:
+
+<h5>Prerequisites</h5>
 <ol type="1">
-    <li>Java Programming SDK</li>
+    <li>Debian or Redhat Liunx machine with OpenSSL installed</li>
+    <li>Java 7 (or greater) SDK</li>
+    <li>Apache Ant 1.8 (or greater)</li>
+    <li>Apache Maven</li>
+</ol>
+
+<h5>Infrastructure Installed during Tutorial</h5>
+<ol type="1">
     <li>Fortress RBAC SDK</li>
     <li>OpenLDAP Directory Server</li>
     <li>MySQL Database Manager</li>
     <li>Tomcat Servlet Container</li>
     <li>Commander RBAC Web Admin</li>
-    <li>OpenSSL</li>
-    <li>JSSE</li>
 </ol>
 
-If you have questions about Fortress, submit them to the openldap-fortress list.
+The techniques demonstrated in this demo are applicable to other Java Web application infrastructure configurations.
+If you find security flaws, or have questions about Fortress, submit to <a href="http://www.openldap.org/lists/mm/listinfo/openldap-fortress">OpenLDAP Fortress Discussion list</a>.
 </p>
 
 </BODY>

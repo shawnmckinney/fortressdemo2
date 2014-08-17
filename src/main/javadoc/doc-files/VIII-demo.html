@@ -37,7 +37,7 @@
           <li>
             Set JAVA_HOME:
             <pre>
-                <p style="color: white; background-color: black; font-size: 14pt">
+                <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
 # export JAVA_HOME=/opt/jdk1.7.0_10/
                 </p>
             </pre>
@@ -47,7 +47,7 @@
           <li>
             Extract:
             <pre>
-                <p style="color: white; background-color: black; font-size: 14pt">
+                <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
 # $JAVA_HOME/bin/jar -xf fortressdemo2-master.zip
                 </p>
             </pre>
@@ -56,7 +56,7 @@
           <li>
               Change directory:
             <pre>
-                <p style="color: white; background-color: black; font-size: 14pt">
+                <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
 # cd fortressdemo2-master/
                 </p>
             </pre>
@@ -65,7 +65,7 @@
           <li>
               Set M2_HOME:
             <pre>
-                <p style="color: white; background-color: black; font-size: 14pt">
+                <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
 # export M2_HOME=../builder/apache-maven/
                 </p>
             </pre>
@@ -74,7 +74,7 @@
           <li>
               Set ANT_HOME:
             <pre>
-                <p style="color: white; background-color: black; font-size: 14pt">
+                <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
 # export ANT_HOME=../builder/apache-ant/
                 </p>
             </pre>
@@ -83,7 +83,7 @@
           <li>
               Modify fortress.properties
                 <pre>
-                    <p style="color: white; background-color: black; font-size: 14pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
 # vi src/main/resources/fortress.properties
                     </p>
                 </pre>
@@ -92,7 +92,7 @@
           <li>
               Change the host, port and ssl to match settings from <a href="IV-fortress.html">Section IV - Install Fortress</a>.
                 <pre>
-                    <p style="color: white; background-color: black; font-size: 14pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
 # Use value from [<a href="III-hosts.html">Section III - Set Hostname Entry</a>]:
 host=fortressdemo2.com
 
@@ -124,7 +124,7 @@ trust.store.set.prop=true
           <li>
               To build and deploy this web application, run this command:
                 <pre>
-                    <p style="color: white; background-color: black; font-size: 14pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
 # $M2_HOME/bin/mvn tomcat:deploy
                     </p>
                 </pre>
@@ -133,7 +133,7 @@ trust.store.set.prop=true
           <li>
               To redeploy the web app:
                 <pre>
-                    <p style="color: white; background-color: black; font-size: 14pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
 # $M2_HOME/bin/mvn tomcat:redeploy
                     </p>
                 </pre>
@@ -166,7 +166,7 @@ trust.store.set.prop=true
           <li>
               Use Apache Solenium to drive Firefox through a range of security unit tests.  Firefox must be installed before running this step.
             <pre>
-                <p style="color: white; background-color: black; font-size: 14pt">
+                <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
 # $M2_HOME/bin/mvn verify -DskipTests=false
                 </p>
             </pre>
@@ -174,6 +174,7 @@ trust.store.set.prop=true
 
           <li>
               Try the various user accounts.  The RBAC policy is automatically loaded into LDAP using <b>fortressdemo2-load-policy.xml</b> during web deployment step.
+              View audit trail changes using Commander.
               <ol type="a">
                   <br>
                   <li>
@@ -759,5 +760,5 @@ trust.store.set.prop=true
       </ol>
 
    </body>
-   <p style="color: black; font-size: 6pt">This is free and unencumbered software released into the public domain.</p>
+   <p style="font: monospace; color: black; font-size: 6pt">This is free and unencumbered software released into the public domain.</p>
 </html>

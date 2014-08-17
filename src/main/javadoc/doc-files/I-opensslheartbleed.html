@@ -31,7 +31,7 @@ target machine is version <b>1.0.1</b> through <b>1.0.1f</b>.  OpenSSL is used b
 <hr>
 <br>To determine if upgrade is needed, enter the following at the command prompt:
 <pre>
-    <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
+    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
 # openssl version -b
     </p>
 </pre>
@@ -44,14 +44,14 @@ and must be upgraded.
     <li>
         If Debian, you may need to update package lists in repo to latest:
         <pre>
-            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt; font-size: 12pt">
 # sudo apt-get update
             </p>
         </pre>
 
         If Redhat, to do similar:
         <pre>
-            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt; font-size: 12pt">
 # yum clean headers && yum clean metadata && yum makecache
             </p>
         </pre>
@@ -62,7 +62,7 @@ and must be upgraded.
         To update openssl package to latest:
 
         <pre>
-            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt; font-size: 12pt">
 # sudo apt-get upgrade openssl
             </p>
         </pre>
@@ -70,7 +70,7 @@ and must be upgraded.
         If Redhat:
 
         <pre>
-            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt; font-size: 12pt">
 # yum upgrade openssl
             </p>
         </pre>
@@ -80,7 +80,7 @@ and must be upgraded.
     <li>
         Verify that it worked (date will vary by linux distro):
         <pre>
-            <p style="color: white; background-color: black; font-size: 14pt; font-size: 14pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt; font-size: 12pt">
 # openssl version -b
 built on: Fri Jun 20 18:54:15 UTC 2014
             </p>
@@ -89,5 +89,5 @@ built on: Fri Jun 20 18:54:15 UTC 2014
     </li>
 </ol>
 </body>
-<p style="color: black; font-size: 6pt">This is free and unencumbered software released into the public domain.</p>
+<p style="font: monospace; color: black; font-size: 6pt">This is free and unencumbered software released into the public domain.</p>
 </html>
