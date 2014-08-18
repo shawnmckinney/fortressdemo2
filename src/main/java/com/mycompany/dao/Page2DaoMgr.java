@@ -65,7 +65,7 @@ public class Page2DaoMgr implements Serializable
     }
 
     /**
-     * Add a new Page2 entity to the database.
+     * Update an existing Page2 entity to the database.
      *
      * @param page2EO Contains Page2 data.
      * @return Page2 entity containing current data in table.

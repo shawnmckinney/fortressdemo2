@@ -65,7 +65,7 @@ public class Page1DaoMgr implements Serializable
     }
 
     /**
-     * Add a new Page1 entity to the database.
+     * Update an existing Page1 entity to the database.
      *
      * @param page1EO Contains Page1 data.
      * @return Page1 entity containing current data in table.

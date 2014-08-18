@@ -124,17 +124,6 @@ public class GlobalUtils
         return ( ( RbacSession ) component.getSession() ).getPermissions();
     }
 
-    public static boolean isAuthorizedx( String roleName, HttpServletRequest servletReq )
-    {
-        boolean isAuthorized = false;
-        if ( servletReq.isUserInRole( roleName ) )
-        {
-            isAuthorized = true;
-        }
-        return isAuthorized;
-    }
-
-
     public static boolean isAuthorized( String roleNames, HttpServletRequest servletReq )
     {
         boolean isAuthorized = false;

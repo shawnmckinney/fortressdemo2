@@ -65,7 +65,7 @@ public class Page3DaoMgr implements Serializable
     }
 
     /**
-     * Add a new Page3 entity to the database.
+     * Update an existing Page3 entity to the database.
      *
      * @param page3EO Contains Page3 data.
      * @return Page3 entity containing current data in table.
