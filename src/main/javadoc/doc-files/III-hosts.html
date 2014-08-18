@@ -33,11 +33,16 @@ If SSL connectivity is to occur between a client and server residing on separate
 
 <ol>
     <li>
-        Determine IP address
+        Determine IP address of target machine:
         <br>
         <pre>
-            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # /sbin/ifconfig
+            </p>
+        </pre>
+         Example output contains 192.168.1.101:
+        <pre>
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 8pt">
 eth0      Link encap:Ethernet  HWaddr 00:0c:29:43:94:0c
 inet addr:192.168.1.101  Bcast:192.168.1.255  Mask:255.255.255.0
 inet6 addr: fe80::20c:29ff:fe43:940c/64 Scope:Link
@@ -48,13 +53,9 @@ collisions:0 txqueuelen:1000
 RX bytes:458268505 (458.2 MB)  TX bytes:28361917 (28.3 MB)
             </p>
         </pre>
-
     </li>
-
-    <br>
-
     <li>
-        Add new hosts entry for IP address:
+        Add new hostname entry using current IP address:
         <br>
         <ol type="a">
             <br>
@@ -62,37 +63,36 @@ RX bytes:458268505 (458.2 MB)  TX bytes:28361917 (28.3 MB)
                 Edit the hosts file
                 <br>
         <pre>
-            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # sudo vi /etc/hosts
             </p>
         </pre>
             </li>
-            <br>
             <li>
                 Use your IP address for new host entry:
                 <br>
         <pre>
-            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 192.168.1.101     fortressdemo2.com
             </p>
         </pre>
             </li>
-
-            <br>
-
             <li>
                 Save and exit
             </li>
         </ol>
     </li>
-
     <br>
-
     <li>
-        Verify
+        Ping hostname:
         <pre>
-            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # ping fortressdemo2.com
+            </p>
+        </pre>
+        Verify results:
+        <pre>
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 8pt">
 PING fortressdemo2.com (192.168.1.101) 56(84) bytes of data.
 64 bytes from fortressdemo2.com (192.168.1.101): icmp_req=1 ttl=64 time=0.106 ms
 64 bytes from fortressdemo2.com (192.168.1.101): icmp_req=2 ttl=64 time=0.052 ms

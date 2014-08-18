@@ -32,17 +32,21 @@
     <li>
         For Debian from system command prompt:
         <pre>
-            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # sudo apt-get install mysql-server
             </p>
         </pre>
         For Redhat (as root):
         <pre>
-            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # yum install mysql-server
 # /sbin/service mysqld start
 # /usr/bin/mysql_secure_installation
-
+            </p>
+        </pre>
+        <pre>
+        Clicking thru the Redhat security prompts...
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 8pt">
 NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MySQL
 SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
 
@@ -109,20 +113,20 @@ Thanks for using MySQL!
     <li>
         If Debian package install fails, you may need to issue update before retrying:
         <pre>
-            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # sudo apt-get update --fix-missing
             </p>
         </pre>
         Redhat users issue different commands to accomplish package refresh (as root):
         <pre>
-            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # yum clean headers && yum clean metadata && yum makecache
             </p>
         </pre>
     </li>
 
     <li>
-        During install a root password may be chosen, since this is a demo env we're using 'secret'.  This password is needed a couple steps later to connect with MySQL's command line processor.
+        During install a root password may be chosen, since this is a demo env we're using 'secret'.  This password is needed, in a couple of steps, to connect to MySQL's command line processor.
     </li>
 
     <br>
@@ -130,7 +134,7 @@ Thanks for using MySQL!
     <li>
         Verify daemon is running and listening to network:
         <pre>
-            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # sudo netstat -tap | grep mysql
 tcp        0      0 localhost:mysql         *:*                     LISTEN      2969/mysqld
             </p>
@@ -140,7 +144,7 @@ tcp        0      0 localhost:mysql         *:*                     LISTEN      
     <li>
         Connect to SQL command line processor (<i>Enter password chosen before during install</i>):
         <pre>
-          <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+          <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # mysql -h localhost -P 3306 -u root -p
           </p>
         </pre>
@@ -149,7 +153,7 @@ tcp        0      0 localhost:mysql         *:*                     LISTEN      
     <li>
         Run the <a href="demo-db-create-and-load.sql">demo-db-create-and-load.sql</a> script:
         <pre>
-            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+            <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 mysql> source demo-db-create-and-load.sql;
             </p>
         </pre>
@@ -164,7 +168,7 @@ mysql> source demo-db-create-and-load.sql;
             <li>
                 Copy keys generated during <a href="III-keys.html">Section III - Managing PKI Keys</a> to <b>/etc/mysql</b> folder.  Redhat users must create the folder:
                 <pre>
-                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # sudo cp src/test/resources/certs/ca-cert.pem /etc/mysql
 # sudo cp src/test/resources/certs/server-cert.pem /etc/mysql
 # sudo cp src/test/resources/certs/server-key.pem /etc/mysql
@@ -177,13 +181,13 @@ mysql> source demo-db-create-and-load.sql;
                 <br><br>
                 For Debian:
                 <pre>
-                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # sudo vi /etc/mysql/my.cnf
                     </p>
                 </pre>
                 Redhat file in different location:
                 <pre>
-                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # sudo vi /etc/my.cnf
                     </p>
                 </pre>
@@ -192,7 +196,7 @@ mysql> source demo-db-create-and-load.sql;
             <li>
                 Add bind address to  to the <b>[mysqld]</b> section of <b>my.cnf</b> file.  Use hostname from <a href="III-hosts.html">Section III - Set Hostname Entry</a>.
                 <pre>
-                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # Instead of skip-networking the default is now to listen only on
 # localhost which is more compatible and is not less secure.
 bind-address            = fortressdemo2.com
@@ -203,7 +207,7 @@ bind-address            = fortressdemo2.com
             <li>
                 Add key locations to the <b>[mysqld]</b> section of <b>my.cnf</b> file:
                 <pre>
-                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # Use keys genned [<a href="II-keys.html">Section II - Managing PKI Keys</a>]:
 ssl-ca=/etc/mysql/ca-cert.pem
 ssl-cert=/etc/mysql/server-cert.pem
@@ -223,7 +227,7 @@ ssl-key=/etc/mysql/server-key.pem
             <li>
                 Restart MySQL daemon (Debian):
                 <pre>
-                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # sudo service mysql restart
 mysql stop/waiting
 mysql start/running, process 3800
@@ -231,7 +235,7 @@ mysql start/running, process 3800
                 </pre>
                 Redhat users have slightly different command:
                 <pre>
-                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # sudo /sbin/service mysqld restart
 Stopping mysqld:                                           [  OK  ]
 Starting mysqld:                                           [  OK  ]
@@ -242,7 +246,7 @@ Starting mysqld:                                           [  OK  ]
             <li>
                 Verify the MySQL daemon is up:
                 <pre>
-                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 # sudo netstat -tap | grep mysql
 tcp        0      0 *:mysql                 *:*                     LISTEN      3800/mysqld
                     </p>
@@ -252,7 +256,7 @@ tcp        0      0 *:mysql                 *:*                     LISTEN      
             <li>
                 Verify SSL is enabled.  From the command line SQL prompt:
                 <pre>
-                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
 mysql> SHOW VARIABLES LIKE 'have_ssl';
 +---------------+-------+
 | Variable_name | Value |
@@ -270,7 +274,7 @@ mysql> SHOW VARIABLES LIKE 'have_ssl';
 
 <h3>Listing for <a href="demo-db-create-and-load.sql">demo-db-create-and-load.sql</a> Script</h3>
     <pre>
-        <p style="font: monospace; color: black; background-color: lightgrey; font-size: 12pt">
+        <p style="font: monospace; color: black; background-color: lightgrey; font-size: 8pt">
 
 -- Setup a new MySQL user for fortress demo app:
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'secret';
