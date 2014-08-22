@@ -108,7 +108,7 @@
                                    access="ROLE_DEMO2_SUPER_USER,ROLE_PAGE1"/>
                 <sec:intercept-url pattern="/wicket/bookmarkable/com.mycompany.page2"
                                    access="ROLE_DEMO2_SUPER_USER,ROLE_PAGE2"/>
-                <sec:intercept-url pattern="/wicket/bookmarkable/com.mycompany.page3"
+                                <sec:intercept-url pattern="/wicket/bookmarkable/com.mycompany.page3"
                                    access="ROLE_DEMO2_SUPER_USER,ROLE_PAGE3"/>
             </sec:filter-invocation-definition-source>
         </property>

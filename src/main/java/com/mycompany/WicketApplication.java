@@ -59,6 +59,5 @@ public class WicketApplication extends WebApplication
         } );
 
         getMarkupSettings().setStripWicketTags(true);
-        mountPage("home.html", LaunchPage.class);
 	}
 }

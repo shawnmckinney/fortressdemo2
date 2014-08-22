@@ -26,7 +26,6 @@ import java.util.StringTokenizer;
  */
 public class GlobalUtils
 {
-    public static final String WINDOW_LOCATION_REPLACE_DEMO_HOME_HTML = "window.location.replace(\"/fortressdemo2/home.html\");";
     private static final String PERMS_CACHED = "perms.cached";
     public static final boolean IS_PERM_CACHED = ( ( Config.getProperty( PERMS_CACHED ) != null ) && ( Config
         .getProperty( PERMS_CACHED ).equalsIgnoreCase( "true" ) ) );
@@ -113,6 +112,11 @@ public class GlobalUtils
     public static final String ROLES_DEACTIVATE = "roles.deactivate";
     public static final String ROLES_ACTIVATE = "roles.activate";
     public static final String FOOTER = "This is free and unencumbered software released into the public domain.";
+
+    public static String getLocationReplacement(HttpServletRequest servletRequest)
+    {
+        return "window.location.replace(\"" + servletRequest.getContextPath() + "\");";
+    }
 
     public static Session getRbacSession( Component component )
     {

@@ -73,6 +73,7 @@
             <role-name>ROLE_PAGE3</role-name>
         </auth-constraint>
     </security-constraint>
+
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>MySecurityRealm</realm-name>

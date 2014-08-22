@@ -24,6 +24,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.openldap.fortress.util.attr.VUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
@@ -104,13 +105,14 @@ public class Page3 extends MyBasePage
                 @Override
                 protected void updateAjaxAttributes( AjaxRequestAttributes attributes )
                 {
-                    super.updateAjaxAttributes( attributes );
                     AjaxCallListener ajaxCallListener = new AjaxCallListener()
                     {
                         @Override
                         public CharSequence getFailureHandler( Component component )
                         {
-                            return GlobalUtils.WINDOW_LOCATION_REPLACE_DEMO_HOME_HTML;
+                            String szRelocation = GlobalUtils.getLocationReplacement(( HttpServletRequest ) getRequest().getContainerRequest());
+                            LOG.info( "Page3.add Failure Handler, relocation string = " + szRelocation );
+                            return szRelocation;
                         }
                     };
                     attributes.getAjaxCallListeners().add( ajaxCallListener );
@@ -144,13 +146,14 @@ public class Page3 extends MyBasePage
                 @Override
                 protected void updateAjaxAttributes( AjaxRequestAttributes attributes )
                 {
-                    super.updateAjaxAttributes( attributes );
                     AjaxCallListener ajaxCallListener = new AjaxCallListener()
                     {
                         @Override
                         public CharSequence getFailureHandler( Component component )
                         {
-                            return GlobalUtils.WINDOW_LOCATION_REPLACE_DEMO_HOME_HTML;
+                            String szRelocation = GlobalUtils.getLocationReplacement(( HttpServletRequest ) getRequest().getContainerRequest());
+                            LOG.info( "Page3.update Failure Handler, relocation string = " + szRelocation );
+                            return szRelocation;
                         }
                     };
                     attributes.getAjaxCallListeners().add( ajaxCallListener );
@@ -184,13 +187,14 @@ public class Page3 extends MyBasePage
                 @Override
                 protected void updateAjaxAttributes( AjaxRequestAttributes attributes )
                 {
-                    super.updateAjaxAttributes( attributes );
                     AjaxCallListener ajaxCallListener = new AjaxCallListener()
                     {
                         @Override
                         public CharSequence getFailureHandler( Component component )
                         {
-                            return GlobalUtils.WINDOW_LOCATION_REPLACE_DEMO_HOME_HTML;
+                            String szRelocation = GlobalUtils.getLocationReplacement(( HttpServletRequest ) getRequest().getContainerRequest());
+                            LOG.info( "Page3.delete Failure Handler, relocation string = " + szRelocation );
+                            return szRelocation;
                         }
                     };
                     attributes.getAjaxCallListeners().add( ajaxCallListener );
@@ -234,13 +238,14 @@ public class Page3 extends MyBasePage
                 @Override
                 protected void updateAjaxAttributes( AjaxRequestAttributes attributes )
                 {
-                    super.updateAjaxAttributes( attributes );
                     AjaxCallListener ajaxCallListener = new AjaxCallListener()
                     {
                         @Override
                         public CharSequence getFailureHandler( Component component )
                         {
-                            return GlobalUtils.WINDOW_LOCATION_REPLACE_DEMO_HOME_HTML;
+                            String szRelocation = GlobalUtils.getLocationReplacement(( HttpServletRequest ) getRequest().getContainerRequest());
+                            LOG.info( "Page3.search Failure Handler, relocation string = " + szRelocation );
+                            return szRelocation;
                         }
                     };
                     attributes.getAjaxCallListeners().add( ajaxCallListener );

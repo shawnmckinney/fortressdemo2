@@ -17,6 +17,7 @@ import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.settings.IExceptionSettings;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.openldap.fortress.AccessMgr;
 import org.openldap.fortress.GlobalErrIds;
@@ -50,6 +51,7 @@ public abstract class MyBasePage extends WebPage
     private String linksLabel = "Authorized Links";
     protected String infoField;
     protected TextArea infoTA;
+
 
     /**
      * These are the child pages of this web application.
@@ -170,6 +172,9 @@ public abstract class MyBasePage extends WebPage
                 @Override
                 protected void onSubmit( AjaxRequestTarget target, Form<?> form )
                 {
+                    getApplication().getExceptionSettings().setAjaxErrorHandlingStrategy(
+                        IExceptionSettings.AjaxErrorStrategy.REDIRECT_TO_ERROR_PAGE);
+
                     if ( VUtil.isNotNullOrEmpty( roleSelection ) )
                     {
                         if ( checkAccess( roleSelection, "addActiveRole" ) )
@@ -188,17 +193,17 @@ public abstract class MyBasePage extends WebPage
                         }
                     }
                 }
-
                 @Override
                 protected void updateAjaxAttributes( AjaxRequestAttributes attributes )
                 {
-                    super.updateAjaxAttributes( attributes );
                     AjaxCallListener ajaxCallListener = new AjaxCallListener()
                     {
                         @Override
                         public CharSequence getFailureHandler( Component component )
                         {
-                            return GlobalUtils.WINDOW_LOCATION_REPLACE_DEMO_HOME_HTML;
+                            String szRelocation = GlobalUtils.getLocationReplacement(( HttpServletRequest ) getRequest().getContainerRequest());
+                            LOG.info( "MyBasePage.addActiveRole Failure Handler, relocation string = " + szRelocation );
+                            return szRelocation;
                         }
                     };
                     attributes.getAjaxCallListeners().add( ajaxCallListener );
@@ -208,7 +213,6 @@ public abstract class MyBasePage extends WebPage
             activeRolesCB = new ComboBox<UserRole>( GlobalUtils.ACTIVE_ROLES, new PropertyModel<String>( this, "activeRoleSelection" ), activeRoles, new ChoiceRenderer<UserRole>( "name" ) );
             activeRolesCB.setOutputMarkupId( true );
             add( activeRolesCB );
-            //add( new SecureIndicatingAjaxButton( GlobalUtils.ROLES_DEACTIVATE, "ROLE_PAGE1,ROLE_PAGE2,ROLE_PAGE3" )
             add( new SecureIndicatingAjaxButton( this, GlobalUtils.ROLES_DEACTIVATE, "com.mycompany.MyBasePage", "dropActiveRole" )
             {
                 private static final long serialVersionUID = 1L;
@@ -237,13 +241,14 @@ public abstract class MyBasePage extends WebPage
                 @Override
                 protected void updateAjaxAttributes( AjaxRequestAttributes attributes )
                 {
-                    super.updateAjaxAttributes( attributes );
                     AjaxCallListener ajaxCallListener = new AjaxCallListener()
                     {
                         @Override
                         public CharSequence getFailureHandler( Component component )
                         {
-                            return GlobalUtils.WINDOW_LOCATION_REPLACE_DEMO_HOME_HTML;
+                            String szRelocation = GlobalUtils.getLocationReplacement(( HttpServletRequest ) getRequest().getContainerRequest());
+                            LOG.info( "MyBasePage.dropActiveRole Failure Handler, relocation string = " + szRelocation );
+                            return szRelocation;
                         }
                     };
                     attributes.getAjaxCallListeners().add( ajaxCallListener );
