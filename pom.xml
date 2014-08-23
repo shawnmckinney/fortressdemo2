@@ -11,7 +11,7 @@
     <version>1.0-RC39</version>
     <packaging>war</packaging>
     <name>Fortress Demo #2</name>
-    <description>Fortress RBAC Security Project Sample using Wicket Web and Mybatis Data Persistence Frameworks.</description>
+    <description>Fortress End-to-End Security Project Sample using Wicket Web and Mybatis Data Persistence Frameworks.</description>
     <properties>
         <wicket.version>6.16.0</wicket.version>
         <wicket.jquery.version>6.16.0</wicket.jquery.version>

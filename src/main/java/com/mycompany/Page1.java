@@ -88,7 +88,6 @@ public class Page1 extends MyBasePage
                     {
                         p1manager.addPage1( page1EO, this );
                         SaveModelEvent.send( getPage(), this, page1EO, target, SaveModelEvent.Operations.ADD );
-                        //target.appendJavaScript(";alert('" + szBtn1 + "');");
                     }
                     else
                     {
@@ -129,7 +128,6 @@ public class Page1 extends MyBasePage
                     {
                         p1manager.updatePage1( page1EO, this );
                         SaveModelEvent.send( getPage(), this, page1EO, target, SaveModelEvent.Operations.UPDATE );
-                        //target.appendJavaScript(";alert('" + szBtn2 + "');");
                     }
                     else
                     {

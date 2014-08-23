@@ -1,8 +1,8 @@
 This is free and unencumbered software released into the public domain.
 _____________________________________________________________________________
 #############################################################################
-README for Fortress Demo #2 RBAC Security Sample
-Last updated: August 14, 2014
+README for Fortress Demo # 2 End-to-End Security Example
+Last updated: August 23, 2014
 _____________________________________________________________________________
 #############################################################################
 # Prerequisites:

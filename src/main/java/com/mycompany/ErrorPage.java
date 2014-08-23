@@ -16,8 +16,8 @@ public class ErrorPage extends MyBasePage
 {
     public ErrorPage( Exception e )
     {
-        add( new Label( "title", new Model<String>( "Runtime Exception Occurred" ) ) );
-        add( new Label( "message", new Model<String>( e.getLocalizedMessage() ) ) );
+        add( new Label( "title", new Model<>( "Runtime Exception Occurred" ) ) );
+        add( new Label( "message", new Model<>( e.getLocalizedMessage() ) ) );
         add( new BookmarkablePageLink( "homePage", getApplication().getHomePage() ) );
     }
 }
