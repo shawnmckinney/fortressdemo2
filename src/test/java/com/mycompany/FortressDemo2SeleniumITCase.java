@@ -38,6 +38,7 @@ public class FortressDemo2SeleniumITCase
         //baseUrl = "http://localhost:8080";
         //baseUrl = "http://fortressdemo2.com:8080";
         baseUrl = "https://fortressdemo2.com:8443";
+        baseUrl += "/fortressdemo2";
         driver.manage().timeouts().implicitlyWait( 2500, TimeUnit.MILLISECONDS );
     }
 
@@ -50,7 +51,7 @@ public class FortressDemo2SeleniumITCase
     public void testCase1() throws Exception
     {
         LOG.info( "Begin FortressDemo2SeleniumITCase" );
-        driver.get( baseUrl + "/fortressdemo2" );
+        driver.get( baseUrl );
 
         // SuperUser has access to all pages and all customer data without restriction:
         login( GlobalUtils.SUPER_USER, "password");
@@ -438,8 +439,48 @@ public class FortressDemo2SeleniumITCase
         {
             // pass
         }
+        try
+        {
+            if(driver.findElement( By.linkText( linkName ) ).isEnabled())
+            {
+                fail("Negative Link Test Failed UserId: " + userId + " Link: " + linkName);
+            }
+        }
+        catch (org.openqa.selenium.NoSuchElementException e)
+        {
+            // pass
+        }
+
+        // Check that Spring security is enforcing page level security:
+        String pageName = linkName;
+        // convert from link name to page name for url:
+        pageName = pageName.substring( 0, 1 ) + pageName.substring( 1 ).toLowerCase();
+        String unauthorizedUrl = baseUrl + "/wicket/bookmarkable/com.mycompany." + pageName;
+        driver.get( unauthorizedUrl );
+        if(is403())
+        {
+            // pass
+            TUtils.sleep( 1 );
+            driver.navigate().back();
+        }
+        else
+        {
+            fail("Spring Security Test Failed URL: " + unauthorizedUrl + "." + GlobalUtils.ADD);
+        }
     }
 
+    public boolean is403()
+    {
+        try
+        {
+            driver.findElement(By.id("web_403"));
+            return true;
+        }
+        catch (NoSuchElementException e)
+        {
+            return false;
+        }
+    }
     private void login(String userId, String password)
     {
         driver.findElement( By.id( GlobalUtils.USER_ID ) ).clear();
