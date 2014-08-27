@@ -4,12 +4,9 @@
 
 package com.mycompany.dao;
 
-
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
-import java.io.Reader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Used to generate a connection factory object used by Mybatis DAO impls.
@@ -17,29 +14,21 @@ import java.io.Reader;
  * @author Shawn McKinney
  * @version $Rev$
  */
+
+@Component
 public class ConnectionFactory
 {
-    protected static final SqlSessionFactory FACTORY;
-
-    static
+	private static SqlSessionFactory sqlSessionFactory;	
+	
+    @Autowired(required=true)
+    public void setSqlSessionFactory (SqlSessionFactory sqlSessionFactory)
     {
-        try
-        {
-            Reader reader = Resources.getResourceAsReader( "Configuration.xml" );
-            FACTORY = new SqlSessionFactoryBuilder().build( reader );
-        }
-        catch ( Exception e )
-        {
-            throw new RuntimeException( e.toString() );
-        }
+    	ConnectionFactory.sqlSessionFactory = sqlSessionFactory;
+        return; 
     }
 
-    /**
-     *
-     * @return
-     */
-    public static SqlSessionFactory getSqlSessionFactory()
-    {
-        return FACTORY;
+    protected static SqlSessionFactory getSqlSessionFactory() {
+    	return ConnectionFactory.sqlSessionFactory;
     }
+    
 }

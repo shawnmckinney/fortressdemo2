@@ -18,6 +18,9 @@
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security.xsd">
 
+	<!-- Turn on component scanning to enable Spring-aware static initialization for the ConnectionFactory class. -->
+	<context:component-scan base-package="com.mycompany"/>
+
     <!-- The Fortress Access Manager bean used for IAM -->
     <bean id="accessMgr" class="org.openldap.fortress.AccessMgrFactory" scope="prototype"
           factory-method="createInstance">
@@ -48,6 +51,20 @@
         </property>
     </bean>
 
+	<!-- Added explicit JDBC DataSource bean to enable Cloud Foundry to create a binding to a MySql instance -->        
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${database.driver}" />
+		<property name="url" value="${database.url}" />
+		<property name="username" value="${database.username}" />
+		<property name="password" value="${database.password}" />
+	</bean>
+
+	<!-- Use the myBatis-Spring integration bean to create a Spring-compatible SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:Configuration.xml"/>
+	</bean>
+		
     <!-- setup spring security using preauthenticated (java ee) strategy -->
     <bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
         <sec:filter-chain-map path-type="ant">
