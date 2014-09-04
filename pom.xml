@@ -340,7 +340,10 @@
                     <execution>
                         <phase>test</phase>
                         <configuration>
-                            <target>
+<!--                            <target>-->
+                            <target name="fortress-load"
+                                    unless="noload"
+                                    description="Loads fortress rbac policy into ldap">
                                 <echo message="###############  Run Fortress Ant script to load demo2 policy  ###############"/>
                                 <java
                                         classname="org.apache.tools.ant.launch.Launcher"
