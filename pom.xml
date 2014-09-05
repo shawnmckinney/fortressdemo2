@@ -13,8 +13,8 @@
     <name>Fortress Demo #2</name>
     <description>Fortress End-to-End Security Project Sample using Wicket Web and Mybatis Data Persistence Frameworks.</description>
     <properties>
-        <wicket.version>6.16.0</wicket.version>
-        <wicket.jquery.version>6.16.0</wicket.jquery.version>
+        <wicket.version>6.17.0</wicket.version>
+        <wicket.jquery.version>6.17.0</wicket.jquery.version>
         <ant.version>1.8.1</ant.version>
         <slf4j.version>1.5.11</slf4j.version>
         <spring.version>3.2.3.RELEASE</spring.version>
