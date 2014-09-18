@@ -79,11 +79,8 @@
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <!-- Anyone with listed role may access this area -->
-            <role-name>ROLE_DEMO2_SUPER_USER</role-name>
-            <role-name>ROLE_PAGE1</role-name>
-            <role-name>ROLE_PAGE2</role-name>
-            <role-name>ROLE_PAGE3</role-name>
+            <!-- Anyone with listed role may access this web app though there will be further restrictions later on inside Spring, Web app and DAO security layers -->
+            <role-name>DEMO2_USER</role-name>
         </auth-constraint>
     </security-constraint>
 
@@ -95,7 +92,7 @@
             <form-error-page>/login/error.html</form-error-page>
         </form-login-config>
     </login-config>
-    <!-- Security roles referenced by this web application -->
+    <!-- These security roles are declared in order to be used by Spring Security's FilterSecurityInterceptor - see applicationContext.xml -->
     <security-role>
         <role-name>ROLE_DEMO2_SUPER_USER</role-name>
     </security-role>

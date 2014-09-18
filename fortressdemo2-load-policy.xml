@@ -147,7 +147,7 @@
             </adduserrole>
 
             <delrole>
-                <role name="ROLE_TEST_USER"/>
+                <role name="DEMO2_USER"/>
                 <role name="ROLE_DEMO2_SUPER_USER"/>
                 <role name="DEMO2_ALL_PAGES"/>
 
@@ -168,7 +168,7 @@
             </delrole>
 
             <addrole>
-                <role name="ROLE_TEST_USER" description="Grants User login access to this Web application"/>
+                <role name="DEMO2_USER" description="Grants User login access to this Web application"/>
                 <role name="ROLE_DEMO2_SUPER_USER" description="Grants User access to all three Pages"/>
                 <role name="DEMO2_ALL_PAGES" description="Grants User ability to switch between Pages"/>
 
@@ -189,6 +189,11 @@
             </addrole>
 
             <addroleinheritance>
+                <relationship child="ROLE_DEMO2_SUPER_USER" parent="DEMO2_USER"/>
+                <relationship child="ROLE_PAGE1" parent="DEMO2_USER"/>
+                <relationship child="ROLE_PAGE2" parent="DEMO2_USER"/>
+                <relationship child="ROLE_PAGE3" parent="DEMO2_USER"/>
+
                 <relationship child="ROLE_DEMO2_SUPER_USER" parent="ROLE_PAGE1"/>
                 <relationship child="ROLE_DEMO2_SUPER_USER" parent="PAGE1_123"/>
                 <relationship child="ROLE_DEMO2_SUPER_USER" parent="PAGE1_456"/>
