@@ -92,7 +92,7 @@ public class Page2 extends MyBasePage
                     }
                     else
                     {
-                        target.appendJavaScript( ";alert('Unauthorized');" );
+                        target.appendJavaScript( ";alert('Page2.Add Button Unauthorized');" );
                     }
                 }
 
@@ -132,7 +132,7 @@ public class Page2 extends MyBasePage
                     }
                     else
                     {
-                        target.appendJavaScript( ";alert('Unauthorized');" );
+                        target.appendJavaScript( ";alert('Page2.Update Button Unauthorized');" );
                     }
                 }
 
@@ -173,7 +173,7 @@ public class Page2 extends MyBasePage
                     }
                     else
                     {
-                        target.appendJavaScript( ";alert('Unauthorized');" );
+                        target.appendJavaScript( ";alert('Page2.Delete Button Unauthorized');" );
                     }
                 }
 
@@ -219,7 +219,7 @@ public class Page2 extends MyBasePage
                         }
                         else
                         {
-                            target.appendJavaScript( ";alert('No matching objects found');" );
+                            target.appendJavaScript( ";alert('Page2.Search Button No matching objects found');" );
                         }
                     }
                     else

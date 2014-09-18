@@ -91,7 +91,7 @@ public class Page1 extends MyBasePage
                     }
                     else
                     {
-                        target.appendJavaScript( ";alert('Unauthorized');" );
+                        target.appendJavaScript( ";alert('Page1.Add Button Unauthorized');" );
                     }
                 }
 
@@ -131,7 +131,7 @@ public class Page1 extends MyBasePage
                     }
                     else
                     {
-                        target.appendJavaScript( ";alert('Unauthorized');" );
+                        target.appendJavaScript( ";alert('Page1.Update Button Unauthorized');" );
                     }
                 }
 
@@ -172,7 +172,7 @@ public class Page1 extends MyBasePage
                     }
                     else
                     {
-                        target.appendJavaScript( ";alert('Unauthorized');" );
+                        target.appendJavaScript( ";alert('Page1.Delete Button Unauthorized');" );
                     }
                 }
 
@@ -223,7 +223,7 @@ public class Page1 extends MyBasePage
                     }
                     else
                     {
-                        target.appendJavaScript( ";alert('Unauthorized');" );
+                        target.appendJavaScript( ";alert('Page1.Search Button Unauthorized');" );
                     }
                 }
 
