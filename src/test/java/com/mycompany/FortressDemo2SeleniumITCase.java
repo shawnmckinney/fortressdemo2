@@ -374,7 +374,7 @@ public class FortressDemo2SeleniumITCase
             Alert alert = driver.switchTo ().alert ();
             //alert is present
             LOG.info( "Button Pressed:" + alert.getText() );
-            if(alert.getText().equals( text ))
+            if(alert.getText().contains( text ))
                 textFound = true;
 
             alert.accept();
