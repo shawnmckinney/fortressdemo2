@@ -224,7 +224,7 @@ public class Page2 extends MyBasePage
                     }
                     else
                     {
-                        target.appendJavaScript( ";alert('Unauthorized');" );
+                        target.appendJavaScript( ";alert('Page2.Search Button Unauthorized');" );
                     }
                 }
 

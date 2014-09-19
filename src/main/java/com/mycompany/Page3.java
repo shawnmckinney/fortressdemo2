@@ -84,7 +84,7 @@ public class Page3 extends MyBasePage
                 {
                     Page3EO page3EO = ( Page3EO ) editForm.getModel().getObject();
                     info( GlobalUtils.BTN_PAGE_3_ADD );
-                    if( page3EO != null && checkAccess() )
+                    if( page3EO != null && checkAccess( page3EO.getCustomer() ) )
                     {
                         p3manager.addPage3( page3EO, this );
                         SaveModelEvent.send( getPage(), this, page3EO, target, SaveModelEvent.Operations.ADD );
@@ -219,6 +219,7 @@ public class Page3 extends MyBasePage
                         else
                         {
                             info( "No matching objects found" );
+                            target.appendJavaScript( ";alert('Page3.Search Button No matching objects found');" );
                         }
                     }
                     else

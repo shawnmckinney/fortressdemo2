@@ -219,6 +219,7 @@ public class Page1 extends MyBasePage
                         else
                         {
                             info( "No matching objects found" );
+                            target.appendJavaScript( ";alert('Page1.Search Button No matching objects found');" );
                         }
                     }
                     else
