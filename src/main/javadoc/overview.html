@@ -12,6 +12,8 @@
     The tutorial provides a how-to guide for applying end-to-end security enforcement across a  sample Java Web environment.
     Security concerns covered are authentication, authorization, confidentiality and audit trail.
     Both declarative and programmatic enforcement controls will be used.
+    <br><br>
+    More info here: <a href="./doc-files/AnatomyOfSecureWebApp.pdf">The Anatomy of a Secure Web App</a>
 <hr>
 <h4>Fortress Demo # 2 Installation Instructions</h4>
 Tutorial installation requires completion of these sections:
@@ -40,6 +42,24 @@ The following block diagram illustrates the layered approach used to enforce sec
     <li><a href="http://ant.apache.org/">Apache Ant 1.8 (or greater)</a></li>
     <li><a href="http://maven.apache.org/">Apache Maven</a></li>
     <li><a href="https://www.mozilla.org/en-GB/firefox/new/">Firefox Web Browser</a></li>
+</ol>
+<hr>
+<h4>Getting Started - How to generate the tutorial's how-to guide</h4>
+This tutorial uses javadoc that is contained within the fortressdemo2 web application.  To generate, follow the instructions that follow:
+<ol type="1">
+    <li>Download the <a href="https://github.com/shawnmckinney/fortressdemo2/archive/master.zip">fortressdemo2 source bundle</a>  from GitHub</li>
+    <li>Extract bundle</li>
+    <li>Set JAVA_HOME</li>
+    <li>Set M2_HOME</li>
+    <li>Run this command from the root package:
+                <pre>
+                    <p style="font: monospace; color: black; background-color: lightgrey; font-size: 10pt">
+$ $M2_HOME/bin/mvn javadoc:javadoc
+                    </p>
+                </pre>
+    </li>
+    <li>Open the help document: /*package home*/target/site/apidocs/overview-summary.html</li>
+    <li>Complete the sections under <b>Fortress Demo # 2 Installation Instructions</b></li>
 </ol>
 <hr>
 <h4>Infrastructure Installed</h4>
